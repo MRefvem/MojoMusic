@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace Ecommerce_App.Models.Interfaces
 {
-    interface IProduct
+    public interface IProduct
     {
         Product Create(Product product);
 
         List<Product> GetProducts();
 
-        Product GetProduct(string name);
+        List<Product> GetProduct(string name);
+
+        List<Product> Sort(string alphabetical);
     }
 }
