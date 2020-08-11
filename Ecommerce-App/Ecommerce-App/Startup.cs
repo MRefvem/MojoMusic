@@ -35,6 +35,8 @@ namespace Ecommerce_App
 
             app.UseRouting();
 
+            app.UseStaticFiles();
+
             app.UseEndpoints(endpoints =>
             {
                 // use the default
