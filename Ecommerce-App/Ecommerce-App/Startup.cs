@@ -47,6 +47,12 @@ namespace Ecommerce_App
                 options.UseSqlServer(Configuration.GetConnectionString("UserConnection"));
             });
 
+            services.AddDbContext<StoreDbContext>(options =>
+            {
+                // Install-Package Microsoft.EntityFrameworkCore.SqlServer
+                options.UseSqlServer(Configuration.GetConnectionString("StoreConnection"));
+            });
+
             services.AddIdentity<Customer, IdentityRole>()
                 .AddEntityFrameworkStores<UserDbContext>()
                 .AddDefaultTokenProviders();
