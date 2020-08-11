@@ -1,20 +1,21 @@
+# Ecommerce-App
+Authors: Michael Refvem, Yasir Mohamud
+
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+This Ecommerce web app displays information about products as well as a home page. It has the ability to allow a user to view products, view information about a single product and sort the products either alphabetically or reverse-alphabetically. 
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+To get started using this app:
+1.	Install the latest version of Microsoft Visual Studio
+2.	Clone the Git repository into your local machine: https://mkrefvem@dev.azure.com/mkrefvem/Ecommerce/_git/Ecommerce-App
+3.	Open Ecommerce-App.sln
+4.	Run the latest build
 
 # Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+The app should simply be able to run through Microsoft Visual Studio. 
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+# Change-Log
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+10 Aug 2020
+1.1 *Views, models and controllers implemented. Site functionality: ability to list products and all info, see information on a single product and sort alphabetically and reverse-alphabetically. Basic front end implemented using Bootstrap.*
+1.0 *Commit 62d9bfd0: Initial commit. File tree established, added .gitignore, README.md. Data set, cereal.csv. Directories, Controllers, Models, Views*

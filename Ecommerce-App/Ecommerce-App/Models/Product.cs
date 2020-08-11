@@ -8,8 +8,8 @@ namespace Ecommerce.Models
     public class Product
     {
         public string Name { get; set; }
-        public char Mfr { get; set; }
-        public char Type { get; set; }
+        public string Mfr { get; set; }
+        public string Type { get; set; }
         public int Calories { get; set; }
         public int Protein { get; set; }
         public int Fat { get; set; }
