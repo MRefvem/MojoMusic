@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace Ecommerce_App.Models.Interfaces
 {
     public interface IProduct
-    { 
+    {
+       
         /// <summary>
         /// GetProducts - This method allows us to get a list of all of our products
         /// </summary>

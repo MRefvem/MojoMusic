@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Models;
+using Ecommerce_App.Data;
 using Ecommerce_App.Models.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,12 @@ namespace Ecommerce_App.Models.Services
 {
     public class InventoryManagement : IProduct
     {
+        private StoreDbContext _context;
+
+        public InventoryManagement(StoreDbContext context)
+        {
+            _context = context;
+        }
         public List<Product> GetProduct(string name)
         {
             throw new NotImplementedException();
