@@ -14,8 +14,5 @@ namespace Ecommerce_App.Data
         {
 
         }
-
-        // db sets
-        public DbSet<Customer> Customer { get; set; }
     }
 }

@@ -14,12 +14,10 @@ namespace Ecommerce_App.Pages.Account
     public class RegisterModel : PageModel
     {
         private UserManager<Customer> _userManager;
-        private UserDbContext _context;
 
-        public RegisterModel(UserManager<Customer> userManager, UserDbContext context)
+        public RegisterModel(UserManager<Customer> userManager)
         {
             _userManager = userManager;
-            _context = context;
         }
 
         // This lets the data from the frontend get sent to the server
@@ -33,33 +31,30 @@ namespace Ecommerce_App.Pages.Account
         }
 
         // Another reserved method name for the post of the page
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             // when a user "posts back" what happens?
             // does it save to the DB? YES
             // does it make an API call? NO
             
             // capture all the values in our input and create a user and save them into our database
+            Customer customer = new Customer()
+            {
+                FirstName = Input.FirstName,
+                LastName = Input.LastName,
+                Email = Input.Email,
+                UserName = Input.Email
+            };
 
             if (Input.Password == Input.ConfirmPassword)
             {
-                Customer customer = new Customer()
-                {
-                    FirstName = Input.FirstName,
-                    LastName = Input.LastName,
-                    Email = Input.Email,
-                    Password = Input.Password
-                };
 
-                _context.Entry(customer).State = EntityState.Added;
-                _context.SaveChanges();
+                await _userManager.CreateAsync(customer, Input.Password);
 
                 // does it redirect us?
                 // redirects HOME
                 return RedirectToAction("Index", "Home");
             }
-
-            
 
             return RedirectToPage("/Account/Register");
             
