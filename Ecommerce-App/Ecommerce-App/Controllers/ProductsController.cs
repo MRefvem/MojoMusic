@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Ecommerce.Models;
 using Ecommerce_App.Models.Interfaces;
+using Ecommerce_App.Models.Services;
+using Ecommerce_App.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Controllers
@@ -18,25 +20,46 @@ namespace Ecommerce.Controllers
             _product = product;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            List<Product> myList = _product.GetProducts();
+            List<Cereal> myList = _product.GetProducts().Cast<Cereal>().ToList();
 
-            return View(myList);
+            ProductsViewModel vm = new ProductsViewModel
+            {
+                Products = myList,
+                Term = ""
+            };
+
+            return View(vm);
         }
 
+        [HttpPost]
         public IActionResult SearchResults(string searchString)
         {
-            List<Product> product = _product.GetProduct(searchString);
+            // Force cast the data type
+            List<Cereal> product = _product.GetProduct(searchString).Cast<Cereal>().ToList();
 
-            return View(product);
+            ProductsViewModel vm = new ProductsViewModel
+            {
+                Products = product,
+                Term = searchString
+            };
+
+            return View(vm);
         }
 
         public IActionResult Sort(string sortedString)
         {
-            List<Product> products = _product.Sort(sortedString);
+            List<Cereal> products = _product.Sort(sortedString).Cast<Cereal>().ToList();
 
-            return View(products);
+            ProductsViewModel vm = new ProductsViewModel
+            {
+                Products = products,
+                Term = sortedString
+            };
+
+            return View(vm);
         }
     }
 }
