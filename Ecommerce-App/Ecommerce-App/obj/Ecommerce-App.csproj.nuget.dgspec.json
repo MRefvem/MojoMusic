@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yasmo\\Source\\Repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj": {}
+    "C:\\Users\\yasmo\\source\\repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yasmo\\Source\\Repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj": {
+    "C:\\Users\\yasmo\\source\\repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yasmo\\Source\\Repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj",
+        "projectUniqueName": "C:\\Users\\yasmo\\source\\repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj",
         "projectName": "Ecommerce-App",
-        "projectPath": "C:\\Users\\yasmo\\Source\\Repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj",
+        "projectPath": "C:\\Users\\yasmo\\source\\repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj",
         "packagesPath": "C:\\Users\\yasmo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yasmo\\Source\\Repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\obj\\",
+        "outputPath": "C:\\Users\\yasmo\\source\\repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\yasmo\\AppData\\Roaming\\NuGet\\NuGet.Config",

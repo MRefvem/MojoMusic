@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1iC8G87gQtDSD3jAeuLp6IBDGWX72sQ0m3I6RH5rWLj5/gvyKAFS8BCKlgsS9/nLiPqI1hZAB+mPK4DVcezXcQ==",
+  "dgSpecHash": "LiSF4pw9xkaDM1aLxqz+nXOOx8V5uV8ih3a/oJ0AtrN22U4cJW1KsLMQD521rTWJ4g1g/dFmsFlC/QBg/0WBUw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\yasmo\\Source\\Repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj",
+  "projectFilePath": "C:\\Users\\yasmo\\source\\repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\yasmo\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.7\\microsoft.aspnetcore.cryptography.internal.3.1.7.nupkg.sha512",
     "C:\\Users\\yasmo\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.7\\microsoft.aspnetcore.cryptography.keyderivation.3.1.7.nupkg.sha512",
