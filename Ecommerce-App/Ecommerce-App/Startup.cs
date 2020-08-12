@@ -54,6 +54,8 @@ namespace Ecommerce_App
                 .AddDefaultTokenProviders();
 
             services.AddTransient<IProduct, ProductRepository>();
+            services.AddTransient<IProduct, InventoryManagement>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
