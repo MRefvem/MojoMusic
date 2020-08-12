@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce_App.Models.Services
 {
-    public class ProductRepository : IProduct
+    public class ProductRepository 
     {
 
         /// <summary>

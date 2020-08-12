@@ -114,10 +114,11 @@ namespace Ecommerce_App.Models.Services
         /// </summary>
         /// <param name="product"> product object we want to update</param>
         /// <returns> task completion </returns>
-        public async Task Update(Product product)
+        public async Task<Product> Update(Product product)
         {
             _context.Entry(product).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            return product;
         }
     }
 }

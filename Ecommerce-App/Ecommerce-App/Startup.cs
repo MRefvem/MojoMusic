@@ -53,7 +53,7 @@ namespace Ecommerce_App
                 .AddEntityFrameworkStores<UserDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddTransient<IProduct, ProductRepository>();
+          
             services.AddTransient<IProduct, InventoryManagement>();
 
         }
