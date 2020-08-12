@@ -35,7 +35,7 @@ namespace Ecommerce_App.Models.Interfaces
         /// </summary>
         /// <param name="product"> product object we want to update</param>
         /// <returns> task completion </returns>
-        Task Update(Product product);
+        Task<Product> Update(Product product);
 
         /// <summary>
         /// Delete - allows us to delete a product
