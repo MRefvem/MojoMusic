@@ -1,25 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mkref\\source\\repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj": {}
+    "C:\\Users\\yasmo\\Source\\Repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mkref\\source\\repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj": {
+    "C:\\Users\\yasmo\\Source\\Repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mkref\\source\\repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj",
+        "projectUniqueName": "C:\\Users\\yasmo\\Source\\Repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj",
         "projectName": "Ecommerce-App",
-        "projectPath": "C:\\Users\\mkref\\source\\repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj",
-        "packagesPath": "C:\\Users\\mkref\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mkref\\source\\repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\obj\\",
+        "projectPath": "C:\\Users\\yasmo\\Source\\Repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj",
+        "packagesPath": "C:\\Users\\yasmo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\yasmo\\Source\\Repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\mkref\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\yasmo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -41,6 +37,26 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.7, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
