@@ -8623,25 +8623,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mkref\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\yasmo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mkref\\source\\repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj",
+      "projectUniqueName": "C:\\Users\\yasmo\\Source\\Repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj",
       "projectName": "Ecommerce-App",
-      "projectPath": "C:\\Users\\mkref\\source\\repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj",
-      "packagesPath": "C:\\Users\\mkref\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mkref\\source\\repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\obj\\",
+      "projectPath": "C:\\Users\\yasmo\\Source\\Repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App.csproj",
+      "packagesPath": "C:\\Users\\yasmo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\yasmo\\Source\\Repos\\Ecommerce-App\\Ecommerce-App\\Ecommerce-App\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\mkref\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\yasmo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"

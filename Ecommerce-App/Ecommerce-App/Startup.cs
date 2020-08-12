@@ -35,7 +35,7 @@ namespace Ecommerce_App
             services.AddMvc();
 
             // Registering our DbContext
-            services.AddDbContext<ProductsDbContext>(options =>
+            services.AddDbContext<StoreDbContext>(options =>
             {
                 // Install-Package Microsoft.EntityFrameworkCore.SqlServer
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
@@ -46,6 +46,8 @@ namespace Ecommerce_App
                 // Install-Package Microsoft.EntityFrameworkCore.SqlServer
                 options.UseSqlServer(Configuration.GetConnectionString("UserConnection"));
             });
+
+          
 
             services.AddIdentity<Customer, IdentityRole>()
                 .AddEntityFrameworkStores<UserDbContext>()
