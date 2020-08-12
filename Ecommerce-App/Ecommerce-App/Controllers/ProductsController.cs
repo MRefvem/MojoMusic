@@ -8,7 +8,6 @@ using Ecommerce_App.Models.Interfaces;
 using Ecommerce_App.Models.Services;
 using Ecommerce_App.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Ecommerce.Controllers
 {
