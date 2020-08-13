@@ -1,5 +1,7 @@
-﻿@{ 
-    Layout = "_Home";
+﻿@page
+@model Ecommerce_App.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Register";
 }
 
 <!Doctype html>
@@ -32,7 +34,7 @@
                         <a asp-action="Index" asp-controller="Products" class="nav-link">Products</a>
                     </li>
                     <li class="navbar-item">
-                        <a asp-page="/Account/Register" class="nav-link">Register</a>
+                        <a asp-page-handler="Account" asp-page="Register" class="nav-link">Register</a>
                     </li>
                 </ul>
             </div>
@@ -40,7 +42,36 @@
     </header>
     <main>
         <div class="container" style="margin-top:30px;">
-            <h2>Welcome to the Ecommerce Site!</h2>
+            <h1>Register</h1>
+            <form method="post">
+                <div asp-validation-summary="All"></div>
+                <label asp-for="@Model.Input.FirstName"></label>
+                <input type="text" placeholder="First Name" asp-for="@Model.Input.FirstName" />
+                <span asp-validation-for="@Model.Input.FirstName"></span>
+                <br /><br />
+                
+                <label asp-for="@Model.Input.LastName"></label>
+                <input type="text" placeholder="Last Name" asp-for="@Model.Input.LastName" />
+                <span asp-validation-for="@Model.Input.LastName"></span>
+                <br /><br />
+                
+                <label asp-for="@Model.Input.Email"></label>
+                <input type="text" placeholder="Email" asp-for="@Model.Input.Email" />
+                <span asp-validation-for="@Model.Input.Email"></span>
+                <br /><br />
+                
+                <label asp-for="@Model.Input.Password"></label>
+                <input type="password" placeholder="Password" asp-for="@Model.Input.Password" />
+                <span asp-validation-for="@Model.Input.Password"></span>
+                <br /><br />
+                
+                <label asp-for="@Model.Input.ConfirmPassword"></label>
+                <input type="password" placeholder="Confirm Password" asp-for="@Model.Input.ConfirmPassword" />
+                <span asp-validation-for="@Model.Input.ConfirmPassword"></span>
+                <br /><br />
+                
+                <button type="submit">SUBMIT</button>
+            </form>
         </div>
     </main>
     <footer>
@@ -53,4 +84,3 @@
     </footer>
 </body>
 </html>
-

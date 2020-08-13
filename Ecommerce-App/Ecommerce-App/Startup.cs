@@ -35,7 +35,7 @@ namespace Ecommerce_App
             services.AddMvc();
 
             // Registering our DbContext
-            services.AddDbContext<ProductsDbContext>(options =>
+            services.AddDbContext<StoreDbContext>(options =>
             {
                 // Install-Package Microsoft.EntityFrameworkCore.SqlServer
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
@@ -47,11 +47,15 @@ namespace Ecommerce_App
                 options.UseSqlServer(Configuration.GetConnectionString("UserConnection"));
             });
 
+          
+
             services.AddIdentity<Customer, IdentityRole>()
                 .AddEntityFrameworkStores<UserDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddTransient<IProduct, ProductRepository>();
+          
+            services.AddTransient<IProduct, InventoryManagement>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,7 +67,9 @@ namespace Ecommerce_App
             }
 
             app.UseRouting();
+
             app.UseAuthentication();
+          
             app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
