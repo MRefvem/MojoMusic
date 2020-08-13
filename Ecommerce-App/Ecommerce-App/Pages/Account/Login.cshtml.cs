@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using Ecommerce_App.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using static Ecommerce_App.Pages.Account.LoginModel;
 
 namespace Ecommerce_App.Pages.Account
 {
@@ -18,10 +20,8 @@ namespace Ecommerce_App.Pages.Account
         {
             _signInManager = signInManager;
         }
-
         [BindProperty]
         public LoginViewModel Input { get; set; }
-
         public void OnGet()
         {
 
@@ -29,21 +29,22 @@ namespace Ecommerce_App.Pages.Account
 
         public async Task<IActionResult> OnPost()
         {
-            // Authenticate
+            // authenticate
             if (ModelState.IsValid)
             {
-                // Sign In
+                // sign in
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, false, false);
 
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index", "Home");
                 }
+
             }
 
             ModelState.AddModelError("", "Invalid Username or Password");
-
             return Page();
+
         }
 
         public class LoginViewModel
@@ -51,12 +52,10 @@ namespace Ecommerce_App.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+
             [Required]
             [DataType(DataType.Password)]
             public string Password { get; set; }
         }
-            
-            
     }
-    
 }
