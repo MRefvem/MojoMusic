@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce_App.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20200812015928_initial")]
-    partial class initial
+    [Migration("20200813002434_intialuser")]
+    partial class intialuser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,9 +59,6 @@ namespace Ecommerce_App.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");

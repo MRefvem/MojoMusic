@@ -53,8 +53,9 @@ namespace Ecommerce_App
                 .AddEntityFrameworkStores<UserDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddTransient<IProduct, ProductRepository>();
-            services.AddTransient<IImage, Blob>();
+          
+            services.AddTransient<IProduct, InventoryManagement>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,7 +67,9 @@ namespace Ecommerce_App
             }
 
             app.UseRouting();
+
             app.UseAuthentication();
+          
             app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>

@@ -31,13 +31,13 @@ namespace Ecommerce_App.Pages.Account
         // Reserved method name for loading the page
         public void OnGet()
         {
-
+            // what is going to populate on the page load?
         }
 
         // Another reserved method name for the post of the page
         public async Task<IActionResult> OnPost()
         {
-
+         
             if (ModelState.IsValid)
             {
                 Customer customer = new Customer()
@@ -47,22 +47,18 @@ namespace Ecommerce_App.Pages.Account
                     Email = Input.Email,
                     UserName = Input.Email
                 };
-
-                var result = await _userManager.CreateAsync(customer, Input.Password);
+               var result = await _userManager.CreateAsync(customer, Input.Password);
 
                 if (result.Succeeded)
                 {
-                    
                     Claim claim = new Claim("FullName", $"{Input.FirstName} {Input.LastName}");
-
                     await _userManager.AddClaimAsync(customer, claim);
-                    await _signInManager.SignInAsync(customer, isPersistent:false);
-
-                    // does it redirect us?
+                    await _signInManager.SignInAsync(customer, isPersistent: false);
+                
                     // redirects HOME
                     return RedirectToAction("Index", "Home");
                 }
-
+                
             }
 
             return Page();
@@ -76,15 +72,6 @@ namespace Ecommerce_App.Pages.Account
             public string Email { get; set; }
 
             [Required]
-            //[MaxLength(100)]
-            [Display(Name = "First Name")]
-            public string FirstName { get; set; }
-
-            [Required]
-            [Display(Name = "Last Name")]
-            public string LastName { get; set; }
-            
-            [Required]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -93,6 +80,14 @@ namespace Ecommerce_App.Pages.Account
             [Compare("Password")]
             [Display(Name = "Confirm Password")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
         }
     }
 
