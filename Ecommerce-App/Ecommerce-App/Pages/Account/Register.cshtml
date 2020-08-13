@@ -44,16 +44,27 @@
         <div class="container" style="margin-top:30px;">
             <h1>Register</h1>
             <form method="post">
+                <div asp-validation-summary="All"></div>
                 <label asp-for="@Model.Input.FirstName"></label>
-                <input type="text" placeholder="First Name" asp-for="@Model.Input.FirstName" />
+                <input type="text" placeholder="First Name" asp-for="@Model.Input.FirstName" /><br /><br />
+                <span asp-validation-for="@Model.Input.FirstName"></span>
+
                 <label asp-for="@Model.Input.LastName"></label>
-                <input type="text" placeholder="Last Name" asp-for="@Model.Input.LastName" />
+                <input type="text" placeholder="Last Name" asp-for="@Model.Input.LastName" /><br /><br />
+                <span asp-validation-for="@Model.Input.LastName"></span>
+
                 <label asp-for="@Model.Input.Email"></label>
-                <input type="text" placeholder="Email" asp-for="@Model.Input.Email" />
+                <input type="text" placeholder="Email" asp-for="@Model.Input.Email" /><br /><br />
+                <span asp-validation-for="@Model.Input.Email"></span>
+
                 <label asp-for="@Model.Input.Password"></label>
-                <input type="password" placeholder="Password" asp-for="@Model.Input.Password" />
+                <input type="password" placeholder="Password" asp-for="@Model.Input.Password" /><br /><br />
+                <span asp-validation-for="@Model.Input.Password"></span>
+
                 <label asp-for="@Model.Input.ConfirmPassword"></label>
-                <input type="password" placeholder="Confirm Password" asp-for="@Model.Input.ConfirmPassword" />
+                <input type="password" placeholder="Confirm Password" asp-for="@Model.Input.ConfirmPassword" /><br /><br />
+                <span asp-validation-for="@Model.Input.ConfirmPassword"></span>
+
                 <button type="submit">SUBMIT</button>
             </form>
         </div>

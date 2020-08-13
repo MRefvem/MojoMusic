@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Ecommerce_App.Data;
 using Ecommerce_App.Models;
@@ -14,10 +16,12 @@ namespace Ecommerce_App.Pages.Account
     public class RegisterModel : PageModel
     {
         private UserManager<Customer> _userManager;
+        private SignInManager<Customer> _signInManager;
 
-        public RegisterModel(UserManager<Customer> userManager)
+        public RegisterModel(UserManager<Customer> userManager, SignInManager<Customer> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         // This lets the data from the frontend get sent to the server
@@ -33,39 +37,56 @@ namespace Ecommerce_App.Pages.Account
         // Another reserved method name for the post of the page
         public async Task<IActionResult> OnPost()
         {
-            // when a user "posts back" what happens?
-            // does it save to the DB? YES
-            // does it make an API call? NO
-            
-            // capture all the values in our input and create a user and save them into our database
-            Customer customer = new Customer()
+         
+            if (ModelState.IsValid)
             {
-                FirstName = Input.FirstName,
-                LastName = Input.LastName,
-                Email = Input.Email,
-                UserName = Input.Email
-            };
+                Customer customer = new Customer()
+                {
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
+                    Email = Input.Email,
+                    UserName = Input.Email
+                };
+               var result = await _userManager.CreateAsync(customer, Input.Password);
 
-            if (Input.Password == Input.ConfirmPassword)
-            {
-
-                await _userManager.CreateAsync(customer, Input.Password);
-
-                // does it redirect us?
-                // redirects HOME
-                return RedirectToAction("Index", "Home");
+                if (result.Succeeded)
+                {
+                    Claim claim = new Claim("FullName", $"{Input.FirstName} {Input.LastName}");
+                    await _userManager.AddClaimAsync(customer, claim);
+                    await _signInManager.SignInAsync(customer, isPersistent: false);
+                
+                    // redirects HOME
+                    return RedirectToAction("Index", "Home");
+                }
+                
             }
 
-            return RedirectToPage("/Account/Register");
+            return Page();
             
         }
 
         public class RegisterViewModel
         {
+            [Required]
+            [EmailAddress]
             public string Email { get; set; }
+
+            [Required]
+            [DataType(DataType.Password)]
             public string Password { get; set; }
+
+            [Required]
+            [DataType(DataType.Password)]
+            [Compare("Password")]
+            [Display(Name = "Confirm Password")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Display(Name = "First Name")]
             public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "Last Name")]
             public string LastName { get; set; }
         }
     }
