@@ -67,7 +67,9 @@ namespace Ecommerce_App
             }
 
             app.UseRouting();
+
             app.UseAuthentication();
+          
             app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
