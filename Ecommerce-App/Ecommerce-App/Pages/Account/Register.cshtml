@@ -4,6 +4,10 @@
     ViewData["Title"] = "Register";
 }
 
+@{
+    Layout = "_Home";
+}
+
 <!Doctype html>
 
 <html>
@@ -31,7 +35,7 @@
                         <a asp-action="Index" class="nav-link">Home</a>
                     </li>
                     <li class="navbar-item">
-                        <a asp-action="Index" asp-controller="Products" class="nav-link">Products</a>
+                        <a asp-page-handler="Account" asp-page="Login" class="nav-link">Login</a>
                     </li>
                     <li class="navbar-item">
                         <a asp-page-handler="Account" asp-page="Register" class="nav-link">Register</a>
@@ -49,27 +53,27 @@
                 <input type="text" placeholder="First Name" asp-for="@Model.Input.FirstName" />
                 <span asp-validation-for="@Model.Input.FirstName"></span>
                 <br /><br />
-                
+
                 <label asp-for="@Model.Input.LastName"></label>
                 <input type="text" placeholder="Last Name" asp-for="@Model.Input.LastName" />
                 <span asp-validation-for="@Model.Input.LastName"></span>
                 <br /><br />
-                
+
                 <label asp-for="@Model.Input.Email"></label>
                 <input type="text" placeholder="Email" asp-for="@Model.Input.Email" />
                 <span asp-validation-for="@Model.Input.Email"></span>
                 <br /><br />
-                
+
                 <label asp-for="@Model.Input.Password"></label>
                 <input type="password" placeholder="Password" asp-for="@Model.Input.Password" />
                 <span asp-validation-for="@Model.Input.Password"></span>
                 <br /><br />
-                
+
                 <label asp-for="@Model.Input.ConfirmPassword"></label>
                 <input type="password" placeholder="Confirm Password" asp-for="@Model.Input.ConfirmPassword" />
                 <span asp-validation-for="@Model.Input.ConfirmPassword"></span>
                 <br /><br />
-                
+
                 <button type="submit">SUBMIT</button>
             </form>
         </div>
