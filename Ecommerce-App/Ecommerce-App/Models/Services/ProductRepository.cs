@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace Ecommerce_App.Models.Services
 {
-    public class ProductRepository : IProduct
+    public class ProductRepository 
     {
-        
-        public Product Create(Product product)
-        {
-            throw new NotImplementedException();
-        }
 
+        /// <summary>
+        /// Sort - This method allows us to sort the list of products alphabetically and reverse-alphabetically
+        /// </summary>
+        /// <param name="alphabetical">Takes in a string that correlates to button (alphabetical or reverse-alphabetical) selection on the front end</param>
+        /// <returns>Returns a list of products according to selected button</returns>
         public List<Product> Sort(string alphabetical)
         {
             List<Product> allProducts = GetProducts();
@@ -37,16 +37,25 @@ namespace Ecommerce_App.Models.Services
             return allProducts;
         }
 
+        /// <summary>
+        /// GetProduct - This method allows us to get a list of all products that match the searched name
+        /// </summary>
+        /// <param name="name">Takes in a string that represents the name searched on the front end</param>
+        /// <returns>Returns a list containing all the objects that match the searched name</returns>
         public List<Product> GetProduct(string searchString)
         {
             List<Product> allProducts = GetProducts();
 
-            List<Product> product = allProducts.Where(x => x.Name == searchString)
+            List<Product> product = allProducts.Where(x => x.Name.Contains(searchString))
                                         .ToList();
 
             return product;
         }
 
+        /// <summary>
+        /// GetProducts - This method allows us to get a list of all of our products
+        /// </summary>
+        /// <returns>A list of all products</returns>
         public List<Product> GetProducts()
         {
             string path = Environment.CurrentDirectory;
@@ -59,7 +68,7 @@ namespace Ecommerce_App.Models.Services
             for (int i = 1; i < allLines.Length; i++)
             {
                 string[] item = allLines[i].Split(",");
-                var product = new Product()
+                products.Add(new Cereal
                 {
                     Name = item[0],
                     Mfr = item[1],
@@ -77,9 +86,7 @@ namespace Ecommerce_App.Models.Services
                     Weight = decimal.Parse(item[13]),
                     Cups = decimal.Parse(item[14]),
                     Rating = decimal.Parse(item[15])
-                };
-
-                products.Add(product);
+                });
 
             }
 
