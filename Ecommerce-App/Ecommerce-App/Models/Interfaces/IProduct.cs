@@ -31,6 +31,13 @@ namespace Ecommerce_App.Models.Interfaces
         Task<Product> GetProduct(int Id);
 
         /// <summary>
+        /// Gets product by name
+        /// </summary>
+        /// <param name="name">name of the product</param>
+        /// <returns> product object</returns>
+        Task<Product> GetProductByName(string name);
+
+        /// <summary>
         /// Update- allows us to update a product
         /// </summary>
         /// <param name="product"> product object we want to update</param>

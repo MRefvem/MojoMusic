@@ -3,7 +3,14 @@
 @{
 }
 
+<h1> Admin</h1>
 
 <form method="post" enctype="multipart/form-data">
-    <input type="file" />
+    <label asp-for="@Model.Name"></label>
+    <input asp-for="@Model.Name" /> <br />
+
+    <label asp-for="@Model.Image"></label>
+    <input type="file" asp-for="@Model.Image" /><br />
+
+    <button type="submit">Upload Image</button>
 </form>
