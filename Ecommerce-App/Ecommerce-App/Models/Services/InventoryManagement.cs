@@ -70,6 +70,16 @@ namespace Ecommerce_App.Models.Services
             }
         }
 
+        /// <summary>
+        /// Gets product by name
+        /// </summary>
+        /// <param name="name">name of the product</param>
+        /// <returns> product object</returns>
+        public async Task<Product> GetProductByName(string name)
+        {
+            Product product = await _context.Products.Where(x => x.Name == name).FirstOrDefaultAsync();
+            return product;
+        }
 
         /// <summary>
         /// GetProducts - This method allows us to get a list of all of our products
