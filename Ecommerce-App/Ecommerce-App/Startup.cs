@@ -47,8 +47,12 @@ namespace Ecommerce_App
                 options.UseSqlServer(Configuration.GetConnectionString("UserConnection"));
             });
 
+            // Add my policy
+            services.AddAuthorization(options =>
+           {
+               options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
+           });
           
-
             services.AddIdentity<Customer, IdentityRole>()
                 .AddEntityFrameworkStores<UserDbContext>()
                 .AddDefaultTokenProviders();
@@ -60,7 +64,7 @@ namespace Ecommerce_App
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -70,7 +74,12 @@ namespace Ecommerce_App
             app.UseRouting();
 
             app.UseAuthentication();
-          
+            app.UseAuthorization();
+
+            var userManager = serviceProvider.GetRequiredService<UserManager<Customer>>();
+
+            RoleInitializer.SeedData(serviceProvider, userManager, Configuration);
+
             app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
