@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce_App.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20200813002434_intialuser")]
-    partial class intialuser
+    [Migration("20200814043045_newPolicyAdminOnly")]
+    partial class newPolicyAdminOnly
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

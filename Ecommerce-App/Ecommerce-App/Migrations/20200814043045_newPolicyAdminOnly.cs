@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Ecommerce_App.Migrations
 {
-    public partial class intialuser : Migration
+    public partial class newPolicyAdminOnly : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
