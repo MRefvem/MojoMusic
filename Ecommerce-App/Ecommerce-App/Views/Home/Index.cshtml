@@ -7,138 +7,29 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="~/styles/reset.css" type="text/css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="~/styles/style.css" type="text/css" />
-    <title>Ecommerce</title>
-    <style type="text/css">
-        .row div {
-            border: 1px solid black;
-        }
-
-        #Home {
-            background-color: bisque;
-            box-sizing: border-box;
-        }
-        #Piano{
-            width : 40vw;
-            height : 55vh;
-            border: 5px solid yellow;
-        }
-        #Piano h3{
-            float : right;
-            line-height:70vh;
-        }
-        #Piano img {
-           
-            height : 100%;
-            float :left;
-        }
-
-        #Fluet {
-            width: 40vw;
-            height: 40vh;
-            border: 5px solid yellow;
-        }
-        
-
-        #Fluet h3 {
-            float: left;
-            line-height: 70vh;
-        }
-
-        #Fluet img {
-           
-            height: 100%;
-            float: right;
-        }
-
-        #Guitar {
-            width: 40vw;
-            height: 30vh;
-            border: 5px solid yellow;
-        }
-
-        #Guitar h3 {
-            float: right;
-            line-height: 45vh;
-        }
-
-        #Guitar img {
-            
-            height: 100%;
-            float: left;
-        }
-
-        #Microphone {
-            width: 40vw;
-            height: 40vh;
-            border: 5px solid yellow;
-        }
-
-        #Microphone h3 {
-            float: left;
-            line-height: 45vh;
-        }
-
-        #Microphone img {
-           
-            height: 100%;
-            float: right;
-        }
-
-    </style>
 </head>
 <body id="Home">
-    <header>
-        <nav class="navbar navbar-light bg-light navbar-expand-lg">
-            <a href="#" class="navbar-brand">Ecommerce</a>
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="navbar-item">
-                        <a asp-action="Index" class="nav-link">Home</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a asp-page="/Account/Login" class="nav-link">Login</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a asp-page="/Account/Register" class="nav-link">Register</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
     <main>
-        <div class="container" style="margin-top:30px;">
-            <h2>Welcome to the Ecommerce Site!</h2>
-        </div>
 
+        <div class="container text-white" style="margin-top:30px;">
+            <h2>Welcome to Mojo Music!</h2>
+            <p>Enjoys these featured items from our products collection.</p>
+        </div>
       
             @foreach (var item in Model.Prod)
             {
                 if (item.Id < 5)
                 {
-                    <div id=@item.Name>
+                    <div id=@item.Name class="container bg-light border rounded bg-gradient-primary" style="margin-top:10px">
                         <img src=@item.Image  />
-                        <h3 > @item.Name</h3>
+                        <h3>@item.Name</h3>
+                        <p>$@item.Price</p>
+                        <p>@item.Description</p>
                     </div>
-                   
                 }
             }
-        
 
     </main>
-    <footer>
-        <div class="container" style="margin-top:30px;">
-            <p>&copy; 2020 Ecommerce-App</p>
-        </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    </footer>
 </body>
 </html>
 

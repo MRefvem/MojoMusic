@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Ecommerce_App.Migrations
+namespace Ecommerce_App.Migrations.UserDb
 {
-    public partial class newPolicyAdminOnly : Migration
+    public partial class accurateDataSeeting : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

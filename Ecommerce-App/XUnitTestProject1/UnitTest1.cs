@@ -3,7 +3,6 @@ using Ecommerce_App.Models.Services;
 using Ecommerce_App.Models;
 using System;
 using Xunit;
-using Ecommerce.Models;
 using System.Collections.Generic;
 
 namespace XUnitTestProject1
