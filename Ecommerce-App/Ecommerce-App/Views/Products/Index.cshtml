@@ -94,6 +94,11 @@
             </div>
 
         }
+
+        @foreach (var item in Model.Instruments)
+	{
+		 <p> @item.Name</p>
+	}
     </main>
     <footer>
         <div class="container" style="margin-top:30px;">

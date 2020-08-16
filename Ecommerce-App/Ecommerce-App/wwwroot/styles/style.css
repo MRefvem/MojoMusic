@@ -1,3 +1,13 @@
-﻿* {
-/*    background-color: hotpink;*/
+﻿#Home {
+   background-color: bisque;
+   box-sizing:border-box;
 }
+
+h3 #Piano {
+    float:left
+}
+
+img #Piano {
+    float:left
+}
+
