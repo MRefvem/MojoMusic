@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce_App.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20200816232040_accurateDataSeeting")]
-    partial class accurateDataSeeting
+    [Migration("20200817211233_reseedingData")]
+    partial class reseedingData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,6 +51,7 @@ namespace Ecommerce_App.Migrations
                         {
                             Id = 1,
                             Description = "Yamaha's finest concert grand delivers the performance and subtleties expected from the world's leading pianists.",
+                            Image = "https://401ecommerce.blob.core.windows.net/productimages/Yamaha%20C7%20Grand%20Piano.jpg",
                             Name = "Yamaha C7 Grand Piano",
                             Price = 48000.00m,
                             SKU = "213nvnv33"
@@ -59,6 +60,7 @@ namespace Ecommerce_App.Migrations
                         {
                             Id = 2,
                             Description = "Gemeinhardt's level of craftsmanship has provided excellent flutes for generations of budding professionals. Take advantage of their prestine quality and our great offer today!",
+                            Image = "https://401ecommerce.blob.core.windows.net/productimages/Gemeinhardt%20Performance%20Flute.jpg",
                             Name = "Gemeinhardt Performance Flute",
                             Price = 1749.00m,
                             SKU = "33mmml23"
@@ -66,7 +68,8 @@ namespace Ecommerce_App.Migrations
                         new
                         {
                             Id = 3,
-                            Description = "Fender has been a leading innovator in electric guitar building for nearly a century, providing favorite models for legendary musicians such as Jimi Hendrix and more. ",
+                            Description = "Fender has been a leading innovator in electric guitar building for nearly a century, providing favorite models for legendary musicians such as Jimi Hendrix and more.",
+                            Image = "https://401ecommerce.blob.core.windows.net/productimages/Fender%20Stratocaster.png",
                             Name = "Fender Stratocaster",
                             Price = 1149.99m,
                             SKU = "113nvev33"
@@ -75,6 +78,7 @@ namespace Ecommerce_App.Migrations
                         {
                             Id = 4,
                             Description = "Whether it's broadcast, podcast or recording, voices need to be handled with care. When purified and polished, every detail has more impact. That's why the SM7B was built, to capture smooth, warm vocals that connect the speaker to the listener.",
+                            Image = "https://401ecommerce.blob.core.windows.net/productimages/SM7B%20Vocal%20Microphone.jpg",
                             Name = "SM7B Vocal Microphone",
                             Price = 399.00m,
                             SKU = "200llvnv33"
@@ -83,6 +87,7 @@ namespace Ecommerce_App.Migrations
                         {
                             Id = 5,
                             Description = "These premium noise cancelling headphones ensure the highest fidelity sound can be enjoyed while also blocking out the distractions of everyday noises.",
+                            Image = "https://401ecommerce.blob.core.windows.net/productimages/Beats%20by%20Dr.%20Dre.jpg",
                             Name = "Beats by Dr. Dre",
                             Price = 349.99m,
                             SKU = "213nvnv44"
@@ -91,6 +96,7 @@ namespace Ecommerce_App.Migrations
                         {
                             Id = 6,
                             Description = "Mackie CR3-X Multimedia Monitors put studio-quality sound right on your desktop at a great value. Mackie have earned their reputation for quality studio monitoring over the years, and CR3-X Multimedia Monitors are just as suitable for multimedia production as they are for gaming and casual listening.",
+                            Image = "https://401ecommerce.blob.core.windows.net/productimages/Mackie%20CR3-X%203%20inch%20Multimedia%20Monitors.jfif",
                             Name = "Mackie CR3-X 3 inch Multimedia Monitors",
                             Price = 99.00m,
                             SKU = "213oonv33"
@@ -99,14 +105,16 @@ namespace Ecommerce_App.Migrations
                         {
                             Id = 7,
                             Description = "The Honer Special has been a favorite of blues musicians for decades, accompanying some of the legendary recoridngs from the early days of jazz masters all the way to present-day alternative rock.",
+                            Image = "https://401ecommerce.blob.core.windows.net/productimages/Hohner%20Special%2020%20Harmonica.jpg",
                             Name = "Hohner Special 20 Harmonica",
-                            Price = 5.00m,
+                            Price = 49.00m,
                             SKU = "122pppp222"
                         },
                         new
                         {
                             Id = 8,
                             Description = "Lyon and Healy have set the standard for concert level harp production through their focus on excellence and preference among leading professionals in the industry. They can be heard in almost every major symphony orchestra.",
+                            Image = "https://401ecommerce.blob.core.windows.net/productimages/Lyon%20and%20Healy%20Concert%20Harp.jfif",
                             Name = "Lyon and Healy Concert Harp",
                             Price = 17875.00m,
                             SKU = "213dddd33"
@@ -115,6 +123,7 @@ namespace Ecommerce_App.Migrations
                         {
                             Id = 9,
                             Description = "Taylor has been recognized over time for their ability to perfectly capture the backwoods/rustic appeal in Country music. The Taylor 100 Series makes the perfect choice for budding singers across many genres.",
+                            Image = "https://401ecommerce.blob.core.windows.net/productimages/Taylor%20100%20Series%20Guitar.jpg",
                             Name = "Taylor 100 Series Guitar",
                             Price = 799.00m,
                             SKU = "199rrnv33"
@@ -123,6 +132,7 @@ namespace Ecommerce_App.Migrations
                         {
                             Id = 10,
                             Description = "When Yamaha set out designing the Absolute Hybrid Maple, they started with the most important aspect of a musical instrument, the sound.",
+                            Image = "https://401ecommerce.blob.core.windows.net/productimages/Yamaha%20Absolute%20Hybrid%20Maple%205-Piece%20Drum%20Set.jpg",
                             Name = "Yamaha Absolute Hybrid Maple 5-Piece Drum Set",
                             Price = 3999.00m,
                             SKU = "213oonv00"
