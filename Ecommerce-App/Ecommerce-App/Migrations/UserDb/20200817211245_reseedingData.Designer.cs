@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce_App.Migrations.UserDb
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20200816232102_accurateDataSeeting")]
-    partial class accurateDataSeeting
+    [Migration("20200817211245_reseedingData")]
+    partial class reseedingData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

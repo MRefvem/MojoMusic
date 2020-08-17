@@ -47,7 +47,7 @@ namespace Ecommerce_App.Models
                 {
                     Claim claim = new Claim("FullName", $"{user.FirstName} {user.LastName}");
                     var claimResult = userManager.AddClaimAsync(user, claim).Result;
-                    await userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
+                    userManager.AddToRoleAsync(user, ApplicationRoles.Admin).Wait();
                 }
             }
         }
