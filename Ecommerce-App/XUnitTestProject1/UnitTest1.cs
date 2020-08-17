@@ -51,7 +51,7 @@ namespace XUnitTestProject1
 
             //Assert
 
-            Assert.Equal("Piano", result.Name);
+            Assert.Equal("Yamaha C7 Grand Piano", result.Name);
           
         }
 
