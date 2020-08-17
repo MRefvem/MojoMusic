@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce_App.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20200816232040_accurateDataSeeting")]
-    partial class accurateDataSeeting
+    [Migration("20200817022915_initalstore")]
+    partial class initalstore
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

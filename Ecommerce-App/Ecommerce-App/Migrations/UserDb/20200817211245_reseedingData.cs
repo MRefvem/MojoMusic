@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Ecommerce_App.Migrations.UserDb
 {
-    public partial class accurateDataSeeting : Migration
+    public partial class reseedingData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
