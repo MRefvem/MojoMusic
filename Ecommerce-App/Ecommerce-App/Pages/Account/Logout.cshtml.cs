@@ -25,7 +25,7 @@ namespace Ecommerce_App.Pages.Account
         public async Task<IActionResult> OnPost()
         {
             await _signInMnager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToPagePermanent("Index", "Home");
         }
     }
 }

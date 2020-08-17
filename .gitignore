@@ -18,6 +18,7 @@
 .nfs*
 
 *.sqllite
+*.sqlite
 
 ### macOS ###
 *.DS_Store
