@@ -1,4 +1,4 @@
-﻿using Ecommerce.Models;
+﻿using Ecommerce_App.Models;
 using Ecommerce_App.Data;
 using Ecommerce_App.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -70,6 +70,31 @@ namespace Ecommerce_App.Models.Services
             }
         }
 
+        /// <summary>
+        /// Gets product by name
+        /// </summary>
+        /// <param name="name">name of the product</param>
+        /// <returns> product object</returns>
+        public async Task<Product> GetProductByName(string name)
+        {
+            Product product = await _context.Products.Where(x => x.Name == name).FirstOrDefaultAsync();
+            return product;
+        }
+
+        /// <summary>
+        /// GetProduct - This method allows us to get a list of all products that match the searched name
+        /// </summary>
+        /// <param name="name">Takes in a string that represents the name searched on the front end</param>
+        /// <returns>Returns a list containing all the objects that match the searched name</returns>
+        public async Task<List<Product>> SearchByProductName(string searchString)
+        {
+            List<Product> allProducts = await GetProducts();
+
+            List<Product> product = allProducts.Where(x => x.Name.Contains(searchString))
+                                        .ToList();
+
+            return product;
+        }
 
         /// <summary>
         /// GetProducts - This method allows us to get a list of all of our products

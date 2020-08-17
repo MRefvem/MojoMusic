@@ -1,4 +1,4 @@
-﻿using Ecommerce.Models;
+﻿using Ecommerce_App.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +29,20 @@ namespace Ecommerce_App.Models.Interfaces
         /// <param name="name">Takes in a string that represents the name searched on the front end</param>
         /// <returns>Returns a list containing all the objects that match the searched name</returns>
         Task<Product> GetProduct(int Id);
+
+        /// <summary>
+        /// Gets product by name
+        /// </summary>
+        /// <param name="name">name of the product</param>
+        /// <returns> product object</returns>
+        Task<Product> GetProductByName(string name);
+
+        /// <summary>
+        /// GetProduct - This method allows us to get a list of all products that match the searched name
+        /// </summary>
+        /// <param name="name">Takes in a string that represents the name searched on the front end</param>
+        /// <returns>Returns a list containing all the objects that match the searched name</returns>
+        Task<List<Product>> SearchByProductName(string searchString);
 
         /// <summary>
         /// Update- allows us to update a product

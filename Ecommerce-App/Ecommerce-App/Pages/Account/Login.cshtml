@@ -4,19 +4,46 @@
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
+@{
+    Layout = "_Home";
+}
 
-<form method="post">
+<!Doctype html>
 
-    <div asp-validation-summary="All"></div>
-    <label asp-for="@Model.Input.Email"></label>
-    <input asp-for="@Model.Input.Email" />
-    <br /><br />
+<html>
+<head>
+    <style>
+        .login {
+            margin: 0px auto;
+        }
+    </style>
+</head>
+<body>
+    <main>
 
-    <label asp-for="@Model.Input.Password"></label>
-    <input asp-for="@Model.Input.Password" />
-    <br /><br />
+        <div class="row">
+            <div class="col-md-4 d-flex justify-content-center login" style="margin-top:30px;">
+                <form method="post">
 
-    <button type="submit">LOGIN</button>
+                    <div class="form-group text-white">
+                        <h1>Login</h1>
+                    </div>
 
-</form>
+                    <div class="form-group">
+                        <div asp-validation-summary="All"></div>
+                        <input type="text" placeholder="Email" asp-for="@Model.Input.Email" />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" placeholder="Password" asp-for="@Model.Input.Password" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">LOGIN</button>
+
+                </form>
+            </div>
+
+        </div>
+    </main>
+</body>
+</html>

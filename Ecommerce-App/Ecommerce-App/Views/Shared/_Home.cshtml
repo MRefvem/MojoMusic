@@ -7,23 +7,69 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/styles/reset.css" type="text/css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/styles/style.css" type="text/css" />
     <title>@ViewBag.Title</title>
+    <style>
+        .center {
+            margin: 0px auto;
+        }
+    </style>
 </head>
 <body>
     <header>
-        @if (SignInManager.IsSignedIn(User))
-        {
-            <span>Welcome @User.Claims.First(x => x.Type == "FullName").Value!</span>
-            <form asp-page="/Account/Logout" method="post"><button type="submit">LOGOUT</button></form>
-        }
-        else
-        {
-            <a asp-page="/Account/Login">Login</a>
-            <a asp-page="/Account/Register">Register</a>
-        }
+        <nav class="navbar navbar-light bg-light navbar-expand-lg">
+            <a href="#" class="navbar-brand">Mojo Music</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="navbar-item">
+                        <a asp-action="Index" asp-controller="Home" class="nav-link">Home</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a asp-action="Index" asp-controller="Products" class="nav-link">Products</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a asp-page="/Account/Login" class="nav-link">Login</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a asp-page="/Account/Register" class="nav-link">Register</a>
+                    </li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="navbar-item">
+                            <form asp-page="/Account/Logout" method="post">
+                                <button id="logout-button" class="nav-link" type="submit">Logout</button>
+                            </form>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </nav>
+        <div class="container welcome-message" style="margin-top:10px;">
+            <div class="row">
+                <div class="col text-white">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <span>Welcome @User.Claims.First(x => x.Type == "FullName").Value!</span>
+                    }
+                </div>
+            </div>
+        </div>
     </header>
-    <div>
+    <div style="margin-bottom: 200px;">
         @RenderBody()
     </div>
+    <footer id="sticky-footer" class="py-4 bg-dark text-white-50" style="position: fixed; bottom: 0; width: 100%;">
+        <div class="container text-center" style="margin-top:30px;">
+            <p class="col-md-4 d-flex justify-content-center center">&copy; 2020 Ecommerce-App</p>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    </footer>
 </body>
 </html>
