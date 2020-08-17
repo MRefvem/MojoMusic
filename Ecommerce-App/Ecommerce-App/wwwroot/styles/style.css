@@ -17,6 +17,10 @@ body {
     background-size: cover;
 }
 
+img {
+    height: 100px;
+}
+
 
 
 /*h3 #Piano {

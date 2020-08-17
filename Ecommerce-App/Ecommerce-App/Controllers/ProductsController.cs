@@ -20,10 +20,30 @@ namespace Ecommerce.Controllers
             _product = product;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var prods = await _product.GetProducts();
+
+            ProductsViewModel vm = new ProductsViewModel
+            {
+                Prod = prods,
+            };
+
+            return View(vm);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> SearchResults(string searchString)
+        {
+            var prods = await _product.SearchByProductName(searchString);
+
+            ProductsViewModel vm = new ProductsViewModel
+            {
+                Prod = prods,
+            };
+
+            return View(vm);
+        }
     }
 }

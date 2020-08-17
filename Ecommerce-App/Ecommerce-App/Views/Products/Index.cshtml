@@ -11,73 +11,38 @@
 </head>
 <body>
     <main>
-        @*<div class="container" style="margin-top:30px;">
-                    <div class="row">
-                        <div class="col">
-                            <h2>All Products</h2>
-                        </div>
-                        <div class="col">
-                            <form asp-controller="Products" asp-action="SearchResults">
-                                <label>Search by Name</label>
-                                <input type="text" name="searchString">
 
-                                <button type="submit">Search</button>
-                            </form>
-                        </div>
-                        <div class="col">
-                            <form asp-controller="Products" asp-action="Sort">
-                                <label>Sort</label>
-                                <button type="submit" value="alphabetical" name="sortedString">Alphabetical</button>
-                                <button type="submit" value="reverseAlphabetical" name="sortedString">Reverse Alphabetical</button>
-                            </form>
-                        </div>
+        <div class="container text-white" style="margin-top:30px;">
+            <h2>All Products</h2>
+        </div>
+        <div class="container text-white" style="margin-top:10px;">
+            <div class="row">
+                <div class="col">
+                    <form asp-controller="Products" asp-action="SearchResults">
+                        <label>Search by Name</label>
+                        <input type="text" name="searchString">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        @foreach (var item in Model.Prod)
+        {
+            <div id=@item.Name class="container bg-light border rounded bg-gradient-primary" style="margin-top:30px">
+                <div class="row" style="margin-top:10px; margin-bottom:10px;">
+                    <div class="col-3">
+                        <img src=@item.Image style="height:175px; width:175px;" />
+                    </div>
+                    <div class="col-9">
+                        <h3>@item.Name</h3>
+                        <p>$@item.Price</p>
+                        <p>@item.Description</p>
                     </div>
                 </div>
-                <div class="container" style="margin-top:30px;">
-                    <div class="row">
-                        <div class="col">
-                            <p>Here is a list of popular cereals made by the following Manufacturers: American Home Food Products (A), General Mills (G), Kelloggs (K), Nabisco (N), Post (P), Quaker Oats (Q), Ralston Purina (R).</p>
-                        </div>
-                    </div>
-                </div>
-                @foreach (var product in Model.Products)
-                {
-                    <div class="container" style="margin-top:30px;">
-                        <h5>Product info</h5>
-                        <div class="row">
-                            <div class="col-sm">
-                                <h3>@product.Name</h3>
-                            </div>
-                            <div class="col-sm">
-                                <p>Manufacturer: @product.Mfr</p>
-                                <p>Type: @product.Type</p>
-                                <p>Calories: @product.Calories</p>
-                                <p>Protein: @product.Protein</p>
-                                <p>Fat: @product.Fat</p>
-                            </div>
-                            <div class="col-sm">
-                                <p>Sodium: @product.Sodium</p>
-                                <p>Fiber: @product.Fiber</p>
-                                <p>Carbohydrates: @product.Carbo</p>
-                                <p>Sugar: @product.Sugars</p>
-                                <p>Potassium: @product.Potass</p>
-                            </div>
-                            <div class="col-sm">
-                                <p>Vitamins: @product.Vitamins</p>
-                                <p>Shelf-Life: @product.Shelf</p>
-                                <p>Weight: @product.Weight</p>
-                                <p>Cups: @product.Cups</p>
-                                <p>Rating: @product.Rating</p>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+        }
 
-                }
-
-                @foreach (var item in Model.Instruments)
-            {
-                 <p> @item.Name</p>
-            }*@
     </main>
 
 </body>
