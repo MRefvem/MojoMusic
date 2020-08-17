@@ -1,4 +1,4 @@
-﻿using Ecommerce.Models;
+﻿using Ecommerce_App.Models;
 using Ecommerce_App.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using System;
