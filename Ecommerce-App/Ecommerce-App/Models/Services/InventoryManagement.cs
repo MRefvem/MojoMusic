@@ -82,6 +82,21 @@ namespace Ecommerce_App.Models.Services
         }
 
         /// <summary>
+        /// GetProduct - This method allows us to get a list of all products that match the searched name
+        /// </summary>
+        /// <param name="name">Takes in a string that represents the name searched on the front end</param>
+        /// <returns>Returns a list containing all the objects that match the searched name</returns>
+        public async Task<List<Product>> SearchByProductName(string searchString)
+        {
+            List<Product> allProducts = await GetProducts();
+
+            List<Product> product = allProducts.Where(x => x.Name.Contains(searchString))
+                                        .ToList();
+
+            return product;
+        }
+
+        /// <summary>
         /// GetProducts - This method allows us to get a list of all of our products
         /// </summary>
         /// <returns>A list of all products</returns>

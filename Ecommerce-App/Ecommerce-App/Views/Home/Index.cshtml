@@ -20,11 +20,17 @@
             {
                 if (item.Id < 5)
                 {
-                    <div id=@item.Name class="container bg-light border rounded bg-gradient-primary" style="margin-top:10px">
-                        <img src=@item.Image  />
-                        <h3>@item.Name</h3>
-                        <p>$@item.Price</p>
-                        <p>@item.Description</p>
+                    <div id=@item.Name class="container bg-light border rounded bg-gradient-primary" style="margin-top:30px">
+                        <div class="row" style="margin-top:10px; margin-bottom:10px;">
+                            <div class="col-3">
+                                <img src=@item.Image style="height:175px; width:175px;" />
+                            </div>
+                            <div class="col-9">
+                                <h3>@item.Name</h3>
+                                <p>$@item.Price</p>
+                                <p>@item.Description</p>
+                            </div>
+                        </div>
                     </div>
                 }
             }

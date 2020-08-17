@@ -24,12 +24,11 @@ namespace Ecommerce.Controllers
         {
             var prods = await _product.GetProducts() ;
 
-
-
             ProductsViewModel vm = new ProductsViewModel
             {
                 Prod = prods,
             };
+
             return View(vm);
         }
     }

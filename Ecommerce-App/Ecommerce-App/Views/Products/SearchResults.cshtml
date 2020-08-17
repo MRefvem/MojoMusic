@@ -1,107 +1,50 @@
 ﻿@model Ecommerce_App.Models.ViewModels.ProductsViewModel
 
+@{
+    Layout = "_Home";
+}
+
 <!Doctype html>
 
 <html>
 <head>
-    <link rel="stylesheet" href="~/styles/reset.css" type="text/css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="~/styles/style.css" type="text/css" />
-    <title>Products</title>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-light bg-light navbar-expand-lg">
-            <a href="#" class="navbar-brand">Ecommerce</a>
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="navbar-item">
-                        <a asp-action="Index" asp-controller="Home" class="nav-link">Home</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a asp-action="Index" class="nav-link">Products</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a asp-page="/Account/Register" class="nav-link">Register</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+
     <main>
-        <div class="container" style="margin-top:30px;">
+
+        <div class="container text-white" style="margin-top:30px;">
+            <h2>Search Results</h2>
+        </div>
+        <div class="container text-white" style="margin-top:10px;">
             <div class="row">
-                <div class="col">
-                    <h2>All Products</h2>
-                </div>
                 <div class="col">
                     <form asp-controller="Products" asp-action="SearchResults">
                         <label>Search by Name</label>
                         <input type="text" name="searchString">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-                        <button type="submit">Search</button>
-                    </form>
-                </div>
-                <div class="col">
-                    <form asp-controller="Products" asp-action="Sort">
-                        <label>Sort</label>
-                        <button type="submit" value="alphabetical" name="sortedString">Alphabetical</button>
-                        <button type="submit" value="reverseAlphabetical" name="sortedString">Reverse Alphabetical</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="container" style="margin-top:30px;">
-            <div class="row">
-                <div class="col">
-                    <p>Here is a list of popular cereals made by the following Manufacturers: American Home Food Products (A), General Mills (G), Kelloggs (K), Nabisco (N), Post (P), Quaker Oats (Q), Ralston Purina (R).</p>
-                </div>
-            </div>
-        </div>
-        @foreach (var product in Model.Products)
+        @foreach (var item in Model.Prod)
         {
-            <div class="container" style="margin-top:30px;">
-                <h5>Product info</h5>
-                <div class="row">
-                    <div class="col-sm">
-                        <h3>@product.Name</h3>
+            <div id=@item.Name class="container bg-light border rounded bg-gradient-primary" style="margin-top:30px">
+                <div class="row" style="margin-top:10px; margin-bottom:10px;">
+                    <div class="col-3">
+                        <img src=@item.Image style="height:175px; width:175px;" />
                     </div>
-                    <div class="col-sm">
-                        <p>Manufacturer: @product.Mfr</p>
-                        <p>Type: @product.Type</p>
-                        <p>Calories: @product.Calories</p>
-                        <p>Protein: @product.Protein</p>
-                        <p>Fat: @product.Fat</p>
-                    </div>
-                    <div class="col-sm">
-                        <p>Sodium: @product.Sodium</p>
-                        <p>Fiber: @product.Fiber</p>
-                        <p>Carbohydrates: @product.Carbo</p>
-                        <p>Sugar: @product.Sugars</p>
-                        <p>Potassium: @product.Potass</p>
-                    </div>
-                    <div class="col-sm">
-                        <p>Vitamins: @product.Vitamins</p>
-                        <p>Shelf-Life: @product.Shelf</p>
-                        <p>Weight: @product.Weight</p>
-                        <p>Cups: @product.Cups</p>
-                        <p>Rating: @product.Rating</p>
+                    <div class="col-9">
+                        <h3>@item.Name</h3>
+                        <p>$@item.Price</p>
+                        <p>@item.Description</p>
                     </div>
                 </div>
             </div>
-
         }
+
     </main>
-    <footer>
-        <div class="container" style="margin-top:30px;">
-            <p>&copy; 2020 Ecommerce-App</p>
-        </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    </footer>
+
 </body>
 </html>

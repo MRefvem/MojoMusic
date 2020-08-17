@@ -38,6 +38,13 @@ namespace Ecommerce_App.Models.Interfaces
         Task<Product> GetProductByName(string name);
 
         /// <summary>
+        /// GetProduct - This method allows us to get a list of all products that match the searched name
+        /// </summary>
+        /// <param name="name">Takes in a string that represents the name searched on the front end</param>
+        /// <returns>Returns a list containing all the objects that match the searched name</returns>
+        Task<List<Product>> SearchByProductName(string searchString);
+
+        /// <summary>
         /// Update- allows us to update a product
         /// </summary>
         /// <param name="product"> product object we want to update</param>
