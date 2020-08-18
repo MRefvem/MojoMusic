@@ -8,9 +8,12 @@ using Ecommerce_App.Data;
 using Ecommerce_App.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace Ecommerce_App.Pages.Account
 {
@@ -18,11 +21,13 @@ namespace Ecommerce_App.Pages.Account
     {
         private UserManager<Customer> _userManager;
         private SignInManager<Customer> _signInManager;
+        private IEmailSender _emailSenderService;
 
-        public RegisterModel(UserManager<Customer> userManager, SignInManager<Customer> signInManager)
+        public RegisterModel(UserManager<Customer> userManager, SignInManager<Customer> signInManager, IEmailSender emailSenderService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailSenderService = emailSenderService;
         }
 
         // This lets the data from the frontend get sent to the server
@@ -55,7 +60,12 @@ namespace Ecommerce_App.Pages.Account
                     Claim claim = new Claim("FullName", $"{Input.FirstName} {Input.LastName}");
                     await _userManager.AddClaimAsync(customer, claim);
                     await _signInManager.SignInAsync(customer, isPersistent: false);
-                
+
+                    // send them a email
+                    string subject = "Welcome to Mojo Music";
+                    string htmlMessage = $"<h1> We're excited to have you here {customer.FirstName}<h1>";
+                    await _emailSenderService.SendEmailAsync(customer.Email, subject, htmlMessage);
+
                     // redirects HOME
                     return RedirectToAction("Index", "Home");
                 }
