@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +34,8 @@ namespace Ecommerce_App
             // could be controllers with views
             // since this is mvc, we're specific
             services.AddMvc();
+
+
 
             // Registering our DbContext
             services.AddDbContext<StoreDbContext>(options =>
@@ -60,6 +63,7 @@ namespace Ecommerce_App
           
             services.AddTransient<IProduct, InventoryManagement>();
             services.AddScoped<IImage, Blob>();
+            services.AddTransient<IEmailSender, EmailSenderService>();
 
         }
 
