@@ -1,0 +1,41 @@
+﻿@page "/Details/{id}/Product"
+
+@model Ecommerce_App.Pages.Details.ProductModel
+
+@{
+    ViewData["Title"] = "Product";
+}
+
+@{
+    Layout = "_Home";
+}
+
+<!Doctype html>
+
+<html>
+<head>
+</head>
+<body>
+    <main>
+
+        <div class="container text-white" style="margin-top:30px;">
+            <h2>Product Info</h2>
+        </div>
+
+        <div id=@Model.Product.Name class="container bg-light border rounded bg-gradient-primary" style="margin-top:30px">
+            <div class="row" style="margin-top:10px; margin-bottom:10px;">
+                <div class="col-3">
+                    <img src=@Model.Product.Image style="height:175px; width:175px;" />
+                </div>
+                <div class="col-9">
+                    <h3>@Model.Product.Name</h3>
+                    <p>$@Model.Product.Price</p>
+                    <p>@Model.Product.Description</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>

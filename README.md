@@ -22,8 +22,17 @@ The app should simply be able to run through Microsoft Visual Studio.
 
 # Change-Log
 
+18 Aug 2020
+1.1 Sprint 2 - Milestone #1 Complete
+User Story 1
+- *As a user, I would like to receive a notification after I register for an account on the site.*
+- *Added SendGrid functionality to register route so that after registration an email gets sent to the user.*
+User Story 2
+- *As a user, I would like to view specific product details.*
+- *On the browse page that shows all of the products, the user can click on a specific product and be redirected to an individual page with the product details.*
+
 17 Aug 2020 - SPRINT 1 Complete
-1.4 Sprint 1
+1.0 Sprint 1
 - *README & Documentation: README contains an introduction to the web application. README contains all required questions as well as link to the deployed site. All contributors are referenced and cited within the README.*
 - *MVC Skeleton & Scaffold: Site contains basic MVC Scaffold including a DBContext with basic products seeded into database. Site implements the repository design pattern with appropriate interfaces and services. Dependency injection is properly registered in Startup.cs file.*
 - *Home Page: Introduction to the site with HTML/CSS. Anonymous accessibility. Home page contains login/register links as well as custom greeting for logged-in users.*
@@ -36,7 +45,7 @@ The app should simply be able to run through Microsoft Visual Studio.
 - *Industry Standard: Summary Comments are present and completed. Methods and variable names are appropriate. Fundamentals are properly used. No misuse of code or industry standards present.*
 
 16 Aug 2020
-1.3 Sprint 1 - Milestone #2 Complete
+0.4 Sprint 1 - Milestone #2 Complete
 User Story 1
 - *As a User, I would like the images of my products to be stored securely and external to the project*
 - *Added the ability to store product images securely in the cloud, utilizing Microsoft Azure Blob Storage*
@@ -52,7 +61,7 @@ User Story 4
 - *Administrator given special role and claims to allow them access secret areas of the site*
 
 12 Aug 2020
-1.2 Sprint 1 - Milestone #1 Complete
+0.3 Sprint 1 - Milestone #1 Complete
 User Story 1 
 - *Ability for the user to register for an account on the site, so that they can have a personalized experience*
 - *Added identity for the MVC project*
@@ -65,9 +74,9 @@ User Story 3
 - *Set up a database, StoreDbContext. Registered in the Startup.cs file. Implemented repository design pattern.*
 
 11 Aug 2020
-1.1 *Refactored code base so that Products.cs can be read as a generic class. Created new class, Cereal.cs, that Products.cs then inherits from. Refactored services and controllers according to these changes. Bug fixes: navigating between routes after performing CRUD operations no longer breaks the site. Sort method free of bugs.*
+0.2 *Refactored code base so that Products.cs can be read as a generic class. Created new class, Cereal.cs, that Products.cs then inherits from. Refactored services and controllers according to these changes. Bug fixes: navigating between routes after performing CRUD operations no longer breaks the site. Sort method free of bugs.*
 
 10 Aug 2020
-1.0
+0.1
 - *Views, models and controllers implemented. Site functionality: ability to list products and all info, see information on a single product and sort alphabetically and reverse-alphabetically. Basic front end implemented using Bootstrap.*
 - *Commit 62d9bfd0: Initial commit. File tree established, added .gitignore, README.md. Data set, cereal.csv. Directories, Controllers, Models, Views*
