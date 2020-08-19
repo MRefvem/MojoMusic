@@ -70,7 +70,7 @@ namespace Ecommerce_App.Pages.Account
                     string subject = "Welcome to Mojo Music";
                     string htmlMessage = $"<h1> We're excited to have you here {customer.FirstName}<h1>";
                     await _emailSenderService.SendEmailAsync(customer.Email, subject, htmlMessage);
-                    await _cart.Create(customer.Email);
+                    _cart.Create(customer.Email).Wait();
                     // redirects HOME
                     return RedirectToAction("Index", "Home");
                 }

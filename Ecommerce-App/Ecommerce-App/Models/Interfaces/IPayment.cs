@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace Ecommerce_App.Models.Interfaces
 {
-    public interface ICart
+    public interface IPayment
     {
-        Task<Cart> Create(string UserEmail);
-
-        Task<Cart> GetCartForUserByEmail(string userEmail);
+        string Run();
     }
 }

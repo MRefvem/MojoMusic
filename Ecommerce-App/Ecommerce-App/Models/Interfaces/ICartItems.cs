@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce_App.Models.Interfaces
 {
-   public  interface ICartItems
+    public interface ICartItems
     {
         Task<CartItems> Create(CartItems cartItems);
 
