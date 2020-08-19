@@ -22,6 +22,11 @@ namespace Ecommerce_App.Pages.Details
             _product = product;
         }
 
+        public void OnGet()
+        {
+
+        }
+
         public async Task<IActionResult> OnPost(int Id)
         {
             var prod = await _product.GetProduct(Id);
