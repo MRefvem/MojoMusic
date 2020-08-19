@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce_App.Models.Interfaces
 {
-   public  interface ICart
+    public interface ICart
     {
         Task<Cart> Create(string UserEmail);
     }

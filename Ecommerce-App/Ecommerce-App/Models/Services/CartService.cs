@@ -1,4 +1,5 @@
 ﻿using Ecommerce_App.Data;
+using Ecommerce_App.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce_App.Models.Services
 {
-    public class CartService
+    public class CartService : ICart
     {
         private StoreDbContext _context;
 

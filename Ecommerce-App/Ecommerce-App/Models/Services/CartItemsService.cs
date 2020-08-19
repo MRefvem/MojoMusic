@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce_App.Models.Services
 {
-    public class CartItemsService
+    public class CartItemsService : ICartItems
     {
         private StoreDbContext _context;
         private IProduct _product;

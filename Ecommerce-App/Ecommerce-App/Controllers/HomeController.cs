@@ -13,10 +13,12 @@ namespace Ecommerce.Controllers
     public class HomeController : Controller
     {
         private IProduct _product;
+        private IPayment _payment;
 
-        public HomeController( IProduct product)
+        public HomeController( IProduct product, IPayment payment )
         {
             _product = product;
+            _payment = payment;
         }
 
         [HttpGet]
@@ -28,6 +30,8 @@ namespace Ecommerce.Controllers
             {
                 Prod = prods,
             };
+
+            _payment.Run();
 
             return View(vm);
         }
