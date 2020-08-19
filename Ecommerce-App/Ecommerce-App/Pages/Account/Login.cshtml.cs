@@ -15,10 +15,12 @@ namespace Ecommerce_App.Pages.Account
     public class LoginModel : PageModel
     {
         private SignInManager<Customer> _signInManager;
+        private UserManager<Customer> _userManager;
 
-        public LoginModel(SignInManager<Customer> signInManager)
+        public LoginModel(SignInManager<Customer> signInManager, UserManager<Customer> userManager)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
         }
         [BindProperty]
         public LoginViewModel Input { get; set; }
@@ -37,7 +39,9 @@ namespace Ecommerce_App.Pages.Account
 
                 if (result.Succeeded)
                 {
+                  
                     return RedirectToAction("Index", "Home");
+
                 }
 
             }
