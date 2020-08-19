@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce_App.Models.Services
 {
-    public class CartItemsService
+    public class CartItemsService : ICartItems
     {
         private StoreDbContext _context;
         private IProduct _product;
@@ -21,9 +21,8 @@ namespace Ecommerce_App.Models.Services
             _cart = cart;
         }
 
-        public async Task<CartItems> Create(CartItems cartItems, int CartId)
+        public async Task<CartItems> Create(CartItems cartItems)
         {
-            cartItems.CartId = CartId;
             _context.Entry(cartItems).State = EntityState.Added;
             await _context.SaveChangesAsync();
             return cartItems;

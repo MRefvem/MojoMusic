@@ -14,5 +14,8 @@ namespace Ecommerce_App.Models
         public decimal Price { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
+
+        // Navigation props
+        public List<CartItems> CartItems { get; set; }
     }
 }

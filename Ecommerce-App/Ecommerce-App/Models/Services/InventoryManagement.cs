@@ -16,6 +16,7 @@ namespace Ecommerce_App.Models.Services
         public InventoryManagement(StoreDbContext context)
         {
             _context = context;
+            
         }
 
 
@@ -147,6 +148,6 @@ namespace Ecommerce_App.Models.Services
         }
 
 
-       
+     
     }
 }
