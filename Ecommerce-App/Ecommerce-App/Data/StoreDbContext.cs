@@ -17,6 +17,9 @@ namespace Ecommerce_App.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // Tells DB that CartItems has a combination composite key of CartID and ProductId
+            modelBuilder.Entity<CartItems>().HasKey(x => new { x.CartId, x.ProductId });
+          
             modelBuilder.Entity<Product>().HasData(
                 new Product
                 {
@@ -119,7 +122,36 @@ namespace Ecommerce_App.Data
                       }
 
                 );
+
+            modelBuilder.Entity<Cart>().HasData(
+             new Cart
+             {
+                 Id = 1,
+                 UserEmail = "testcart@gmail.com"
+             }
+              );
+
+
+            modelBuilder.Entity<CartItems>().HasData(
+                new CartItems
+                {
+                    Id = 1,
+                    CartId = 1,
+                    ProductId = 1,
+                    Quantity = 2,
+                },
+                   new CartItems
+                   {
+                       Id = 2,
+                       CartId = 1,
+                       ProductId = 3,
+                       Quantity = 1,
+                   }
+
+                 );
         }
         public DbSet<Product> Products { get; set; }
+        public  DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItems> CartItems { get; set; }
     }
 }

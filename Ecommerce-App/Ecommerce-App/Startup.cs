@@ -62,6 +62,7 @@ namespace Ecommerce_App
 
           
             services.AddTransient<IProduct, InventoryManagement>();
+            
             services.AddScoped<IImage, Blob>();
             services.AddTransient<IEmailSender, EmailSenderService>();
 

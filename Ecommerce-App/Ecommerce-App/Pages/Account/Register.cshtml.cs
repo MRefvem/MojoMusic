@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Ecommerce_App.Data;
 using Ecommerce_App.Models;
+using Ecommerce_App.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -22,12 +23,14 @@ namespace Ecommerce_App.Pages.Account
         private UserManager<Customer> _userManager;
         private SignInManager<Customer> _signInManager;
         private IEmailSender _emailSenderService;
+        private ICart _cart;
 
-        public RegisterModel(UserManager<Customer> userManager, SignInManager<Customer> signInManager, IEmailSender emailSenderService)
+        public RegisterModel(UserManager<Customer> userManager, SignInManager<Customer> signInManager, IEmailSender emailSenderService, ICart cart)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSenderService = emailSenderService;
+            _cart = cart;
         }
 
         // This lets the data from the frontend get sent to the server
@@ -65,7 +68,7 @@ namespace Ecommerce_App.Pages.Account
                     string subject = "Welcome to Mojo Music";
                     string htmlMessage = $"<h1> We're excited to have you here {customer.FirstName}<h1>";
                     await _emailSenderService.SendEmailAsync(customer.Email, subject, htmlMessage);
-
+                    await _cart.Create(customer.Email);
                     // redirects HOME
                     return RedirectToAction("Index", "Home");
                 }
