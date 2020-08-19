@@ -61,7 +61,9 @@ namespace Ecommerce_App.Pages.Account
                 if (result.Succeeded)
                 {
                     Claim claim = new Claim("FullName", $"{Input.FirstName} {Input.LastName}");
+                    Claim claimEmail = new Claim("Email", $"{Input.Email}");
                     await _userManager.AddClaimAsync(customer, claim);
+                    await _userManager.AddClaimAsync(customer, claimEmail);
                     await _signInManager.SignInAsync(customer, isPersistent: false);
 
                     // send them a email

@@ -8,5 +8,7 @@ namespace Ecommerce_App.Models.Interfaces
     public interface ICart
     {
         Task<Cart> Create(string UserEmail);
+
+        Task<Cart> GetCartForUserByEmail(string userEmail);
     }
 }

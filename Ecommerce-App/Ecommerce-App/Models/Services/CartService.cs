@@ -27,6 +27,12 @@ namespace Ecommerce_App.Models.Services
             return cart;
         }
 
+        public async Task<Cart> GetCartForUserByEmail (string userEmail)
+        {
+           Cart cart = await _context.Carts.Where(x => x.UserEmail == userEmail).FirstOrDefaultAsync();
+            return cart;
+        }
+
         
     }
 }

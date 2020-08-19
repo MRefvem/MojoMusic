@@ -21,9 +21,8 @@ namespace Ecommerce_App.Models.Services
             _cart = cart;
         }
 
-        public async Task<CartItems> Create(CartItems cartItems, int CartId)
+        public async Task<CartItems> Create(CartItems cartItems)
         {
-            cartItems.CartId = CartId;
             _context.Entry(cartItems).State = EntityState.Added;
             await _context.SaveChangesAsync();
             return cartItems;
