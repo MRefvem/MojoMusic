@@ -56,10 +56,12 @@ namespace Ecommerce_App.Pages.Account
                     Email = Input.Email,
                     UserName = Input.Email
                 };
+                //creates customer
                var result = await _userManager.CreateAsync(customer, Input.Password);
 
                 if (result.Succeeded)
                 {
+                    // give them a claims
                     Claim claim = new Claim("FullName", $"{Input.FirstName} {Input.LastName}");
                     Claim claimEmail = new Claim("Email", $"{Input.Email}");
                     await _userManager.AddClaimAsync(customer, claim);

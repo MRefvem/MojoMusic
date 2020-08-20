@@ -55,6 +55,7 @@ namespace Ecommerce_App.Pages.Details
             
             if (cart == null)
             {
+                // gives user a cart if they dont have one
                 await _cart.Create(GetUserEmail());
             }
 

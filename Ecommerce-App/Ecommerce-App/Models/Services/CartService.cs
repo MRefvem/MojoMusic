@@ -12,10 +12,17 @@ namespace Ecommerce_App.Models.Services
     {
         private StoreDbContext _context;
 
+        //brings in the storedb
         public CartService(StoreDbContext context)
         {
             _context = context;
         }
+
+        /// <summary>
+        /// Creates a new cart
+        /// </summary>
+        /// <param name="UserEmail">the email of the user </param>
+        /// <returns> a cart object</returns>
         public async Task<Cart> Create (string UserEmail)
         {
             Cart cart = new Cart()
@@ -27,6 +34,11 @@ namespace Ecommerce_App.Models.Services
             return cart;
         }
 
+        /// <summary>
+        /// Gets a cart by using the users email
+        /// </summary>
+        /// <param name="userEmail">the email of the user</param>
+        /// <returns>  cart of the user  </returns>
         public async Task<Cart> GetCartForUserByEmail(string userEmail)
         {
            Cart cart = await _context.Carts.Where(x => x.UserEmail == userEmail).FirstOrDefaultAsync();
