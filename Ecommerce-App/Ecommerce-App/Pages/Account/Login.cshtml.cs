@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Ecommerce_App.Models;
 using Ecommerce_App.Models.Interfaces;
@@ -43,10 +44,12 @@ namespace Ecommerce_App.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    // checks to see if user has a cart
                     var currentUserCart = _cart.GetCartForUserByEmail(Input.Email);
 
                     if (currentUserCart == null)
                     {
+                        // gives user a cart when the login 
                         await _cart.Create(Input.Email);
                     }
 

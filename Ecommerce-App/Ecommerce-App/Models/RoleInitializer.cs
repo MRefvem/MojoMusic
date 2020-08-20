@@ -53,7 +53,7 @@ namespace Ecommerce_App.Models
                 }
             }
         }
-
+        // Adds roles to all users
         private static void AddRoles(UserDbContext context)
         {
             if (context.Roles.Any()) return;
