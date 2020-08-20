@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Ecommerce_App.Models;
+using Ecommerce_App.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -16,14 +17,17 @@ namespace Ecommerce_App.Pages.Account
     {
         private SignInManager<Customer> _signInManager;
         private UserManager<Customer> _userManager;
+        private readonly ICart _cart;
 
-        public LoginModel(SignInManager<Customer> signInManager, UserManager<Customer> userManager)
+        public LoginModel(SignInManager<Customer> signInManager, UserManager<Customer> userManager, ICart cart)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _cart = cart;
         }
         [BindProperty]
         public LoginViewModel Input { get; set; }
+
         public void OnGet()
         {
 
@@ -39,7 +43,13 @@ namespace Ecommerce_App.Pages.Account
 
                 if (result.Succeeded)
                 {
-                  
+                    var currentUserCart = _cart.GetCartForUserByEmail(Input.Email);
+
+                    if (currentUserCart == null)
+                    {
+                        await _cart.Create(Input.Email);
+                    }
+
                     return RedirectToAction("Index", "Home");
 
                 }

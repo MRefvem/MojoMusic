@@ -1,4 +1,4 @@
-﻿@*@model List<Ecommerce_App.Models.CartItems>*@
+﻿@model List<Ecommerce_App.Models.CartItems>
 
     <head>
         <meta name="viewport" content="width=device-width" />
@@ -12,20 +12,13 @@
                 <div class="row" style="margin-top:10px; margin-bottom:10px;">
                     <div class="col">
                         <h1>Your Cart</h1>
-                        @*@if (Model == null)
+                        @foreach (var item in Model)
                         {
-                            <p>Your cart is currently empty</p>
-
+                            <h1>@item.Product.Name</h1>
+                            <p style="color:purple">@item.Product.Description</p>
+                            <p>Quantity: @item.Quantity</p>
+                            <hr />
                         }
-                        else
-                        {
-                            @foreach (var item in Model)
-                            {
-                                    <h1>@item.Product.Name</h1>
-                                    <p style="color:purple">Description</p>
-                                    <hr />
-                            }
-                        }*@
                         <form asp-page="/Details/Cart" enctype="multipart/form-data">
                             <button type="submit" class="btn btn-primary">Go to Cart</button>
                         </form>

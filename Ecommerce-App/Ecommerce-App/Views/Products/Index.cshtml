@@ -31,7 +31,7 @@
         {
             <div id=@item.Name class="container bg-light border rounded bg-gradient-primary" style="margin-top:30px">
                 <div class="row" style="margin-top:10px; margin-bottom:10px;">
-                        <form asp-page="/Details/Product" asp-route-id="@item.Id" enctype="multipart/form-data">
+                        <form asp-page="/Details/Product" asp-route-id="@item.Id" method="get" enctype="multipart/form-data">
                             <div class="col-3">
                                 <img src=@item.Image style="height:200px; width:200px;" />
                             </div>
@@ -39,7 +39,8 @@
                                 <h3>@item.Name</h3>
                                 <p>$@item.Price</p>
                                 <p>@item.Description</p>
-                                <input type="hidden" value="@item.Id"/>
+                                <hr />
+                                <input type="hidden" value="@item.Id" />
                                 <button onclick="document.getElementById('@item.Id')" type="submit" class="btn btn-primary">View Product</button>
                             </div>
                         </form>

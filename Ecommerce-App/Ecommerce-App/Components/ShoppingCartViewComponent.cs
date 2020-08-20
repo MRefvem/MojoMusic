@@ -1,5 +1,6 @@
 ﻿using Ecommerce_App.Data;
 using Ecommerce_App.Models;
+using Ecommerce_App.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -14,17 +15,19 @@ namespace Ecommerce_App.Components
     [ViewComponent]
     public class ShoppingCartViewComponent : ViewComponent
     {
-        private StoreDbContext _context;
-        public ShoppingCartViewComponent(StoreDbContext context)
+        private ICartItems _cartItems;
+
+        public ShoppingCartViewComponent(StoreDbContext context, ICartItems cartItems)
         {
-            _context = context;
+            _cartItems = cartItems;
+
         }
 
         // make actions
-        public async Task<IViewComponentResult> InvokeAsync(int number)
+        public async Task<IViewComponentResult> InvokeAsync(int currentCartId)
         {
             // do some logic to pull from the DB 
-            var cartItems = await _context.CartItems.OrderByDescending(x => x.Id).Take(number).ToListAsync();
+            var cartItems = await _cartItems.GetAllCartItems(currentCartId);
 
             return View(cartItems);
         }
