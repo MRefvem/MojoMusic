@@ -20,6 +20,10 @@ To get started using this app:
 # Build and Test
 The app should simply be able to run through Microsoft Visual Studio. 
 
+# How to login as an Admin and access the Admin Panel
+- Login with these credentials: UserName = "admin@gmail.com", Password = "@Test123!"
+- While logged-in as the Admin, you will see a link reading "Admin Panel" on the Nav Bar which leads to a dashboard which gives the Admin access to special operations on the site including the ability to upload product pictures to the Azure Blob.
+
 # Change-Log
 
 18 Aug 2020

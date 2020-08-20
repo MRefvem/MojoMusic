@@ -22,22 +22,26 @@
             <h2>Product Info</h2>
         </div>
 
-        <div id=@Model.Product.Name class="container bg-light border rounded bg-gradient-primary" style="margin-top:30px">
-            <div class="row" style="margin-top:10px; margin-bottom:10px;">
-                <div class="col-3">
-                    <img src=@Model.Product.Image style="height:200px; width:200px;" />
+        <form method="post">
+            <div id=@Model.Product.Name class="container bg-light border rounded bg-gradient-primary" style="margin-top:30px">
+            
+                <div class="row" style="margin-top:10px; margin-bottom:10px;">
+                    <div class="col-3">
+                        <img src=@Model.Product.Image style="height:200px; width:200px;" />
+                    </div>
+                    <div class="col-9">
+                        <h3>@Model.Product.Name</h3>
+                        <p>$@Model.Product.Price</p>
+                        <p>@Model.Product.Description</p>
+                        <hr />
+                        <button type="submit" class="btn btn-primary">Add To Cart</button>
+                    </div>
                 </div>
-                <div class="col-9">
-                    <h3>@Model.Product.Name</h3>
-                    <p>$@Model.Product.Price</p>
-                    <p>@Model.Product.Description</p>
-                </div>
-                <button type="submit" >Add To Cart</button>
             </div>
-        </div>
+        </form>
 
         <div class="container" style="margin-top:30px;">
-            @await Component.InvokeAsync("ShoppingCart", 2);
+            @await Component.InvokeAsync("ShoppingCart", Model.CurrentCartId);
         </div>
 
     </main>

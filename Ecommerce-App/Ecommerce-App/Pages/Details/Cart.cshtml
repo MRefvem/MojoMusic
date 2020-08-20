@@ -1,12 +1,8 @@
 ﻿@page
 @model Ecommerce_App.Pages.Details.CartModel
-@*@model List<Ecommerce_App.Models.CartItems>*@
 
 @{
     ViewData["Title"] = "Cart";
-}
-
-@{
     Layout = "_Home";
 }
 
@@ -25,13 +21,18 @@
         <div id=Name class="container bg-light border rounded bg-gradient-primary" style="margin-top:30px">
             <div class="row" style="margin-top:10px; margin-bottom:10px;">
                 <form asp-page="/Details/Cart" enctype="multipart/form-data">
+                    @*@foreach (var item in Model)
+                    {
+
+                    }*@
                     <div class="col-3">
                         <img src=Image style="height:175px; width:175px;" />
                     </div>
                     <div class="col-9">
-                        <h3>Product.Name</h3>
-                        <p>Product.Price</p>
-                        <p>Product.Description</p>
+                        <h3>@Model.Product.Name</h3>
+                        <p>@Model.Product.Price</p>
+                        <p>@Model.Product.Description</p>
+                        <p>Quantity: @Model.</p>
                         <input type="text" placeholder="Enter Quantity" />
                         <button type="submit" class="btn btn-primary">Update Quantity</button>
                     </div>

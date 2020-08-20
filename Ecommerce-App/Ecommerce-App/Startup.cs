@@ -66,6 +66,7 @@ namespace Ecommerce_App
             services.AddTransient<IEmailSender, EmailSenderService>();
             services.AddTransient<ICart, CartService>();
             services.AddTransient<ICartItems, CartItemsService>();
+            services.AddTransient<IPayment, PaymentService>();
 
         }
 
