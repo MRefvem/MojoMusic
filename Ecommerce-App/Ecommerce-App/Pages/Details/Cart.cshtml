@@ -20,23 +20,38 @@
 
         <div id=Name class="container bg-light border rounded bg-gradient-primary" style="margin-top:30px">
             <div class="row" style="margin-top:10px; margin-bottom:10px;">
-                <form asp-page="/Details/Cart" enctype="multipart/form-data">
-                    @*@foreach (var item in Model)
+                    @if (Model.CurrentUserCart.CartItems.Count == 0)
                     {
+                        <p>Your cart is currently empty</p>
+                        <p>Go to store!</p>
+                    }
+                    else
+                    {
+                        foreach (var item in Model.CurrentUserCart.CartItems)
+                        {
+                            <form enctype="multipart/form-data" method="post">
+                            <div class="col-3">
+                                <img src=@item.Product.Image style="height:175px; width:175px;" />
+                            </div>
+                            <div class="col-9">
+                                <h3>@item.Product.Name</h3>
+                                <p>Price: $@item.Product.Price</p>
+                                <p>Description: @item.Product.Description</p>
+                                <p>Quantity: @item.Quantity</p>
+                                <input hidden asp-for="@Model.CartId" value="@item.CartId"/>
+                                <input hidden asp-for="@Model.ProductId" value="@item.ProductId"/>
+                                <input min="1" asp-for="@Model.Quantity" value="@item.Quantity" type="text" placeholder="Enter Quantity" />
+                                <button asp-page="/Details/Cart" type="submit" class="btn btn-primary">Update Quantity</button>
+                                <button asp-page="/Details/Remove" asp-route-id="@item" enctype="multipart/form-data" type="submit" class="btn btn-primary">Remove Item</button>
+                            </div>
 
-                    }*@
-                    <div class="col-3">
-                        <img src=Image style="height:175px; width:175px;" />
-                    </div>
-                    <div class="col-9">
-                        <h3>@Model.Product.Name</h3>
-                        <p>@Model.Product.Price</p>
-                        <p>@Model.Product.Description</p>
-                        <p>Quantity: @Model.</p>
-                        <input type="text" placeholder="Enter Quantity" />
-                        <button type="submit" class="btn btn-primary">Update Quantity</button>
-                    </div>
-                </form>
+                            </form>
+                        }
+                        <div class="col" style="margin-top:20px;">
+                            <h2>Total cost: $@Model.Total</h2>
+                            <button type="submit" class="btn btn-primary">Checkout</button>
+                        </div>
+                    }
             </div>
         </div>
 

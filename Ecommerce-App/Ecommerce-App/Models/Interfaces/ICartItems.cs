@@ -41,7 +41,7 @@ namespace Ecommerce_App.Models.Interfaces
         /// </summary>
         /// <param name="id"> the id of the cart item</param>
         /// <returns> task completion</returns>
-        Task Delete(int id);
+        Task Delete(int productId, int cartId);
 
     }
 }

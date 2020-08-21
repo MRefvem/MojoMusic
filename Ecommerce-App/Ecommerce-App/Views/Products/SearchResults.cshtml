@@ -38,8 +38,8 @@
                         </div>
                         <div class="col-9">
                             <h3>@item.Name</h3>
-                            <p>$@item.Price</p>
-                            <p>@item.Description</p>
+                            <p>Price: $@item.Price</p>
+                            <p>Description: @item.Description</p>
                             <hr />
                             <input type="hidden" value="@item.Id" />
                             <button onclick="document.getElementById('@item.Id')" type="submit" class="btn btn-primary">View Product</button>

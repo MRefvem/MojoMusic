@@ -11,26 +11,30 @@ namespace Ecommerce_App.Pages.Details
 {
     public class CartModel : PageModel
     {
-        private readonly IProduct _product;
+
         private readonly ICartItems _cartItems;
         private readonly ICart _cart;
 
         [BindProperty]
-        public Product Product { get; set; }
-        [BindProperty]
         public int CurrentCartId { get; set; }
+        public Cart CurrentUserCart { get; set; }
+        [BindProperty]
+        public int CartId { get; set; }
+        [BindProperty]
+        public int ProductId { get; set; }
+        [BindProperty]
+        public int Quantity { get; set; }
+        public decimal Total { get; set; }
 
-        public CartModel(IProduct product, ICartItems cartItems, ICart cart)
+        public CartModel(ICartItems cartItems, ICart cart)
         {
-            _product = product;
             _cartItems = cartItems;
             _cart = cart;
             CurrentCartId = 0;
         }
 
-        public async Task<IActionResult> OnGet(int Id)
+        public async Task<IActionResult> OnGet()
         {
-            var prod = await _product.GetProduct(Id);
             Cart cart = await _cart.GetCartForUserByEmail(GetUserEmail());
 
             // logic here
@@ -39,12 +43,33 @@ namespace Ecommerce_App.Pages.Details
                 await _cart.Create(GetUserEmail());
             }
 
-            var items = await _cartItems.GetAllCartItems(cart.Id);
+            decimal totalPrice = 0;
 
-            Product = prod;
+            foreach (var item in cart.CartItems)
+            {
+                totalPrice += item.Product.Price * item.Quantity;
+            }
+
+            Total = totalPrice;
+
             CurrentCartId = cart.Id;
+            CurrentUserCart = cart;
 
             return Page();
+        }
+
+        public async Task<IActionResult> OnPost()
+        {
+            CartItems cartItem = new CartItems()
+            {
+                CartId = CartId,
+                ProductId = ProductId,
+                Quantity = Quantity,
+            };
+
+            await _cartItems.Update(cartItem);
+
+            return await OnGet();
         }
 
         protected string GetUserEmail()
