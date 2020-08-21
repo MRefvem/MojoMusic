@@ -76,13 +76,15 @@ namespace Ecommerce_App.Models.Services
         }
 
         /// <summary>
-        /// Deletes a cartitem
+        /// Deletes a cart item
         /// </summary>
-        /// <param name="id"> the id of the cart item</param>
+        /// <param name="cartId">The ID of the cart</param>
+        /// <param name="productId">The ID of the product to delete</param>
         /// <returns> task completion</returns>
-        public async Task Delete(int id)
+        public async Task Delete(int productId, int cartId)
         {
-            CartItems cartItem = await _context.CartItems.FindAsync(id);
+            CartItems cartItem = await _context.CartItems.FindAsync(cartId, productId);
+
             if (cartItem == null)
             {
                 return;

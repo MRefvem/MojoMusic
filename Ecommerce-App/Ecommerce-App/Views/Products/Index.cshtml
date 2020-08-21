@@ -33,12 +33,12 @@
                 <div class="row" style="margin-top:10px; margin-bottom:10px;">
                         <form asp-page="/Details/Product" asp-route-id="@item.Id" method="get" enctype="multipart/form-data">
                             <div class="col-3">
-                                <img src=@item.Image style="height:200px; width:200px;" />
+                                <img src=@item.Image style="height:175px; width:175px;" />
                             </div>
                             <div class="col-9">
                                 <h3>@item.Name</h3>
-                                <p>$@item.Price</p>
-                                <p>@item.Description</p>
+                                <p>Price: $@item.Price</p>
+                                <p>Description: @item.Description</p>
                                 <hr />
                                 <input type="hidden" value="@item.Id" />
                                 <button onclick="document.getElementById('@item.Id')" type="submit" class="btn btn-primary">View Product</button>

@@ -26,6 +26,16 @@ The app should simply be able to run through Microsoft Visual Studio.
 
 # Change-Log
 
+19 Aug 2020
+1.2 Sprint 2 - Milestone #2 Complete
+User Story 1
+- *As a user, I would like a way to store the items I wish to purchase in a cart within the application.*
+- *Created new tables, Cart and CartItems with all appropriate Models, Services, Interfaces, and created the ability to perform all CRUD operations on these entities.*
+User Story 2
+- *As a user, I would like the ability to view my desired purchases while browsing the other products on the site.*
+User Story 3
+- *As a user, I would like a dedicated page where I can view all the products I wish to purchase all in one location.*
+
 18 Aug 2020
 1.1 Sprint 2 - Milestone #1 Complete
 User Story 1
