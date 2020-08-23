@@ -30,6 +30,8 @@ namespace Ecommerce_App.Models.Services
                 UserEmail = userEmail
             };
 
+            cart.IsActive = true;
+
             _context.Entry(cart).State = EntityState.Added;
             await _context.SaveChangesAsync();
 
@@ -43,12 +45,28 @@ namespace Ecommerce_App.Models.Services
         /// <returns>  cart of the user  </returns>
         public async Task<Cart> GetCartForUserByEmail(string userEmail)
         {
-           Cart cart = await _context.Carts.Where(x => x.UserEmail == userEmail)
+           Cart cart = await _context.Carts.Where(x => x.UserEmail == userEmail && x.IsActive == true)
                                             .Include(x => x.CartItems)
                                             .ThenInclude(x => x.Product)
                                             .FirstOrDefaultAsync();
 
             return cart;
+        }
+
+        /// <summary>
+        /// Update - Method updates a user's cart 
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <returns></returns>
+        public async Task<Cart> Update(Cart cart)
+        {
+            var cartToUpdate = await _context.Carts.FindAsync(cart.Id); 
+
+            _context.Entry(cartToUpdate).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return await _context.Carts.FindAsync(cart.Id);
+
         }
 
         /// <summary>

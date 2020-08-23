@@ -59,7 +59,7 @@ namespace Ecommerce_App.Models.Services
 
             var transRequest = new transactionRequestType
             {
-                transactionType = transactionTypeEnum.authCaptureContinueTransaction.ToString(),
+                transactionType = transactionTypeEnum.authCaptureTransaction.ToString(),
                 amount = total,
                 payment = paymentType,
                 billTo = billingAddress,
@@ -84,7 +84,7 @@ namespace Ecommerce_App.Models.Services
                     };
                 }
             }
-            else if (response.transactionResponse != null)
+            else if (response.transactionResponse == null)
             {
                 return new TransactionResponse
                 {

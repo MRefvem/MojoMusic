@@ -23,6 +23,7 @@
                     @if (Model.CurrentUserCart.CartItems.Count == 0)
                     {
                         <p>Your cart is currently empty</p>
+                        <hr />
                         <a asp-action="Index" asp-controller="Products" class="btn btn-primary">Go to store</a>
                     }
                     else
