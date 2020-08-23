@@ -13,6 +13,6 @@ namespace Ecommerce_App.Models
         public string UserEmail { get; set; }
 
         /// Navigation PROPERTIES
-       public  List<CartItems> CartItems { get; set; } 
+        public  List<CartItems> CartItems { get; set; } 
     }
 }

@@ -31,7 +31,7 @@ namespace Ecommerce.Controllers
                 Prod = prods,
             };
 
-            _payment.Run();
+            
 
             return View(vm);
         }
