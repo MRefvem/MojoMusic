@@ -26,7 +26,13 @@ The app should simply be able to run through Microsoft Visual Studio.
 
 # Change-Log
 
-19 Aug 2020
+22 Aug 2020
+1.3 Sprint 3 - Milestone #1
+User Story 1
+- * As a user, I would like to checkout with my purchases using electronic payment options on my site during the checkout process*
+- *Implemented a Payment Service to accept credit card transactions into the site*
+
+20 Aug 2020
 1.2 Sprint 2 - Milestone #2 Complete
 User Story 1
 - *As a user, I would like a way to store the items I wish to purchase in a cart within the application.*

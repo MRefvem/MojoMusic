@@ -31,18 +31,19 @@ namespace Ecommerce_App.Models.Services
         {
             _context.Entry(cartItems).State = EntityState.Added;
             await _context.SaveChangesAsync();
+
             return cartItems;
         }
 
         /// <summary>
         /// Gets a single cart item by the cartid and product id
         /// </summary>
-        /// <param name="CartId"> the id of the userscart</param>
-        /// <param name="ProductId"> the id of the product</param>
+        /// <param name="cartId"> the id of the user's cart</param>
+        /// <param name="productId"> the id of the product</param>
         /// <returns> the cart item object</returns>
-        public async Task<CartItems> GetCartItem (int CartId,int ProductId)
+        public async Task<CartItems> GetCartItem (int cartId,int productId)
         {
-            CartItems cartItem = await _context.CartItems.Where(x => x.CartId == CartId && x.ProductId == ProductId)
+            CartItems cartItem = await _context.CartItems.Where(x => x.CartId == cartId && x.ProductId == productId)
                                                            .Include(x => x.Product)
                                                            .FirstOrDefaultAsync();
 
@@ -54,9 +55,9 @@ namespace Ecommerce_App.Models.Services
         /// </summary>
         /// <param name="CartId">the users cart id</param>
         /// <returns>the cart item object</returns>
-        public async Task<List<CartItems>> GetAllCartItems(int CartId)
+        public async Task<List<CartItems>> GetAllCartItems(int cartId)
         {
-            List<CartItems> cartItems = await _context.CartItems.Where(x => x.CartId == CartId)
+            List<CartItems> cartItems = await _context.CartItems.Where(x => x.CartId == cartId)
                                                                 .Include(x => x.Product)
                                                                 .ToListAsync();
             return cartItems;

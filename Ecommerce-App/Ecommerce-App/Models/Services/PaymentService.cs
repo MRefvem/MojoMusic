@@ -20,7 +20,7 @@ namespace Ecommerce_App.Models.Services
             _config = configuration;
         }
 
-        public string Run()
+        public TransactionResponse Run(creditCardType creditCard, customerAddressType billingAddress, Cart cart)
         {
             // Important, bring in a full object
             // Can return something other than a string
@@ -34,25 +34,36 @@ namespace Ecommerce_App.Models.Services
                 Item = _config["AuthorizeTransactionKey"]
             };
 
-            var creditCard = new creditCardType
-            {
-                cardNumber = "5424000000000015",
-                expirationDate = "1020",
-                cardCode = "555"
-            };
-
-            customerAddressType billingAddress = GetBillingAddress(3);
+            // create the cart we want on file
+            // store these in the secrets file, make a dropdown for the user in the checkout process
 
             var paymentType = new paymentType { Item = creditCard };
+
+            decimal total = 0;
+            lineItemType[] lineItems = new lineItemType[cart.CartItems.Count];
+
+            for (int i = 0; i < lineItems.Length; i++)
+            {
+                var cartItem = cart.CartItems[i];
+                total += cartItem.Product.Price * cartItem.Quantity;
+                lineItems[i] = new lineItemType
+                {
+                    itemId = cartItem.ProductId.ToString(),
+                    name = cartItem.Product.Name,
+                    quantity = cartItem.Quantity,
+                    unitPrice = cartItem.Product.Price
+                };
+            }
 
             // make the transaction request
 
             var transRequest = new transactionRequestType
             {
                 transactionType = transactionTypeEnum.authCaptureContinueTransaction.ToString(),
-                amount = 150.00m,
+                amount = total,
                 payment = paymentType,
                 billTo = billingAddress,
+                lineItems = lineItems
             };
 
             var request = new createTransactionRequest { transactionRequest = transRequest };
@@ -62,21 +73,36 @@ namespace Ecommerce_App.Models.Services
 
             var response = controller.GetApiResponse();
 
-            return "";
+            if (response.transactionResponse != null)
+            {
+                if (response.transactionResponse != null)
+                {
+                    return new TransactionResponse
+                    {
+                        Successful = true,
+                        Response = $"Transaction Success: {response.transactionResponse.authCode}"
+                    };
+                }
+            }
+            else if (response.transactionResponse != null)
+            {
+                return new TransactionResponse
+                {
+                    Successful = false,
+                    Response = $"Transaction Error: {response.transactionResponse.errors[0].errorCode} {response.transactionResponse.errors[0].errorText}"
+                };
+            }
+            return new TransactionResponse
+            {
+                Successful = false,
+                Response = $"Error: {response.messages.message[0].code} {response.messages.message[0].text}"
+            };
         }
 
-        private customerAddressType GetBillingAddress(int orderId)
+        public class TransactionResponse
         {
-            customerAddressType address = new customerAddressType
-            {
-                firstName = "Josie",
-                lastName = "Kitty",
-                address = "123 Cat Nip Lane",
-                city = "Seattle",
-                zip = "98004"
-            };
-
-            return address;
+            public bool Successful;
+            public string Response;
         }
     }
 }

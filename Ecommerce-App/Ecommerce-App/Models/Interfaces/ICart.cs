@@ -12,7 +12,7 @@ namespace Ecommerce_App.Models.Interfaces
         /// </summary>
         /// <param name="UserEmail">the email of the user </param>
         /// <returns> a cart object</returns>
-        Task<Cart> Create(string UserEmail);
+        Task<Cart> Create(string userEmail);
 
         /// <summary>
         /// Gets a cart by using the users email

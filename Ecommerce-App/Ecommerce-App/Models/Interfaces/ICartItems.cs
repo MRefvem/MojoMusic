@@ -25,9 +25,9 @@ namespace Ecommerce_App.Models.Interfaces
         /// <summary>
         /// Gets all cart items by the cartid
         /// </summary>
-        /// <param name="CartId">the users cart id</param>
+        /// <param name="cartId">the users cart id</param>
         /// <returns>the cart item object</returns>
-        Task<List<CartItems>> GetAllCartItems(int CartId);
+        Task<List<CartItems>> GetAllCartItems(int cartId);
 
         /// <summary>
         /// Updates a cart item

@@ -10,7 +10,7 @@ namespace Ecommerce_App.Models.Services
 {
     public class CartService : ICart
     {
-        private StoreDbContext _context;
+        private readonly StoreDbContext _context;
 
         //brings in the storedb
         public CartService(StoreDbContext context)
@@ -23,14 +23,16 @@ namespace Ecommerce_App.Models.Services
         /// </summary>
         /// <param name="UserEmail">the email of the user </param>
         /// <returns> a cart object</returns>
-        public async Task<Cart> Create (string UserEmail)
+        public async Task<Cart> Create (string userEmail)
         {
             Cart cart = new Cart()
             {
-                UserEmail = UserEmail
+                UserEmail = userEmail
             };
+
             _context.Entry(cart).State = EntityState.Added;
             await _context.SaveChangesAsync();
+
             return cart;
         }
 
@@ -49,6 +51,24 @@ namespace Ecommerce_App.Models.Services
             return cart;
         }
 
-        
+        /// <summary>
+        /// Deletes a cart
+        /// </summary>
+        /// <param name="cartId">The ID of the cart</param>
+        /// <returns> task completion</returns>
+        public async Task Delete(int cartId)
+        {
+            CartItems cart = await _context.CartItems.FindAsync(cartId);
+
+            if (cart == null)
+            {
+                return;
+            }
+            else
+            {
+                _context.Entry(cart).State = EntityState.Deleted;
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }
