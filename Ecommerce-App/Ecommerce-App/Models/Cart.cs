@@ -11,6 +11,7 @@ namespace Ecommerce_App.Models
         public int Id { get; set; }
         [EmailAddress]
         public string UserEmail { get; set; }
+        public bool IsActive { get; set; }
 
         /// Navigation PROPERTIES
         public  List<CartItems> CartItems { get; set; } 

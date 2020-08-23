@@ -14,6 +14,8 @@ namespace Ecommerce_App.Models.Interfaces
         /// <returns> a cart object</returns>
         Task<Cart> Create(string userEmail);
 
+        Task<Cart> Update(Cart cart);
+
         /// <summary>
         /// Gets a cart by using the users email
         /// </summary>

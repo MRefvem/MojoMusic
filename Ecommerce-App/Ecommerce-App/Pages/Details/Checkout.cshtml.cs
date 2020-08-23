@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AuthorizeNet.Api.Contracts.V1;
 using Ecommerce_App.Models;
 using Ecommerce_App.Models.Interfaces;
 using Ecommerce_App.Models.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +24,7 @@ namespace Ecommerce_App.Pages.Details
         private readonly IConfiguration _config;
         private readonly SignInManager<Customer> _signInManager;
         private readonly ICartItems _cartItems;
+        private readonly IEmailSender _emailSender;
 
         [BindProperty]
         public int CurrentCartId { get; set; }
@@ -42,7 +45,7 @@ namespace Ecommerce_App.Pages.Details
         public decimal Total { get; set; }
         public Cart CurrentUserCart { get; set; }
 
-        public CheckoutModel(ICart cart, IPayment payment, IOrder order, IConfiguration configuration, SignInManager<Customer> signInManager, ICartItems cartItems)
+        public CheckoutModel(ICart cart, IPayment payment, IOrder order, IConfiguration configuration, SignInManager<Customer> signInManager, ICartItems cartItems, IEmailSender emailSender)
         {
             _cart = cart;
             _payment = payment;
@@ -50,6 +53,7 @@ namespace Ecommerce_App.Pages.Details
             _config = configuration;
             _signInManager = signInManager;
             _cartItems = cartItems;
+            _emailSender = emailSender;
             CurrentCartId = 0;
         }
 
@@ -92,6 +96,15 @@ namespace Ecommerce_App.Pages.Details
                 await _cart.Create(GetUserEmail());
             }
 
+            decimal totalPrice = 0;
+
+            foreach (var item in cart.CartItems)
+            {
+                totalPrice += item.Product.Price * item.Quantity;
+            }
+
+            Total = totalPrice;
+
             OrderAddress orderAddress = new OrderAddress()
             {
                 FirstName = firstName,
@@ -131,9 +144,22 @@ namespace Ecommerce_App.Pages.Details
             {
                 await _order.Create(cart, orderAddress);
 
-                // TODO: Need a way to clear a user's shopping cart (create a new one?)
-                // Deleting a user's cart or it's contents from the database means we won't be able to reference them later
-                //await _cart.Create(GetUserEmail());
+                StringBuilder sb = new StringBuilder();
+
+                foreach (var item in cart.CartItems)
+                {
+                    sb.Append($"<li>{item.Product.Name} (Quantity: {item.Quantity})</li>");
+                };
+
+                string subject = "Your Order Summary";
+                string htmlMessage = $"<h1>Thank you for your purchase {user.FirstName}.</h1><p>Your summary: {sb.ToString()}</p><p>Total purchase cost: ${totalPrice}</p><p>Your order is now being processed and should be heading your way soon. We hope you're happy with your purchase!</p>";
+                await _emailSender.SendEmailAsync(user.UserName, subject, htmlMessage);
+
+                cart.IsActive = false;
+
+                await _cart.Update(cart);
+
+                await _cart.Create(GetUserEmail());
 
                 return Page();
             }
