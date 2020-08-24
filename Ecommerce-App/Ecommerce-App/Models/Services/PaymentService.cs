@@ -73,7 +73,7 @@ namespace Ecommerce_App.Models.Services
 
             var response = controller.GetApiResponse();
 
-            if (response.transactionResponse != null)
+            if (response != null)
             {
                 if (response.transactionResponse != null)
                 {
@@ -83,19 +83,20 @@ namespace Ecommerce_App.Models.Services
                         Response = $"Transaction Success: {response.transactionResponse.authCode}"
                     };
                 }
-            }
-            else if (response.transactionResponse == null)
-            {
-                return new TransactionResponse
+                else if (response.transactionResponse == null)
                 {
-                    Successful = false,
-                    Response = $"Transaction Error: {response.transactionResponse.errors[0].errorCode} {response.transactionResponse.errors[0].errorText}"
-                };
+                    return new TransactionResponse
+                    {
+                        Successful = false,
+                        Response = $"Transaction Error: {response.transactionResponse.errors[0].errorCode} {response.transactionResponse.errors[0].errorText}"
+                    };
+                }
             }
+
             return new TransactionResponse
             {
                 Successful = false,
-                Response = $"Error: {response.messages.message[0].code} {response.messages.message[0].text}"
+                Response = ""
             };
         }
 

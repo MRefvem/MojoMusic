@@ -37,7 +37,7 @@ namespace Ecommerce_App.Pages.Details
             // logic here
             if (cart == null)
             {
-                await _cart.Create(GetUserEmail());
+                cart = await _cart.Create(GetUserEmail());
             }
 
             var items = await _cartItems.GetAllCartItems(cart.Id);

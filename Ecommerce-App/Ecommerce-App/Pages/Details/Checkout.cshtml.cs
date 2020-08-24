@@ -140,9 +140,9 @@ namespace Ecommerce_App.Pages.Details
 
             var paymentResult = _payment.Run(creditCard, billingAddress, cart);
 
-            if (paymentResult.Successful == true)
+            if (paymentResult.Successful)
             {
-                await _order.Create(cart, orderAddress);
+               Order order =  await _order.Create(cart, orderAddress);
 
                 StringBuilder sb = new StringBuilder();
 
@@ -161,7 +161,7 @@ namespace Ecommerce_App.Pages.Details
 
                 await _cart.Create(GetUserEmail());
 
-                return Page();
+                return RedirectToPage("Receipt");
             }
 
             return Page();

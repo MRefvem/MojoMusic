@@ -15,5 +15,6 @@ namespace Ecommerce_App.Models
 
         /// Navigation PROPERTIES
         public  List<CartItems> CartItems { get; set; } 
+        public Order Orders { get; set; }
     }
 }
