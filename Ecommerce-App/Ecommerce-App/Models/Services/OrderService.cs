@@ -40,5 +40,17 @@ namespace Ecommerce_App.Models.Services
             
             return order;
         }
+
+
+        public async Task<Order> GetMostRecent(int cartId)
+        {
+            Order order = await _context.Order.Where(x => x.CartId == cartId)
+                                               .Include(x=> x.OrderAddress)
+                                               .Include(x => x.Cart)
+                                               .ThenInclude(x => x.CartItems)
+                                               .ThenInclude(x => x.Product)
+                                               .FirstOrDefaultAsync();
+            return order;
+        }
     }
 }

@@ -77,7 +77,7 @@ namespace Ecommerce_App.Data
                   {
                       Id = 6,
                       SKU = "213oonv33",
-                      Name = "Mackie CR3-X 3 inch Multimedia Monitors",
+                      Name = "Mackie Multimedia Monitors",
                       Price = 99.00m,
                       Description = "Mackie CR3-X Multimedia Monitors put studio-quality sound right on your desktop at a great value. Mackie have earned their reputation for quality studio monitoring over the years, and CR3-X Multimedia Monitors are just as suitable for multimedia production as they are for gaming and casual listening.",
                       Image = "https://401ecommerce.blob.core.windows.net/productimages/Mackie%20CR3-X%203%20inch%20Multimedia%20Monitors.jfif"
@@ -117,7 +117,7 @@ namespace Ecommerce_App.Data
                       {
                           Id = 10,
                           SKU = "213oonv00",
-                          Name = "Yamaha Absolute Hybrid Maple 5-Piece Drum Set",
+                          Name = "Yamaha Absolute Hybrid Drum Set",
                           Price = 3999.00m,
                           Description = "When Yamaha set out designing the Absolute Hybrid Maple, they started with the most important aspect of a musical instrument, the sound.",
                           Image = "https://401ecommerce.blob.core.windows.net/productimages/Yamaha%20Absolute%20Hybrid%20Maple%205-Piece%20Drum%20Set.jpg"
