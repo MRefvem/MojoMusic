@@ -56,6 +56,7 @@ namespace Ecommerce_App.Models.Services
             List<CartItems> cartItems = await _context.CartItems.Where(x => x.CartId == cartId)
                                                                 .Include(x => x.Product)
                                                                 .ToListAsync();
+
             return cartItems;
         }
 

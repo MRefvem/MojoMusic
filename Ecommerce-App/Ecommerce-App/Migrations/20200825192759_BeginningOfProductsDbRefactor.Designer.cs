@@ -3,14 +3,16 @@ using Ecommerce_App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Ecommerce_App.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    partial class StoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200825192759_BeginningOfProductsDbRefactor")]
+    partial class BeginningOfProductsDbRefactor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,6 +80,22 @@ namespace Ecommerce_App.Migrations
 
             modelBuilder.Entity("Ecommerce_App.Models.Order", b =>
                 {
+                    b.Property<int>("OrderAddressId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderAddressId", "CartId");
+
+                    b.HasIndex("CartId")
+                        .IsUnique();
+
+                    b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("Ecommerce_App.Models.OrderAddress", b =>
+                {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
@@ -85,9 +103,6 @@ namespace Ecommerce_App.Migrations
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CartId")
-                        .HasColumnType("int");
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
@@ -101,17 +116,12 @@ namespace Ecommerce_App.Migrations
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserEmail")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Zip")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CartId");
-
-                    b.ToTable("Order");
+                    b.ToTable("OrderAddress");
                 });
 
             modelBuilder.Entity("Ecommerce_App.Models.Product", b =>
@@ -251,8 +261,14 @@ namespace Ecommerce_App.Migrations
             modelBuilder.Entity("Ecommerce_App.Models.Order", b =>
                 {
                     b.HasOne("Ecommerce_App.Models.Cart", "Cart")
+                        .WithOne("Orders")
+                        .HasForeignKey("Ecommerce_App.Models.Order", "CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ecommerce_App.Models.OrderAddress", "OrderAddress")
                         .WithMany()
-                        .HasForeignKey("CartId")
+                        .HasForeignKey("OrderAddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
