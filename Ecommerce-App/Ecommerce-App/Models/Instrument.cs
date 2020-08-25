@@ -10,6 +10,5 @@ namespace Ecommerce_App.Models
     {
         public string Manufacturer { get; set; }
         public string Type { get; set; }
-
     }
 }

@@ -1,0 +1,121 @@
+﻿@page
+@model Ecommerce_App.Pages.Details.CheckoutModel
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "_Home";
+}
+
+<!Doctype html>
+
+<html>
+<head>
+    <style>
+        .checkout {
+            margin: 0px auto;
+        }
+    </style>
+</head>
+<body>
+    <main>
+
+        <div class="container text-white" style="margin-top:30px;">
+            <h2>Checkout Page</h2>
+        </div>
+
+        <div id=Name class="container bg-light border rounded bg-gradient-primary" style="margin-top:30px;margin-bottom:30px;">
+            <div class="row" style="margin-top:10px; margin-bottom:10px;">
+                <div class="col-6 d-flex justify-content-center checkout" style="margin-top:30px;">
+
+                    <form enctype="multipart/form-data" method="post">
+
+                        <div class="form-group">
+                            <h1>Please enter your info</h1>
+                            <p>Billing/Shipping Info</p>
+                        </div>
+
+                        <div class="form-group">
+                            <div asp-validation-summary="All"></div>
+                            <input required type="text" placeholder="First Name" asp-for="@Model.FirstName" />
+                            <span asp-validation-for="@Model.FirstName"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input required type="text" placeholder="Last Name" asp-for="@Model.LastName" />
+                            <span asp-validation-for="@Model.LastName"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input required type="text" placeholder="Address" asp-for="@Model.Address" />
+                            <span asp-validation-for="@Model.Address"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input required type="text" placeholder="City" asp-for="@Model.City" />
+                            <span asp-validation-for="@Model.City"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input required type="text" placeholder="State" asp-for="@Model.State" />
+                            <span asp-validation-for="@Model.State"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input required type="text" placeholder="Zip" asp-for="@Model.Zip" />
+                            <span asp-validation-for="@Model.Zip"></span>
+                            <hr />
+                        </div>
+
+                        <div class="form-group">
+                            <select required asp-for="@Model.CardType">
+                                <option selected disabled>Choose a card type</option>
+                                <option value="VISA">VISA</option>
+                                <option value="Mastercard">Mastercard</option>
+                                <option value="Discover">Discover</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit Payment</button>
+
+                    </form>
+                </div>
+                </div>
+            </div>
+
+        <div id=Name class="container bg-light border rounded bg-gradient-primary" style="margin-top:30px">
+            <div class="row" style="margin-top:10px; margin-bottom:10px;">
+                @if (Model.CurrentUserCart.CartItems.Count == 0)
+                {
+                    <p>Your cart is currently empty</p>
+                    <a asp-action="Index" asp-controller="Products" class="btn btn-primary">Go to store</a>
+                }
+                else
+                {
+                    <div class="col-12" style="margin-top:20px; margin-bottom:20px;">
+                        <h2>Your Order Summary</h2>
+                        <hr />
+                    </div>
+                    foreach (var item in Model.CurrentUserCart.CartItems)
+                    {
+                        <div class="col-3">
+                            <img src=@item.Product.Image style="height:175px; width:175px;" />
+                        </div>
+                        <div class="col-9">
+                            <h3>@item.Product.Name</h3>
+                            <p>Price: $@item.Product.Price</p>
+                            <p>Description: @item.Product.Description</p>
+                            <p>Quantity: @item.Quantity</p>
+                        </div>
+                    }
+                    <div class="col" style="margin-top:20px;">
+                        <hr />
+                        <h2>Total cost: $@Model.Total</h2>
+                        <a asp-page="/Details/Cart" class="btn btn-primary">Back to Cart</a>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>

@@ -20,7 +20,7 @@
 <body>
     <header>
         <nav class="navbar navbar-light bg-light navbar-expand-lg">
-            <a href="#" class="navbar-brand">Mojo Music</a>
+            <a asp-action="Index" asp-controller="Home" class="navbar-brand">Mojo Music</a>
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,18 +32,30 @@
                     <li class="navbar-item">
                         <a asp-action="Index" asp-controller="Products" class="nav-link">Products</a>
                     </li>
-                    <li class="navbar-item">
-                        <a asp-page="/Account/Login" class="nav-link">Login</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a asp-page="/Account/Register" class="nav-link">Register</a>
-                    </li>
                     @if (SignInManager.IsSignedIn(User))
                     {
+                        <li class="navbar-item">
+                            <a asp-page="/Details/Cart" class="nav-link">Your Cart</a>
+                        </li>
                         <li class="navbar-item">
                             <form asp-page="/Account/Logout" method="post">
                                 <button id="logout-button" class="nav-link" type="submit">Logout</button>
                             </form>
+                        </li>
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li class="navbar-item">
+                                <a asp-page="/Dashboard/AdminPortal" class="nav-link">Admin Panel</a>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="navbar-item">
+                            <a asp-page="/Account/Login" class="nav-link">Login</a>
+                        </li>
+                        <li class="navbar-item">
+                            <a asp-page="/Account/Register" class="nav-link">Register</a>
                         </li>
                     }
                 </ul>

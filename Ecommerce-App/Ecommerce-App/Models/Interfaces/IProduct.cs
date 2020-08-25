@@ -10,59 +10,51 @@ namespace Ecommerce_App.Models.Interfaces
     {
 
         /// <summary>
-        /// Create - allow us to create a product
+        /// Create - Method that allow us to create a new product.
         /// </summary>
-        /// <param name="product"> product we want to create</param>
-        /// <returns> created product object </returns>
+        /// <param name="product">The product we want to create.</param>
+        /// <returns>Information about the newly created product.</returns>
         Task<Product> Create(Product product);
 
-
         /// <summary>
-        /// GetProducts - This method allows us to get a list of all of our products
+        /// GetProducts - This method allows us to get a list of all of our products.
         /// </summary>
-        /// <returns>A list of all products</returns>
+        /// <returns>A list of all products in the database.</returns>
         Task<List<Product>> GetProducts();
 
         /// <summary>
-        /// GetProduct - This method allows us to get a list of all products that match the searched name
+        /// GetProduct - This method allows us to get a list of all products that match the searched name.
         /// </summary>
-        /// <param name="name">Takes in a string that represents the name searched on the front end</param>
-        /// <returns>Returns a list containing all the objects that match the searched name</returns>
+        /// <param name="name">Takes in a string that represents the name searched on the front end.</param>
+        /// <returns>Returns a list containing all the objects that match the searched name.</returns>
         Task<Product> GetProduct(int Id);
 
         /// <summary>
-        /// Gets product by name
+        /// GetProductByName - Gets product by name.
         /// </summary>
-        /// <param name="name">name of the product</param>
-        /// <returns> product object</returns>
+        /// <param name="name">The name of the product the program wants to find more information for.</param>
+        /// <returns>The task complete, product information found.</returns>
         Task<Product> GetProductByName(string name);
 
         /// <summary>
-        /// GetProduct - This method allows us to get a list of all products that match the searched name
+        /// GetProduct - This method allows us to get a list of all products that match the searched name.
         /// </summary>
-        /// <param name="name">Takes in a string that represents the name searched on the front end</param>
-        /// <returns>Returns a list containing all the objects that match the searched name</returns>
+        /// <param name="name">Takes in a string that represents the name searched on the front end.</param>
+        /// <returns>Returns a list containing all the objects that match the searched name.</returns>
         Task<List<Product>> SearchByProductName(string searchString);
 
         /// <summary>
-        /// Update- allows us to update a product
+        /// Update - Method allows the program to update information about a product.
         /// </summary>
-        /// <param name="product"> product object we want to update</param>
-        /// <returns> task completion </returns>
+        /// <param name="product">The product the administrator seeks to update information about.</param>
+        /// <returns>The task complete: the product is now updated with the inputted information.</returns>
         Task<Product> Update(Product product);
 
         /// <summary>
-        /// Delete - allows us to delete a product
+        /// Delete - Method that allows the program to delete a product.
         /// </summary>
-        /// <param name="id"> id of the item we want to delete</param>
-        /// <returns> task completion</returns>
+        /// <param name="id">The id of the item the administrator has chosen to delete.</param>
+        /// <returns>The task completion, the stored product now deleted from the database.</returns>
         Task Delete(int id);
-
-        /// <summary>
-        /// Sort - This method allows us to sort the list of products alphabetically and reverse-alphabetically
-        /// </summary>
-        /// <param name="alphabetical">Takes in a string that correlates to button (alphabetical or reverse-alphabetical) selection on the front end</param>
-        /// <returns>Returns a list of products according to selected button</returns>
-       // List<Product> Sort(string alphabetical);
     }
 }

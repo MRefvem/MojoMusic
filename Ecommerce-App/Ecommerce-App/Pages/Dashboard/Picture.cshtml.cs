@@ -15,15 +15,13 @@ namespace Ecommerce_App.Pages.Dashboard
     [Authorize(Policy = "AdminOnly" )]
     public class PictureModel : PageModel
     {
-        private IImage _image;
-        private IProduct _productservice;
+        private readonly IImage _image;
+        private readonly IProduct _productservice;
 
         [BindProperty]
         public string Name { get; set; }
-
         [BindProperty]
         public IFormFile Image { get; set; }
-       
 
         public PictureModel(IImage image , IProduct productservice)
         {
@@ -33,13 +31,18 @@ namespace Ecommerce_App.Pages.Dashboard
 
         public void OnGet()
         {
+
         }
 
+        /// <summary>
+        /// OnPost - When the administrator posts to this page, operations take place between the Azure blob storage account and this website that in the end results in a product image being associated with a certain product.
+        /// </summary>
+        /// <returns>The task complete, a new product image is sent to the cloud storage account and associated with a product rendered to the site. That product image is now tied to the product and will be rendered alongside it where applicable.</returns>
         public async Task OnPost()
         {
             string ext = Path.GetExtension(Image.FileName);
             
-            // convert Image into a stream
+            // Convert image into a stream
 
             if (Image != null)
             {
@@ -52,15 +55,14 @@ namespace Ecommerce_App.Pages.Dashboard
                 }
                 // Gets the blob 
                 var blobReference = await _image.GetBlob($"{Name}{ext}", "productimages");
-                // gets url from blob
+                // Gets url from blob
                 string imageUri = blobReference.Uri.AbsoluteUri;
 
                 Product product = await _productservice.GetProductByName(Name);
                 product.Image = imageUri;
-                await _productservice.Update(product);
 
+                await _productservice.Update(product);
             }
-            
         }
     }
 }
