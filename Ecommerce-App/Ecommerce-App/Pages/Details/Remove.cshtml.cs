@@ -11,7 +11,7 @@ namespace Ecommerce_App.Pages.Details
 {
     public class RemoveModel : PageModel
     {
-        private ICartItems _cartItems;
+        private readonly ICartItems _cartItems;
 
         [BindProperty]
         public int ProductId { get; set; }
@@ -31,6 +31,12 @@ namespace Ecommerce_App.Pages.Details
 
         }
 
+        /// <summary>
+        /// This method performs the functions necessary to remove an item from a user's shopping cart.
+        /// </summary>
+        /// <param name="productId">A product Id is sent in as a parameter.</param>
+        /// <param name="cartId">A cart Id is sent in, that is associated with the user's "IsActive" cart.</param>
+        /// <returns>The task complete, the user's shopping cart no longer contains the item that was selected to be removed.</returns>
         public async Task<IActionResult> OnPost(int productId, int cartId)
         {
             CartItem.ProductId = productId;

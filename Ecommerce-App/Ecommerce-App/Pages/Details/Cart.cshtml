@@ -22,9 +22,11 @@
             <div class="row" style="margin-top:10px; margin-bottom:10px;">
                     @if (Model.CurrentUserCart.CartItems.Count == 0)
                     {
-                        <p>Your cart is currently empty</p>
-                        <hr />
-                        <a asp-action="Index" asp-controller="Products" class="btn btn-primary">Go to store</a>
+                        <div class="col">
+                            <p>Your cart is currently empty</p>
+                            <hr />
+                            <a asp-action="Index" asp-controller="Products" class="btn btn-primary">Go to store</a>
+                        </div>
                     }
                     else
                     {
@@ -39,11 +41,12 @@
                                 <p>Price: $@item.Product.Price</p>
                                 <p>Description: @item.Product.Description</p>
                                 <p>Quantity: @item.Quantity</p>
-                                <input hidden asp-for="@Model.CartId" value="@item.CartId"/>
-                                <input hidden asp-for="@Model.ProductId" value="@item.ProductId"/>
+                                <input hidden asp-for="@Model.CartId" value="@item.CartId" />
+                                <input hidden asp-for="@Model.ProductId" value="@item.ProductId" />
                                 <input min="1" max="5" asp-for="@Model.Quantity" value="@item.Quantity" placeholder="Enter Quantity" />
                                 <button asp-page="/Details/Cart" type="submit" class="btn btn-primary">Update Quantity</button>
                                 <button asp-page="/Details/Remove" asp-route-id="@item" enctype="multipart/form-data" type="submit" class="btn btn-primary">Remove Item</button>
+                                <a asp-action="Index" asp-controller="Products" class="btn btn-primary">Go to store</a>
                             </div>
 
                             </form>

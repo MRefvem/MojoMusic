@@ -16,16 +16,15 @@ namespace Ecommerce_App.Pages.Account
 {
     public class LoginModel : PageModel
     {
-        private SignInManager<Customer> _signInManager;
-        private UserManager<Customer> _userManager;
+        private readonly SignInManager<Customer> _signInManager;
         private readonly ICart _cart;
 
-        public LoginModel(SignInManager<Customer> signInManager, UserManager<Customer> userManager, ICart cart)
+        public LoginModel(SignInManager<Customer> signInManager, ICart cart)
         {
             _signInManager = signInManager;
-            _userManager = userManager;
             _cart = cart;
         }
+
         [BindProperty]
         public LoginViewModel Input { get; set; }
 
@@ -34,6 +33,10 @@ namespace Ecommerce_App.Pages.Account
 
         }
 
+        /// <summary>
+        /// OnPost - Method used to gather up all of the information from the database necessary for when the user logs in to their account.
+        /// </summary>
+        /// <returns>The completed task, user is logged in and then redirected to the home page if successful (method also instantiates a cart for the user if they for some reason do not have one). If unsuccessful, the user is redirected back to the login page for another attempt.</returns>
         public async Task<IActionResult> OnPost()
         {
             // authenticate
@@ -54,14 +57,11 @@ namespace Ecommerce_App.Pages.Account
                     }
 
                     return RedirectToAction("Index", "Home");
-
                 }
-
             }
 
             ModelState.AddModelError("", "Invalid Username or Password");
             return Page();
-
         }
 
         public class LoginViewModel

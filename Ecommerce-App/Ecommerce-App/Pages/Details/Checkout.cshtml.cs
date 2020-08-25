@@ -17,13 +17,11 @@ namespace Ecommerce_App.Pages.Details
 {
     public class CheckoutModel : PageModel
     {
-
         private readonly ICart _cart;
         private readonly IPayment _payment;
         private readonly IOrder _order;
         private readonly IConfiguration _config;
         private readonly SignInManager<Customer> _signInManager;
-        private readonly ICartItems _cartItems;
         private readonly IEmailSender _emailSender;
 
         [BindProperty]
@@ -45,18 +43,21 @@ namespace Ecommerce_App.Pages.Details
         public decimal Total { get; set; }
         public Cart CurrentUserCart { get; set; }
 
-        public CheckoutModel(ICart cart, IPayment payment, IOrder order, IConfiguration configuration, SignInManager<Customer> signInManager, ICartItems cartItems, IEmailSender emailSender)
+        public CheckoutModel(ICart cart, IPayment payment, IOrder order, IConfiguration configuration, SignInManager<Customer> signInManager, IEmailSender emailSender)
         {
             _cart = cart;
             _payment = payment;
             _order = order;
             _config = configuration;
             _signInManager = signInManager;
-            _cartItems = cartItems;
             _emailSender = emailSender;
             CurrentCartId = 0;
         }
 
+        /// <summary>
+        /// OnGet - This method performs all of the logic necessary to query the databases and then have information available to display to the page upon loading. In this case that includes the items present in the user's shopping cart near the time of purchase as well as seeded credit card details to be used for Sandbox most test purchases (no real credit cards can be used to make purchases on this site).
+        /// </summary>
+        /// <returns>The completed task, all necessary information is presented to the page upon page load.</returns>
         public async Task<IActionResult> OnGet()
         {
             Cart cart = await _cart.GetCartForUserByEmail(GetUserEmail());
@@ -87,7 +88,18 @@ namespace Ecommerce_App.Pages.Details
             return Page();
         }
 
-        public async Task<IActionResult> OnPost(string firstName, string lastName, string address, string city, string state, int zip, string cardNumber)
+        /// <summary>
+        /// OnPost - Upon posting to this page (user checkout) a number of actions take place. This method constructs all of the pieces necessary for the most important operation: the purchase. This method assembles all of the final details needed to make the purchase including the user's shopping cart, to total price of all of the items in the cart, the billing/order address, and the credit card being used. Then finally a call is made to the payment service, the card gets ran, and the order is placed. The user inputs their billing information into a form, selects from one of the three seeded credit cards and then makes their purchase.
+        /// </summary>
+        /// <param name="firstName">Billing First Name</param>
+        /// <param name="lastName">Billing Last Name</param>
+        /// <param name="address">Billing Address</param>
+        /// <param name="city">Billing City</param>
+        /// <param name="state">Billing State</param>
+        /// <param name="zip">Billing ZIP</param>
+        /// <param name="cardNumber">Credit Card</param>
+        /// <returns>The task complete, a successful (or unsuccessful) transaction has taken place.</returns>
+        public async Task<IActionResult> OnPost(string firstName, string lastName, string address, string city, string state, int zip)
         {
             Cart cart = await _cart.GetCartForUserByEmail(GetUserEmail());
 
@@ -167,6 +179,10 @@ namespace Ecommerce_App.Pages.Details
             return Page();
         }
 
+        /// <summary>
+        /// GetUserEmail - This method performs the logic neceesary for retrieving a user's email addressed based on the claims assigned to that user upon their registration to the site.
+        /// </summary>
+        /// <returns>A string containing the user's email address.</returns>
         protected string GetUserEmail()
         {
             return User.Claims.First(x => x.Type == "Email").Value;

@@ -8,19 +8,31 @@ namespace Ecommerce_App.Models.Interfaces
     public interface ICart
     {
         /// <summary>
-        /// Creates a new cart
+        /// Create - Method creates a new cart.
         /// </summary>
-        /// <param name="UserEmail">the email of the user </param>
-        /// <returns> a cart object</returns>
+        /// <param name="UserEmail">The email of the user.</param>
+        /// <returns>A new cart was created for the user.</returns>
         Task<Cart> Create(string userEmail);
 
+        /// <summary>
+        /// Update - Method updates the cart status of the user
+        /// </summary>
+        /// <param name="cart">A complete cart obejct.</param>
+        /// <returns>An updated cart object.</returns>
         Task<Cart> Update(Cart cart);
 
         /// <summary>
-        /// Gets a cart by using the users email
+        /// GetCartForUserByEmail - Method gets a cart by using the user's email
         /// </summary>
-        /// <param name="userEmail">the email of the user</param>
-        /// <returns>  cart of the user  </returns>
+        /// <param name="userEmail">The email of the user.</param>
+        /// <returns>The cart of the user that was searched.</returns>
         Task<Cart> GetCartForUserByEmail(string userEmail);
+
+        /// <summary>
+        /// Delete - Method that deletes a cart from the database.
+        /// </summary>
+        /// <param name="cartId">The id of the cart to be deleted.</param>
+        /// <returns>The task complete, the user's cart now deleted from the database.</returns>
+        Task Delete(int cartId);
     }
 }

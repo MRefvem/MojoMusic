@@ -12,15 +12,17 @@ namespace Ecommerce.Controllers
 {
     public class HomeController : Controller
     {
-        private IProduct _product;
-        private IPayment _payment;
+        private readonly IProduct _product;
 
-        public HomeController( IProduct product, IPayment payment )
+        public HomeController(IProduct product)
         {
             _product = product;
-            _payment = payment;
         }
 
+        /// <summary>
+        /// Controls what information is available for the page to display upon page load.
+        /// </summary>
+        /// <returns>The task complete, information is gathered from the database and ready to display to the Razor View.</returns>
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -30,8 +32,6 @@ namespace Ecommerce.Controllers
             {
                 Prod = prods,
             };
-
-            
 
             return View(vm);
         }

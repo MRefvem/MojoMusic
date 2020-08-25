@@ -8,39 +8,40 @@ namespace Ecommerce_App.Models.Interfaces
     public interface ICartItems
     {
         /// <summary>
-        /// Creates a cart item
+        /// Create - Method creates a cart item.
         /// </summary>
-        /// <param name="cartItems"> the cart item object</param>
-        /// <returns> the created cartitem object</returns>
+        /// <param name="cartItems">The cart item object to be created.</param>
+        /// <returns>The created cart item object.</returns>
         Task<CartItems> Create(CartItems cartItems);
 
         /// <summary>
-        /// Gets a single cart item by the cartid and product id
+        /// GetCartItem - Method gets a single cart item by the cartid and product id.
         /// </summary>
-        /// <param name="CartId"> the id of the userscart</param>
-        /// <param name="ProductId"> the id of the product</param>
-        /// <returns> the cart item object</returns>
+        /// <param name="CartId">The id of the user's cart.</param>
+        /// <param name="ProductId">The id of the product.</param>
+        /// <returns>The cart item object.</returns>
         Task<CartItems> GetCartItem(int CartId, int ProductId);
 
         /// <summary>
-        /// Gets all cart items by the cartid
+        /// GetAllCartItems - Method gets all cart items associated with a specific user's cart.
         /// </summary>
-        /// <param name="cartId">the users cart id</param>
-        /// <returns>the cart item object</returns>
+        /// <param name="cartId">The user's cart id.</param>
+        /// <returns>A list of all items in a user's cart.</returns>
         Task<List<CartItems>> GetAllCartItems(int cartId);
 
         /// <summary>
-        /// Updates a cart item
+        /// Update - Method updates the contents of a user's cart.
         /// </summary>
-        /// <param name="cartItems"> the cart item object</param>
-        /// <returns> the updated cart</returns>
+        /// <param name="cartItems">The cart item to be updated.</param>
+        /// <returns>The updated item.</returns>
         Task<CartItems> Update(CartItems cartItems);
 
         /// <summary>
-        /// Deletes a cartitem
+        /// Delete - Method deletes a cart item. It finds the exact product by first searching for the Id of that product and the associated Id of the user's cart.
         /// </summary>
-        /// <param name="id"> the id of the cart item</param>
-        /// <returns> task completion</returns>
+        /// <param name="productId">The id of the product to be deleted.</param>
+        /// <param name="cartId">The id of the user's cart.</param>
+        /// <returns>The completed task: that item has now been deleted from the user's cart.</returns>
         Task Delete(int productId, int cartId);
 
     }
