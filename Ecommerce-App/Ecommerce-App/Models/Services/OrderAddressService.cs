@@ -19,10 +19,10 @@ namespace Ecommerce_App.Models.Services
         }
 
         /// <summary>
-        /// Creates an order address
+        /// Create - Method used to create the user's order address. User inputs their billing/shipping address into the form and that information is passed through the Checkout PageModel and through to the Order Service and then on to here.
         /// </summary>
-        /// <param name="cartItems"> the cart item object</param>
-        /// <returns> the created cartitem object</returns>
+        /// <param name="orderAddress">The input fields passed through from the user</param>
+        /// <returns>The User's Order Address stored in the database</returns>
         public async Task<OrderAddress> Create(OrderAddress orderAddress)
         {
             _context.Entry(orderAddress).State = EntityState.Added;
@@ -30,7 +30,5 @@ namespace Ecommerce_App.Models.Services
 
             return orderAddress;
         }
-
-       
     }
 }

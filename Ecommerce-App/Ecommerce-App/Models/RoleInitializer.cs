@@ -14,13 +14,19 @@ namespace Ecommerce_App.Models
 {
     public class RoleInitializer
     {
-        // create a list of identity roles
+        // Create a list of identity roles
         private static readonly List<IdentityRole> Roles = new List<IdentityRole>()
         {
             new IdentityRole{Name = ApplicationRoles.Admin, NormalizedName = ApplicationRoles.Admin.ToUpper(), ConcurrencyStamp = Guid.NewGuid().ToString() }
         };
 
-        // method that creates the admin
+        /// <summary>
+        /// SeedData - Sets the groundwork for being able to assign roles to future users.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider interface.</param>
+        /// <param name="users">The user manager, manages all of the user's in the program.</param>
+        /// <param name="_config">IConfiguration, controls all of the configuration settings established in the Startup.cs file.</param>
+        /// <returns>The completed task, a set of rules now in place that will specify how users are granted certain roles and permissions.</returns>
         public async static Task SeedData(IServiceProvider serviceProvider, UserManager<Customer> users, IConfiguration _config)
         {
             using (var dbContext = new UserDbContext(serviceProvider.GetRequiredService<DbContextOptions<UserDbContext>>()))
@@ -31,6 +37,12 @@ namespace Ecommerce_App.Models
             }
         }
 
+        /// <summary>
+        /// SeedUsers - Method that creates the seeded administrator in the database upon application startup.
+        /// </summary>
+        /// <param name="userManager">The user manager, manages all of the user's in the program.</param>
+        /// <param name="_config">IConfiguration, controls all of the configuration settings established in the Startup.cs file.</param>
+        /// <returns>The completed task, a seeded administrator created in the root of the program, can access special areas of the site and perform high-level CRUD operations.</returns>
         private async static Task SeedUsers(UserManager<Customer> userManager, IConfiguration _config)
         {
             if (userManager.FindByEmailAsync(_config["AdminEmail"]).Result == null)
@@ -53,7 +65,11 @@ namespace Ecommerce_App.Models
                 }
             }
         }
-        // Adds roles to all users
+
+        /// <summary>
+        /// AddRoles - Method that allows the program to give roles to certain approved users (notably the administrator).
+        /// </summary>
+        /// <param name="context">Establishes the UserDbContext as the database the program is trying to access/modify.</param>
         private static void AddRoles(UserDbContext context)
         {
             if (context.Roles.Any()) return;
@@ -64,6 +80,5 @@ namespace Ecommerce_App.Models
                 context.SaveChanges();
             }
         }
-
     }
 }

@@ -1,6 +1,6 @@
 # Ecommerce-App: Mojo Music
 Authors: Michael Refvem, Yasir Mohamud
-Contributors: Amanda Iverson, Andrew Casper, Kyungrae Kim, Andrew Smith, Paul Rest, Nicco Ryan, Bryant Davis
+Contributors: Amanda Iverson, Andrew Casper, Kyungrae Kim, Andrew Smith, Paul Rest, Nicco Ryan, Bryant Davis, Na'ama Bar-Ilan, Peyton Cysewski
 
 # Link to the Deployed Site
 https://mojomusic.azurewebsites.net/
@@ -22,14 +22,46 @@ The app should simply be able to run through Microsoft Visual Studio.
 
 # How to login as an Admin and access the Admin Panel
 - Login with these credentials: UserName = "admin@gmail.com", Password = "@Test123!"
-- While logged-in as the Admin, you will see a link reading "Admin Panel" on the Nav Bar which leads to a dashboard which gives the Admin access to special operations on the site including the ability to upload product pictures to the Azure Blob.
+- While logged-in as the Admin, you will see a link reading "Admin Panel" on the Nav Bar which leads to a dashboard which gives the Admin access to special operations on the site including the ability to see, create, update and delete products as well as upload product pictures to an Azure Blob Storage account.
+
+# A description of the Products Database Schema
+The products database contains the following tables: dbo.CartItems, dbo.Carts, dbo.Order, dbo.OrderAddress and dbo.Products. The dbo.Products table lists all of the products in the database and includes their properties such as Id, Name, SKU, Price, Description and Image URL.
+The dbo.Carts and dbo.Order tables are join tables that link a specific user to their Cart Items and Order Address, respectively. The dbo.Carts table contains the Id of the cart, the UserEmail associated with the user and a boolean describing the current status of the cart ("IsActive" when set to true means it is active, and when set to false means it is one of the user's past purchases). You can use the dbo.Carts table to link to the dbo.CartItems table which simply links a CartId with a ProductId and then gives the quantity of the item present in the cart correlating with the given product Id.
+Much in the way the the dbo.Carts table links to the dbo.CartItems table, so does the dbo.Order table with the dbo.OrderAddress table. The dbo.OrderTable links an Order Address to a specific Cart (which is important as long as you want a specified shipment to reach the correct address!). The dbo.OrderAddress table contains a primary key to identify a unique order address in the database, as well as all of the practical information necessary to ship an item to a customer such as the customer's FirstName, LastName, Address, City, State and ZIP.
 
 # Change-Log
 
+24 Aug 2020 - SPRINT 2 Complete
+2.0 Sprint 1
+- *README: README contains the following: A link to the deployed website, a description of the products the site is selling, a description of the claims that are captured upon account registration, a description of the policies that are being reinforced, a description of the structure of the products database schema, a description of the DB Schema (particularly the basket/order tables)*
+- *Mini Cart: Mini Cart exists on the product landing page. Mini basket holds a current view of all the existing items the user has in their cart. A view component is used to implement the mini cart across the site.*
+- *Cart: A dedicated cart page that consists of all the user's current products. Items in the cart can be modified in quantity or removed. Home page consists of a link to the cart for easability (present in the Nav Bar on all pages). Cart page contains a "Checkout" button that redirects to the Checkout page. The user must be logged in to access the cart page.*
+- *Receipt Page: Receipt page consists of an itemized list of all products the user has "purchased". Includes the item name, quantity and total price of each item as well as total price of all items in the basket.*
+- *Email Sender: A welcome email is sent to the user upon a new registration. A receipt email is also sent to the user after the "checkout" process from the basket page. Each email is fitting to the problem domain, and formatted professionally. The email consists of a custom greeting and personalization.*
+- *Admin Dashboard: Admin Dashboard exists with a landing page directing users to Products Controller. An admin can execute full CRUD operations on the products. Only users with a role of "Admin" can access this page.*
+- *User Experience: HTML/CSS is present across the site. Site is clean and professional looking. Pages are properly linked and the overall experience and flow of the site is usable. Site does not contain any unhandled exceptions.*
+- *README & Documentation: README contains an introduction to the web application. Site contains all required questions as well as a link to the deployed site. All contributors are referenced and cite within the README.*
+1.6 Sprint 1 resubmission criteria addressed (Reviewer: Please regrade/reevaluate this project from Sprint 1 as the following feedback was addressed)
+- *Added documentation for how the Admin portal can be accessed to the README*
+- *Admin panel now exists where an admin can perform full CRUD operations on products.*
+- *Access permitted for admin access on admin panel*
+- *User experience: clicking on "Mojo Music" nav element now returns the user to the home page*
+- *User experience: Nav bar now hides the login/register tab even after registered and logged in*
+- *Summary comments added and present for all logical methods*
+
+23 Aug 2020
+1.5 Sprint - Milestone #3 Complete
+User Story 2
+- *As a user, I would like to see a summary of my purchase after completing my checkout process*
+- *Added a receipt page for the user to see a summary of their order after having made a purchase*
+User Story 3
+- *As a user, I would like a summary of my purchase to be emailed to me so that I can store the receipt for my records*
+- *Added SendGrind email service to the method that authorizes a user's purchase, complete with the user's purchase information.*
+
 22 Aug 2020
-1.3 Sprint 3 - Milestone #1
+1.3 Sprint 2 - Milestone #3
 User Story 1
-- * As a user, I would like to checkout with my purchases using electronic payment options on my site during the checkout process*
+- *As a user, I would like to checkout with my purchases using electronic payment options on my site during the checkout process*
 - *Implemented a Payment Service to accept credit card transactions into the site*
 
 20 Aug 2020

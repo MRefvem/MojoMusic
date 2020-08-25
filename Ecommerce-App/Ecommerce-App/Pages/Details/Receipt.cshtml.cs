@@ -17,44 +17,39 @@ namespace Ecommerce_App.Pages.Details
     public class ReceiptModel : PageModel
     {
         private readonly UserManager<Customer> _userManager;
-        private readonly SignInManager<Customer> _signInManager;
-        private readonly ICart _cart;
-        private readonly ICartItems _cartItems;
-        private readonly IOrderAddress _orderAddress;
-        private readonly IOrder _order;
         private readonly StoreDbContext _context;
 
         public decimal Total { get; set; }
         public Cart CurrentUserCart { get; set; }
         public Order UserOrder { get; set; }
 
-        public ReceiptModel(UserManager<Customer> userManager , SignInManager<Customer> signInManager, ICart cart, ICartItems cartItems, IOrderAddress orderAddress, IOrder order, StoreDbContext context )
+        public ReceiptModel(UserManager<Customer> userManager , StoreDbContext context )
         {
             _userManager = userManager;
-            _signInManager = signInManager;
-            _cart = cart;
-            _cartItems = cartItems;
-            _orderAddress = orderAddress;
-            _order = order;
             _context = context;
-
         }
+
+        /// <summary>
+        /// OnGet - This information gathers all of the necessary information from the database that is necessary to display upon loading the page. In this case, it is the details about the user's most-recent purchase.
+        /// </summary>
+        /// <returns>The task complete, the necessary information has been queried from the database and is now ready to present to the front end.</returns>
         public async Task<IActionResult> OnGet()
         {
                 Customer user = await _userManager.GetUserAsync(User);
-            /*  Cart cart = await _cart.GetCartForUserByEmail(user.Email);*/
-            /*  Order order = await _order.GetMostRecent(cart.Id);*/
 
                 var cart = await _context.Carts.Where(x => x.IsActive == false && x.UserEmail == user.Email)
                                               .Include(x => x.CartItems)
                                               .ThenInclude(x => x.Product)
                                               .OrderByDescending(x => x.Id)
                                               .FirstOrDefaultAsync();
+
               var order =  await _context.Order.Where(x => x.CartId == cart.Id)
                                                 .Include(x => x.OrderAddress)
                                                 .FirstOrDefaultAsync();
+
                 CurrentUserCart = cart;
                 UserOrder = order;
+
                 decimal totalPrice = 0;
 
                 foreach (var item in cart.CartItems)
@@ -65,8 +60,6 @@ namespace Ecommerce_App.Pages.Details
                 Total = totalPrice;
 
                 return Page();
-        
         }
-
     }
 }

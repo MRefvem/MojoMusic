@@ -10,23 +10,19 @@ namespace Ecommerce_App.Models.Services
 {
     public class CartItemsService : ICartItems
     {
-        private StoreDbContext _context;
-        private IProduct _product;
-        private ICart _cart;
+        private readonly StoreDbContext _context;
 
-        // brings in the storedb,product interface and cart interface
-        public CartItemsService(StoreDbContext context, IProduct product, ICart cart)
+        // Brings in the storedb, product interface and cart interface
+        public CartItemsService(StoreDbContext context)
         {
             _context = context;
-            _product = product;
-            _cart = cart;
         }
 
         /// <summary>
-        /// Creates a cart item
+        /// Create - Method creates a cart item.
         /// </summary>
-        /// <param name="cartItems"> the cart item object</param>
-        /// <returns> the created cartitem object</returns>
+        /// <param name="cartItems">The cart item object to be created.</param>
+        /// <returns>The created cart item object.</returns>
         public async Task<CartItems> Create(CartItems cartItems)
         {
             _context.Entry(cartItems).State = EntityState.Added;
@@ -36,11 +32,11 @@ namespace Ecommerce_App.Models.Services
         }
 
         /// <summary>
-        /// Gets a single cart item by the cartid and product id
+        /// GetCartItem - Method gets a single cart item by the cartid and product id.
         /// </summary>
-        /// <param name="cartId"> the id of the user's cart</param>
-        /// <param name="productId"> the id of the product</param>
-        /// <returns> the cart item object</returns>
+        /// <param name="CartId">The id of the user's cart.</param>
+        /// <param name="ProductId">The id of the product.</param>
+        /// <returns>The cart item object.</returns>
         public async Task<CartItems> GetCartItem (int cartId,int productId)
         {
             CartItems cartItem = await _context.CartItems.Where(x => x.CartId == cartId && x.ProductId == productId)
@@ -51,10 +47,10 @@ namespace Ecommerce_App.Models.Services
         }
 
         /// <summary>
-        /// Gets all cart items by the cartid
+        /// GetAllCartItems - Method gets all cart items associated with a specific user's cart.
         /// </summary>
-        /// <param name="CartId">the users cart id</param>
-        /// <returns>the cart item object</returns>
+        /// <param name="cartId">The user's cart id.</param>
+        /// <returns>A list of all items in a user's cart.</returns>
         public async Task<List<CartItems>> GetAllCartItems(int cartId)
         {
             List<CartItems> cartItems = await _context.CartItems.Where(x => x.CartId == cartId)
@@ -64,10 +60,10 @@ namespace Ecommerce_App.Models.Services
         }
 
         /// <summary>
-        /// Updates a cart item
+        /// Update - Method updates the contents of a user's cart.
         /// </summary>
-        /// <param name="cartItems"> the cart item object</param>
-        /// <returns> the updated cart</returns>
+        /// <param name="cartItems">The cart item to be updated.</param>
+        /// <returns>The updated item.</returns>
         public async Task<CartItems> Update(CartItems cartItems)
         {
 
@@ -77,11 +73,11 @@ namespace Ecommerce_App.Models.Services
         }
 
         /// <summary>
-        /// Deletes a cart item
+        /// Delete - Method deletes a cart item. It finds the exact product by first searching for the Id of that product and the associated Id of the user's cart.
         /// </summary>
-        /// <param name="cartId">The ID of the cart</param>
-        /// <param name="productId">The ID of the product to delete</param>
-        /// <returns> task completion</returns>
+        /// <param name="productId">The id of the product to be deleted.</param>
+        /// <param name="cartId">The id of the user's cart.</param>
+        /// <returns>The completed task: that item has now been deleted from the user's cart.</returns>
         public async Task Delete(int productId, int cartId)
         {
             CartItems cartItem = await _context.CartItems.FindAsync(cartId, productId);

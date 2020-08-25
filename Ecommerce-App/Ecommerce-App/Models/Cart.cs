@@ -13,7 +13,7 @@ namespace Ecommerce_App.Models
         public string UserEmail { get; set; }
         public bool IsActive { get; set; }
 
-        /// Navigation PROPERTIES
+        // Navigation properties
         public  List<CartItems> CartItems { get; set; } 
         public Order Orders { get; set; }
     }

@@ -11,20 +11,20 @@ namespace Ecommerce_App.Models.Services
 {
     public class EmailSenderService : IEmailSender
     {
-        private IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
 
-        // brings in the configuration
         public EmailSenderService(IConfiguration configuration)
         {
             _configuration = configuration;
         }
+
         /// <summary>
-        /// sends a email
+        /// SendEmailAsync - Method allows the program to send emails automatically.
         /// </summary>
-        /// <param name="email">the email to send to</param>
-        /// <param name="subject">the subject of the email</param>
-        /// <param name="htmlMessage">message </param>
-        /// <returns>task completion</returns>
+        /// <param name="email">The address of the email account to send the message to.</param>
+        /// <param name="subject">The subject of the message (will display in the subject field upon receipt).</param>
+        /// <param name="htmlMessage">The HTML content of the message.</param>
+        /// <returns>The task complete, an automated message was sent upon trigger of a specific action.</returns>
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
             SendGridClient client = new SendGridClient(_configuration["SENDGRID_API_KEY"]);
@@ -34,8 +34,8 @@ namespace Ecommerce_App.Models.Services
             message.AddTo(email);
             message.SetSubject(subject);
             message.AddContent(MimeType.Html, htmlMessage);
-            await client.SendEmailAsync(message);
 
+            await client.SendEmailAsync(message);
         }
     }
 }

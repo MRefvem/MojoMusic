@@ -19,10 +19,10 @@ namespace Ecommerce_App.Models.Services
         }
 
         /// <summary>
-        /// Creates a new cart
+        /// Create - Method creates a new cart.
         /// </summary>
-        /// <param name="UserEmail">the email of the user </param>
-        /// <returns> a cart object</returns>
+        /// <param name="UserEmail">The email of the user.</param>
+        /// <returns>A new cart was created for the user.</returns>
         public async Task<Cart> Create (string userEmail)
         {
             Cart cart = new Cart()
@@ -39,10 +39,10 @@ namespace Ecommerce_App.Models.Services
         }
 
         /// <summary>
-        /// Gets a cart by using the users email
+        /// GetCartForUserByEmail - Method gets a cart by using the user's email
         /// </summary>
-        /// <param name="userEmail">the email of the user</param>
-        /// <returns>  cart of the user  </returns>
+        /// <param name="userEmail">The email of the user.</param>
+        /// <returns>The cart of the user that was searched.</returns>
         public async Task<Cart> GetCartForUserByEmail(string userEmail)
         {
            Cart cart = await _context.Carts.Where(x => x.UserEmail == userEmail && x.IsActive == true)
@@ -54,10 +54,10 @@ namespace Ecommerce_App.Models.Services
         }
 
         /// <summary>
-        /// Update - Method updates a user's cart 
+        /// Update - Method updates the cart status of the user
         /// </summary>
-        /// <param name="cart"></param>
-        /// <returns></returns>
+        /// <param name="cart">A complete cart obejct.</param>
+        /// <returns>An updated cart object.</returns>
         public async Task<Cart> Update(Cart cart)
         {
             var cartToUpdate = await _context.Carts.FindAsync(cart.Id); 
@@ -70,10 +70,10 @@ namespace Ecommerce_App.Models.Services
         }
 
         /// <summary>
-        /// Deletes a cart
+        /// Delete - Method that deletes a cart from the database.
         /// </summary>
-        /// <param name="cartId">The ID of the cart</param>
-        /// <returns> task completion</returns>
+        /// <param name="cartId">The id of the cart to be deleted.</param>
+        /// <returns>The task complete, the user's cart now deleted from the database.</returns>
         public async Task Delete(int cartId)
         {
             CartItems cart = await _context.CartItems.FindAsync(cartId);
