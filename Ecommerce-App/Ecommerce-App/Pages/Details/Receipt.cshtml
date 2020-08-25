@@ -1,0 +1,66 @@
+﻿@page
+@model Ecommerce_App.Pages.Details.ReceiptModel
+
+@{
+    ViewData["Title"] = "Receipt";
+    Layout = "_Home";
+}
+
+
+<!Doctype html>
+
+<html>
+<head>
+    <style>
+        .receipt {
+            margin: 0px auto;
+        }
+    </style>
+</head>
+    <body>
+        <main>
+
+            <div>
+                <div id=Name class="container bg-light border rounded bg-gradient-primary receipt" style="margin-top:30px">
+                    <div class="row" style="margin-top:10px; margin-bottom:10px;">
+                        <div class="col-2"></div>
+                        <div class="col-10" style="margin-top:20px; margin-bottom:10px;">
+                            <h2>Your Receipt</h2>
+                            <hr />
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="col-10" style="margin-top:10px; margin-bottom:10px;">
+                            <p>Billing/Shipping info</p>
+                            <h3>Name: @Model.UserOrder.OrderAddress.FirstName @Model.UserOrder.OrderAddress.LastName</h3>
+                            <p>Address: @Model.UserOrder.OrderAddress.Address</p>
+                            <p>City: @Model.UserOrder.OrderAddress.City</p>
+                            <p>State: @Model.UserOrder.OrderAddress.State</p>
+                            <p>Zip: @Model.UserOrder.OrderAddress.Zip</p>
+                            <hr />
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="col-10" style="margin-top:10px; margin-bottom:10px;">
+                            <p>Your order summary:</p>
+                            <ul>
+                                @foreach (var item in Model.CurrentUserCart.CartItems)
+                                {
+                                    <li>Product Name: @item.Product.Name</li>
+                                    <li>Price: $@(item.Product.Price * item.Quantity) (Unit Price: $@item.Product.Price)</li>
+                                    <li>SKU: @item.Product.SKU</li>
+                                    <li>Quantity: @item.Quantity </li>
+                                    <hr />
+                                }
+                            </ul>
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="col-10" style="margin-bottom:10px;">
+                            <h2>Total cost: $@Model.Total</h2>
+                            <a asp-action="Index" asp-controller="Home" class="btn btn-primary">Back to Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </body>
+</html>

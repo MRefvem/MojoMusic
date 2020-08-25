@@ -1,0 +1,49 @@
+﻿@page "/Details/{id}/Product"
+
+@model Ecommerce_App.Pages.Details.ProductModel
+
+@{
+    ViewData["Title"] = "Product";
+    Layout = "_Home";
+}
+
+
+<!Doctype html>
+
+<html>
+<head>
+</head>
+<body>
+    <main>
+
+        <div class="container text-white" style="margin-top:30px;">
+            <h2>Product Info</h2>
+        </div>
+
+        <form method="post">
+            <div id=@Model.Product.Name class="container bg-light border rounded bg-gradient-primary" style="margin-top:30px">
+            
+                <div class="row" style="margin-top:10px; margin-bottom:10px;">
+                    <div class="col-3">
+                        <img src=@Model.Product.Image style="height:200px; width:200px;" />
+                    </div>
+                    <div class="col-9">
+                        <h3>@Model.Product.Name</h3>
+                        <p>Price: $@Model.Product.Price</p>
+                        <p>Description: @Model.Product.Description</p>
+                        <hr />
+                        <button type="submit" class="btn btn-primary">Add To Cart</button>
+                        <a asp-action="Index" asp-controller="Products" class="btn btn-primary">Keep shopping</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="container" style="margin-top:30px;">
+            @await Component.InvokeAsync("ShoppingCart", Model.CurrentCartId);
+        </div>
+
+    </main>
+
+</body>
+</html>

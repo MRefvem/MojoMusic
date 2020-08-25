@@ -9,7 +9,6 @@ namespace Ecommerce_App.Models.ViewModels
 {
     public class ProductsViewModel
     {
-        public List<Cereal> Products { get; set; }
         public List<Product> Prod { get; set; }
         public List<Instrument> Instruments { get; set; }
         public string Term { get; set; }

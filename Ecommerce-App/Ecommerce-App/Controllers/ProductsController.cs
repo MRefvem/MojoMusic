@@ -20,6 +20,10 @@ namespace Ecommerce.Controllers
             _product = product;
         }
 
+        /// <summary>
+        /// Method controls what data is retrieved from the database and ready to display to the user upon page load.
+        /// </summary>
+        /// <returns>The task complete, information is gathered from the database and ready to display to the Razor View.</returns>
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -33,6 +37,11 @@ namespace Ecommerce.Controllers
             return View(vm);
         }
 
+        /// <summary>
+        /// SearchResults - Method that uses the SearchByProductName method to retrieve information about a specific product (or range of products) that was searched for by the user in the search bar.
+        /// </summary>
+        /// <param name="searchString">The unputted string used to query the database for more relevant info.</param>
+        /// <returns>The task complete, searched-for product information delivered to the user through a query made to the database for the relevant information.</returns>
         [HttpPost]
         public async Task<IActionResult> SearchResults(string searchString)
         {

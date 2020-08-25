@@ -18,6 +18,110 @@ namespace Ecommerce_App.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Ecommerce_App.Models.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Carts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsActive = false,
+                            UserEmail = "testcart@gmail.com"
+                        });
+                });
+
+            modelBuilder.Entity("Ecommerce_App.Models.CartItems", b =>
+                {
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("CartId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CartItems");
+
+                    b.HasData(
+                        new
+                        {
+                            CartId = 1,
+                            ProductId = 1,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            CartId = 1,
+                            ProductId = 3,
+                            Quantity = 1
+                        });
+                });
+
+            modelBuilder.Entity("Ecommerce_App.Models.Order", b =>
+                {
+                    b.Property<int>("OrderAddressId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderAddressId", "CartId");
+
+                    b.HasIndex("CartId")
+                        .IsUnique();
+
+                    b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("Ecommerce_App.Models.OrderAddress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Zip")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OrderAddress");
+                });
+
             modelBuilder.Entity("Ecommerce_App.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -35,7 +139,7 @@ namespace Ecommerce_App.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(7,2)");
 
                     b.Property<string>("SKU")
                         .HasColumnType("nvarchar(max)");
@@ -95,7 +199,7 @@ namespace Ecommerce_App.Migrations
                             Id = 6,
                             Description = "Mackie CR3-X Multimedia Monitors put studio-quality sound right on your desktop at a great value. Mackie have earned their reputation for quality studio monitoring over the years, and CR3-X Multimedia Monitors are just as suitable for multimedia production as they are for gaming and casual listening.",
                             Image = "https://401ecommerce.blob.core.windows.net/productimages/Mackie%20CR3-X%203%20inch%20Multimedia%20Monitors.jfif",
-                            Name = "Mackie CR3-X 3 inch Multimedia Monitors",
+                            Name = "Mackie Multimedia Monitors",
                             Price = 99.00m,
                             SKU = "213oonv33"
                         },
@@ -131,10 +235,40 @@ namespace Ecommerce_App.Migrations
                             Id = 10,
                             Description = "When Yamaha set out designing the Absolute Hybrid Maple, they started with the most important aspect of a musical instrument, the sound.",
                             Image = "https://401ecommerce.blob.core.windows.net/productimages/Yamaha%20Absolute%20Hybrid%20Maple%205-Piece%20Drum%20Set.jpg",
-                            Name = "Yamaha Absolute Hybrid Maple 5-Piece Drum Set",
+                            Name = "Yamaha Absolute Hybrid Drum Set",
                             Price = 3999.00m,
                             SKU = "213oonv00"
                         });
+                });
+
+            modelBuilder.Entity("Ecommerce_App.Models.CartItems", b =>
+                {
+                    b.HasOne("Ecommerce_App.Models.Cart", "Cart")
+                        .WithMany("CartItems")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ecommerce_App.Models.Product", "Product")
+                        .WithMany("CartItems")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Ecommerce_App.Models.Order", b =>
+                {
+                    b.HasOne("Ecommerce_App.Models.Cart", "Cart")
+                        .WithOne("Orders")
+                        .HasForeignKey("Ecommerce_App.Models.Order", "CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ecommerce_App.Models.OrderAddress", "OrderAddress")
+                        .WithMany()
+                        .HasForeignKey("OrderAddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
