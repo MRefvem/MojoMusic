@@ -23,6 +23,7 @@ namespace Ecommerce_App.Pages.Details
         private readonly IConfiguration _config;
         private readonly SignInManager<Customer> _signInManager;
         private readonly IEmailSender _emailSender;
+        private readonly ICartItems _cartItems;
 
         [BindProperty]
         public int CurrentCartId { get; set; }
@@ -43,7 +44,7 @@ namespace Ecommerce_App.Pages.Details
         public decimal Total { get; set; }
         public Cart CurrentUserCart { get; set; }
 
-        public CheckoutModel(ICart cart, IPayment payment, IOrder order, IConfiguration configuration, SignInManager<Customer> signInManager, IEmailSender emailSender)
+        public CheckoutModel(ICart cart, IPayment payment, IOrder order, IConfiguration configuration, SignInManager<Customer> signInManager, IEmailSender emailSender, ICartItems cartItems)
         {
             _cart = cart;
             _payment = payment;
@@ -51,6 +52,7 @@ namespace Ecommerce_App.Pages.Details
             _config = configuration;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _cartItems = cartItems;
             CurrentCartId = 0;
         }
 
@@ -117,15 +119,7 @@ namespace Ecommerce_App.Pages.Details
 
             Total = totalPrice;
 
-            OrderAddress orderAddress = new OrderAddress()
-            {
-                FirstName = firstName,
-                LastName = lastName,
-                Address = address,
-                City = city,
-                State = state,
-                Zip = zip
-            };
+
 
             var user = await _signInManager.UserManager.GetUserAsync(User);
 
@@ -154,7 +148,23 @@ namespace Ecommerce_App.Pages.Details
 
             if (paymentResult.Successful)
             {
-               Order order =  await _order.Create(cart, orderAddress);
+                // on checkout, look at your cartitems and "transfer' them to a new order and make new orderitems for each product in your cart
+                // GET CART ITEMS HERE
+                List<CartItems> cartItems = await _cartItems.GetAllCartItems(CurrentCartId);
+
+                Order newOrder = new Order()
+                {
+                    CartId = cart.Id,
+                    UserEmail = user.Email,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    Address = address,
+                    City = city,
+                    State = state,
+                    Zip = zip
+                };
+
+                Order order =  await _order.Create(newOrder);
 
                 StringBuilder sb = new StringBuilder();
 

@@ -43,8 +43,7 @@ namespace Ecommerce_App.Pages.Details
                                               .OrderByDescending(x => x.Id)
                                               .FirstOrDefaultAsync();
 
-              var order =  await _context.Order.Where(x => x.CartId == cart.Id)
-                                                .Include(x => x.OrderAddress)
+              var order =  await _context.Order.Where(x => x.Cart.Id == cart.Id)
                                                 .FirstOrDefaultAsync();
 
                 CurrentUserCart = cart;

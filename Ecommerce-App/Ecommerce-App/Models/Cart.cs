@@ -14,7 +14,6 @@ namespace Ecommerce_App.Models
         public bool IsActive { get; set; }
 
         // Navigation properties
-        public  List<CartItems> CartItems { get; set; } 
-        public Order Orders { get; set; }
+        public  List<CartItems> CartItems { get; set; }
     }
 }

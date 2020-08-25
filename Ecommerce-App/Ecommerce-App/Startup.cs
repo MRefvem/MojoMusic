@@ -68,7 +68,6 @@ namespace Ecommerce_App
             services.AddTransient<ICartItems, CartItemsService>();
             services.AddTransient<IPayment, PaymentService>();
             services.AddTransient<IOrder, OrderService>();
-            services.AddTransient<IOrderAddress, OrderAddressService>();
 
         }
 
