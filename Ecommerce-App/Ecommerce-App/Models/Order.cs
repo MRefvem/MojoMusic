@@ -19,14 +19,5 @@ namespace Ecommerce_App.Models
 
         // Nav properties
         public Cart Cart { get; set; }
-
-        // combine order address with this table
-
-        // order Table -> id (pk), first name, lastname, address infor, city, state......
-        // orderitems table -> orderId, productId
-
-        // on checkout, look at your cartitems and "transfer' them to a new order and make new orderitems for each product in your cart
-
-        // receipt can just look at your orderitems table and pull all the products from there 
     }
 }

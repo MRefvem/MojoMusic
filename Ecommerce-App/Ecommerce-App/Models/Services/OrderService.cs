@@ -31,21 +31,6 @@ namespace Ecommerce_App.Models.Services
         /// <returns>The completed order, user's products are enroute!</returns>
         public async Task<Order> Create(Order order)
         {
-            // get all of the user's cart items and turn them into order items
-
-            //List<CartItems> cartItems = await _cartItems.GetAllCartItems(cart.Id);
-            //Cart cart = await _cart.GetCartForUserByEmail()
-
-            //Order newOrder = new Order()
-            //{
-            //    FirstName = order.FirstName,
-            //    LastName = order.LastName,
-            //    Address = order.Address,
-            //    City = order.City,
-            //    State = order.State,
-            //    Zip = order.Zip,
-            //};
-
             _context.Entry(order).State = EntityState.Added;
             await _context.SaveChangesAsync();
             
