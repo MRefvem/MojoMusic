@@ -148,7 +148,6 @@ namespace Ecommerce_App.Pages.Details
 
             if (paymentResult.Successful)
             {
-                // on checkout, look at your cartitems and "transfer' them to a new order and make new orderitems for each product in your cart
                 // GET CART ITEMS HERE
                 List<CartItems> cartItems = await _cartItems.GetAllCartItems(CurrentCartId);
 
