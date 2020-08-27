@@ -52,7 +52,8 @@ namespace Ecommerce_App.Pages.Details
             {
                 totalPrice += item.Product.Price * item.Quantity;
             }
-
+            cart.Total = totalPrice;
+            await _cart.Update(cart);
             Total = totalPrice;
 
             CurrentCartId = cart.Id;

@@ -55,7 +55,7 @@ namespace Ecommerce_App.Pages.Details
                 {
                     totalPrice += item.Product.Price * item.Quantity;
                 }
-
+            order.Total = totalPrice;
                 Total = totalPrice;
 
                 return Page();

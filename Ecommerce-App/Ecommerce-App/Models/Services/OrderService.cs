@@ -52,5 +52,34 @@ namespace Ecommerce_App.Models.Services
 
             return order;
         }
+
+        /// <summary>
+        /// GetAllOrders - Method that gets all the user's order 
+        /// </summary>
+        /// <param name="userEmail">The email (username) of the logged in user.</param>
+        /// <returns> A list of all of the user's orders</returns>
+        public async Task<List<Order>> GetAllOrders(string userEmail)
+        {
+            var order = await _context.Order.Where(x => x.UserEmail == userEmail)
+                                               .Include(x => x.Cart)
+                                               .ThenInclude(x => x.CartItems)
+                                               .ThenInclude(x => x.Product)
+                                               .OrderByDescending(x => x.Id)
+                                               .ToListAsync();
+            return order;
+        }
+
+       public async Task<Order> GetTotal(Order order)
+        {
+         
+            order.Total = 0;
+            foreach (var item in order.Cart.CartItems)
+            {
+                    order.Total += item.Product.Price * item.Quantity;
+                
+            }
+
+            return order;
+        }
     }
 }

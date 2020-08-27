@@ -16,7 +16,9 @@ namespace Ecommerce_App.Models
         public string City { get; set; }
         public string State { get; set; }
         public int Zip { get; set; }
-
+        public decimal Total { get; set; }
+        public DateTime Date { get; set; }
+       // dateTime.now
         // Nav properties
         public Cart Cart { get; set; }
     }
