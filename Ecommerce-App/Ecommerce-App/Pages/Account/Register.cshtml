@@ -27,7 +27,7 @@
                     <div class="form-group text-white">
                         <h1>Register</h1>
                     </div>
-                    
+
                     <div class="form-group">
                         <div asp-validation-summary="All"></div>
                         <input type="text" placeholder="First Name" asp-for="@Model.Input.FirstName" />
@@ -40,8 +40,38 @@
                     </div>
 
                     <div class="form-group">
+                        <input type="text" placeholder="Phone Number" asp-for="@Model.Input.PhoneNumber" />
+                        <span asp-validation-for="@Model.Input.PhoneNumber"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" placeholder="Address" asp-for="@Model.Input.Address" />
+                        <span asp-validation-for="@Model.Input.Address"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" placeholder="City" asp-for="@Model.Input.City" />
+                        <span asp-validation-for="@Model.Input.City"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" placeholder="State" asp-for="@Model.Input.State" />
+                        <span asp-validation-for="@Model.Input.State"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" placeholder="Zip" asp-for="@Model.Input.Zip" />
+                        <span asp-validation-for="@Model.Input.Zip"></span>
+                    </div>
+
+                    <div class="form-group">
                         <input type="text" placeholder="Email" asp-for="@Model.Input.Email" />
                         <span asp-validation-for="@Model.Input.Email"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" placeholder="Confirm Email" asp-for="@Model.Input.ConfirmEmail" />
+                        <span asp-validation-for="@Model.Input.ConfirmEmail"></span>
                     </div>
 
                     <div class="form-group">

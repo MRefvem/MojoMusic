@@ -119,8 +119,6 @@ namespace Ecommerce_App.Pages.Details
 
             Total = totalPrice;
 
-
-
             var user = await _signInManager.UserManager.GetUserAsync(User);
 
             customerAddressType billingAddress = new customerAddressType()

@@ -54,6 +54,11 @@ namespace Ecommerce_App.Pages.Account
                 {
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
+                    PhoneNumber = Input.PhoneNumber,
+                    Address = Input.Address,
+                    City = Input.City,
+                    State = Input.State,
+                    Zip = Input.Zip,
                     Email = Input.Email,
                     UserName = Input.Email
                 };
@@ -89,6 +94,12 @@ namespace Ecommerce_App.Pages.Account
             public string Email { get; set; }
 
             [Required]
+            [EmailAddress]
+            [Compare("Email")]
+            [Display(Name = "Confirm Email")]
+            public string ConfirmEmail { get; set; }
+
+            [Required]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -105,6 +116,23 @@ namespace Ecommerce_App.Pages.Account
             [Required]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
+
+            [Required]
+            [DataType(DataType.PhoneNumber)]
+            [Display(Name = "Phone Number")]
+            public string PhoneNumber { get; set; }
+
+            [Required]
+            public string Address { get; set; }
+
+            [Required]
+            public string City { get; set; }
+
+            [Required]
+            public string State { get; set; }
+
+            [Required]
+            public int Zip { get; set; }
         }
     }
 
