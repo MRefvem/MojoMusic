@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce_App.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20200827002736_testing")]
-    partial class testing
+    [Migration("20200827041016_SprintThreeMigration")]
+    partial class SprintThreeMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,7 +32,7 @@ namespace Ecommerce_App.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(7,2)");
 
                     b.Property<string>("UserEmail")
                         .HasColumnType("nvarchar(max)");
@@ -112,7 +112,7 @@ namespace Ecommerce_App.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(12,2)");
 
                     b.Property<string>("UserEmail")
                         .HasColumnType("nvarchar(max)");

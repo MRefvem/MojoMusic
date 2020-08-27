@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,6 +17,7 @@ namespace Ecommerce_App.Models
         public string City { get; set; }
         public string State { get; set; }
         public int Zip { get; set; }
+        [Column(TypeName = "decimal(12,2)")]
         public decimal Total { get; set; }
         public DateTime Date { get; set; }
        // dateTime.now

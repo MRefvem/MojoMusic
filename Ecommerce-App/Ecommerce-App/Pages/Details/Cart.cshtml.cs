@@ -48,16 +48,19 @@ namespace Ecommerce_App.Pages.Details
 
             decimal totalPrice = 0;
 
-            foreach (var item in cart.CartItems)
+            if (cart != null)
             {
-                totalPrice += item.Product.Price * item.Quantity;
-            }
-            cart.Total = totalPrice;
-            await _cart.Update(cart);
-            Total = totalPrice;
+                foreach (var item in cart.CartItems)
+                {
+                    totalPrice += item.Product.Price * item.Quantity;
+                }
+                cart.Total = totalPrice;
+                await _cart.Update(cart);
+                Total = totalPrice;
 
-            CurrentCartId = cart.Id;
-            CurrentUserCart = cart;
+                CurrentCartId = cart.Id;
+                CurrentUserCart = cart;
+            }
 
             return Page();
         }

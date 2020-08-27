@@ -26,6 +26,11 @@ namespace Ecommerce_App.Pages.Account
             _cart = cart;
             _cartItems = cartItems;
         }
+
+        /// <summary>
+        /// OnGet - Method that queries the orders table in the products Db and gets information about the current user's order history and prepares that info to be read on the page
+        /// </summary>
+        /// <returns>The task complete, user's order info is ready to be read</returns>
         public async Task<IActionResult> OnGet()
         {
             List<Order> order = await _order.GetAllOrders(GetUserEmail());
@@ -33,16 +38,25 @@ namespace Ecommerce_App.Pages.Account
             Cart cart = await _cart.GetCartForUserByEmail(GetUserEmail());
             decimal totalPrice = 0;
 
-            foreach (var item in cart.CartItems)
+            if (cart != null)
             {
-                totalPrice += item.Product.Price * item.Quantity;
-            }
-            cart.Total = totalPrice;
+                foreach (var item in cart.CartItems)
+                {
+                    totalPrice += item.Product.Price * item.Quantity;
+                }
+                cart.Total = totalPrice;
           
-            Total = totalPrice;
+                Total = totalPrice;
+            }
+
             return Page();
+
         }
 
+        /// <summary>
+        /// GetUserEmail - This method performs the logic neceesary for retrieving a user's email addressed based on the claims assigned to that user upon their registration to the site.
+        /// </summary>
+        /// <returns>A string containing the user's email address.</returns>
         protected string GetUserEmail()
         {
             return User.Claims.First(x => x.Type == "Email").Value;

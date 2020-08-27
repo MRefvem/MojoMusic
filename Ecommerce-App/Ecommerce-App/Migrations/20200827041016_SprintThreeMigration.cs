@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Ecommerce_App.Migrations
 {
-    public partial class testing : Migration
+    public partial class SprintThreeMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,7 @@ namespace Ecommerce_App.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserEmail = table.Column<string>(nullable: true),
                     IsActive = table.Column<bool>(nullable: false),
-                    Total = table.Column<decimal>(nullable: false)
+                    Total = table.Column<decimal>(type: "decimal(7,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,7 +53,7 @@ namespace Ecommerce_App.Migrations
                     City = table.Column<string>(nullable: true),
                     State = table.Column<string>(nullable: true),
                     Zip = table.Column<int>(nullable: false),
-                    Total = table.Column<decimal>(nullable: false),
+                    Total = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
                     Date = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

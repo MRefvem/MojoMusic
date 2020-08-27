@@ -20,21 +20,6 @@ namespace Ecommerce_App.Pages.Account
 
         [BindProperty]
         public Customer CurrentUser { get; set; }
-        //[BindProperty]
-        //public string FirstName { get; set; }
-        //[BindProperty]
-        //public string LastName { get; set; }
-        //[BindProperty]
-        //[DataType(DataType.PhoneNumber)]
-        //public string PhoneNumber { get; set; }
-        //[BindProperty]
-        //public string Address { get; set; }
-        //[BindProperty]
-        //public string City { get; set; }
-        //[BindProperty]
-        //public string State { get; set; }
-        //[BindProperty]
-        //public string Zip { get; set; }
 
         public UserProfileModel(UserManager<Customer> userManager, SignInManager<Customer> signInManager)
         {
@@ -42,6 +27,10 @@ namespace Ecommerce_App.Pages.Account
             _signInManager = signInManager;
         }
 
+        /// <summary>
+        /// OnGet - Method that asks the userManager for information about the current user and makes it available to be read on the page
+        /// </summary>
+        /// <returns>The task complete, user information is available</returns>
         public async Task<IActionResult> OnGet()
         {
             Customer user = await _userManager.GetUserAsync(User);
@@ -51,6 +40,10 @@ namespace Ecommerce_App.Pages.Account
             return Page();
         }
 
+        /// <summary>
+        /// OnPost - Method that takes in information inputted by the user, asks the Db for information about the current user and then uses the input to update that info before sending it back to be saved. Also updates the user's claims in accordance.
+        /// </summary>
+        /// <returns>The task complete, user info has been updated.</returns>
         public async Task<IActionResult> OnPost()
         {
             Customer userToUpdate = await _userManager.GetUserAsync(User);
@@ -89,7 +82,7 @@ namespace Ecommerce_App.Pages.Account
                 CurrentUser = userToUpdate;
             }
 
-            return Page();
+            return RedirectToPage("UserProfile");
         }
     }
 }
