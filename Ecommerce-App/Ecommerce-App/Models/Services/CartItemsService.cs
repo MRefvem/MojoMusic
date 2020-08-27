@@ -67,9 +67,9 @@ namespace Ecommerce_App.Models.Services
         /// <returns>The updated item.</returns>
         public async Task<CartItems> Update(CartItems cartItems)
         {
+            
             _context.Entry(cartItems).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-
             return cartItems;
         }
 

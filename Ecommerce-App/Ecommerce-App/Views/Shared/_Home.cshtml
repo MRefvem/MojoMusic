@@ -45,6 +45,9 @@
                                 <button id="logout-button" class="nav-link" type="submit">Logout</button>
                             </form>
                         </li>
+                        <li class="navbar-item">
+                            <a asp-page="/Account/OrderHistory" class="nav-link">Order History</a>
+                        </li>
                         if (User.IsInRole("Admin"))
                         {
                             <li class="navbar-item">

@@ -21,5 +21,15 @@ namespace Ecommerce_App.Models.Interfaces
         /// <param name="cartId">The Id of the newly-inactive cart.</param>
         /// <returns>The order detail of the user's most recent purchase.</returns>
         Task<Order> GetMostRecent(string userEmail);
+
+
+        /// <summary>
+        /// GetAllOrders - Method that gets all the user's order 
+        /// </summary>
+        /// <param name="userEmail">The email (username) of the logged in user.</param>
+        /// <returns> A list of all of the user's orders</returns>
+        Task<List<Order>> GetAllOrders(string userEmail);
+
+        Task<Order> GetTotal(Order order);
     }
 }

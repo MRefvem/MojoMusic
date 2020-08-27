@@ -12,6 +12,7 @@ namespace Ecommerce_App.Models
         [EmailAddress]
         public string UserEmail { get; set; }
         public bool IsActive { get; set; }
+        public decimal Total { get; set; }
 
         // Navigation properties
         public  List<CartItems> CartItems { get; set; }
