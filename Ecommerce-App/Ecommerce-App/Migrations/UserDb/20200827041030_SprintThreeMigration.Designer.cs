@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce_App.Migrations.UserDb
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20200826213038_AddedPhoneNumberAndAddressToCustomer")]
-    partial class AddedPhoneNumberAndAddressToCustomer
+    [Migration("20200827041030_SprintThreeMigration")]
+    partial class SprintThreeMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

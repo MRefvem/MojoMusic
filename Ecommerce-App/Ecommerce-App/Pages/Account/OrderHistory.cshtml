@@ -5,16 +5,13 @@
     Layout = "_Home";
 }
 
-<h1>OrderHistory</h1>
-
-
 
 <!Doctype html>
 
 <html>
 <head>
     <style>
-        .receipt {
+        .order-history {
             margin: 0px auto;
         }
     </style>
@@ -23,48 +20,51 @@
     <main>
 
         <div>
-            <div id=Name class="container bg-light border rounded bg-gradient-primary receipt" style="margin-top:30px">
+            <div id=Name class="container bg-light border rounded bg-gradient-primary order-history" style="margin-top:30px">
                 <div class="row" style="margin-top:10px; margin-bottom:10px;">
+                    <div class="col-2"></div>
+                    <div class="col-10" style="margin-top:20px; margin-bottom:15px;">
+                        <a asp-page="/Account/UserProfile" class="nav-link">Back to Profile</a>
+                    </div>
                     <div class="col-2"></div>
                     <div class="col-10" style="margin-top:20px; margin-bottom:15px;">
                         <h2>Your Order History</h2>
                         <hr />
                     </div>
                     <div class="col-2"></div>
-                    <div class="col-10" style="margin-top:10px; margin-bottom:100px;">
-                        @foreach (var item in Model.Order)
-                        {
-                            <h3>Billing/Shipping info</h3>
-                            <p> Date: @item.Date</p>
-                            <p>Address: @item.Address</p>
-                            <p>City: @item.City</p>
-                            <p>State: @item.State</p>
-                            <p>Zip: @item.Zip</p>
-                            <div class="col-2"></div>
-                        
-                         <h3>Your order summary:</h3>
-                            
+                    @if (Model.Order != null)
+                    {
+                        <div class="col-10" style="margin-top:10px; margin-bottom:100px;">
+                            @foreach (var item in Model.Order)
+                            {
+                                <h3>Billing/Shipping info</h3>
+                                <p> Date: @item.Date</p>
+                                <p>Address: @item.Address</p>
+                                <p>City: @item.City</p>
+                                <p>State: @item.State</p>
+                                <p>Zip: @item.Zip</p>
+                                <div class="col-2"></div>
 
-                        @foreach (var s in @item.Cart.CartItems)
-                         {
-                            <p>Product Name: @s.Product.Name</p>
-                            <p>Price: $@(s.Product.Price * s.Quantity) (Unit Price: $@s.Product.Price)</p>
-                            <p>SKU: @s.Product.SKU</p>
-                            <p>Quantity: @s.Quantity </p>
-                          }
-                            
-                             <hr />
+                                <h3>Your order summary:</h3>
+
+
+                                @foreach (var s in @item.Cart.CartItems)
+                                {
+                                    <p>Product Name: @s.Product.Name</p>
+                                    <p>Price: $@(s.Product.Price * s.Quantity) (Unit Price: $@s.Product.Price)</p>
+                                    <p>SKU: @s.Product.SKU</p>
+                                    <p>Quantity: @s.Quantity </p>
+                                }
+
+                                <hr />
                                 <div class="col-2"></div>
                                 <div class="col-10" style="margin-bottom:20px;">
                                     <h2>Total cost: $@item.Cart.Total</h2>
-                                    <p> @Model.Total</p>
                                 </div>
                                 <hr />
-
- 
-                        }
-                    </div>
-                    <a asp-action="Index" asp-controller="Home" class="btn btn-primary">Back to Home</a>
+                            }
+                        </div>
+                    }
                 </div>
             </div>
         </div>
