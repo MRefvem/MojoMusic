@@ -25,14 +25,30 @@ The app should simply be able to run through Microsoft Visual Studio.
 - While logged-in as the Admin, you will see a link reading "Admin Panel" on the Nav Bar which leads to a dashboard which gives the Admin access to special operations on the site including the ability to see, create, update and delete products as well as upload product pictures to an Azure Blob Storage account.
 
 # A description of the Products Database Schema
-The products database contains the following tables: dbo.CartItems, dbo.Carts, dbo.Order, dbo.OrderAddress and dbo.Products. The dbo.Products table lists all of the products in the database and includes their properties such as Id, Name, SKU, Price, Description and Image URL.
-The dbo.Carts and dbo.Order tables are join tables that link a specific user to their Cart Items and Order Address, respectively. The dbo.Carts table contains the Id of the cart, the UserEmail associated with the user and a boolean describing the current status of the cart ("IsActive" when set to true means it is active, and when set to false means it is one of the user's past purchases). You can use the dbo.Carts table to link to the dbo.CartItems table which simply links a CartId with a ProductId and then gives the quantity of the item present in the cart correlating with the given product Id.
-Much in the way the the dbo.Carts table links to the dbo.CartItems table, so does the dbo.Order table with the dbo.OrderAddress table. The dbo.OrderTable links an Order Address to a specific Cart (which is important as long as you want a specified shipment to reach the correct address!). The dbo.OrderAddress table contains a primary key to identify a unique order address in the database, as well as all of the practical information necessary to ship an item to a customer such as the customer's FirstName, LastName, Address, City, State and ZIP.
+The products database contains the following tables: dbo.CartItems, dbo.Carts, dbo.Order, dbo.OrderHistory and dbo.Products. The dbo.Products table lists all of the products in the database and includes their properties such as Id, Name, SKU, Price, Description and Image URL.
+The dbo.Carts and dbo.Order tables are join tables that link a specific user to their Cart Items and Order History, respectively. The dbo.Carts table contains the Id of the cart, the UserEmail associated with the user and a boolean describing the current status of the cart ("IsActive" when set to true means it is active, and when set to false means it is one of the user's past purchases). You can use the dbo.Carts table to link to the dbo.CartItems table which simply links a CartId with a ProductId and then gives the quantity of the item present in the cart correlating with the given product Id.
+Much in the way the the dbo.Carts table links to the dbo.CartItems table, so does the dbo.Order table with the dbo.OrderHistory table. The dbo.Order table links an Order History to a specific Cart. The dbo.Order table contains a primary key to identify a unique order history in the database.
 
 # Change-Log
 
+30 Aug 2020 - SPRINT 3 Complete
+3.0 Sprint 3 - Milestone 1 Complete
+User Story 1
+- *As a user, I would like a dedicated page that shows my account specific information.*
+- *Created a new route for /account with a razor page that shows the user's information. Allows the user to change their Name, Address and any other important information.*
+User Story 2
+- *As a user, I would like to view all of my prior orders.*
+- *A dedicated page is accessible from the profile page that shows all the orders the user has individually created. Shows the user the date of their order and total listed from newest to oldest.*
+2.1 Sprint 2 resubmission criteria address (Reviewer: Please regrade/reevaluate this project from Sprint 2 as the following feedback was addressed)
+- *A receipt email is also sent to the user after the "checkout" process from the basket page - CANNOT CHECK (reviewer: please create an account with your personal email and then place an order to receive an email)*
+- *Each email is fitting the problem domain, and formatted professionally - CANNOT CHECK (reviewer: please create an account with your personal email and then place an order to receive and email)*
+- *Can update product image in admin dashboard*
+- *Anonymous and a signed-in user should be able to view the product details page.*
+- *Structure/Database schema for your Store DB - Complete*
+- *Explanation of your DB Schema - Complete*
+
 24 Aug 2020 - SPRINT 2 Complete
-2.0 Sprint 1
+2.0 Sprint 2
 - *README: README contains the following: A link to the deployed website, a description of the products the site is selling, a description of the claims that are captured upon account registration, a description of the policies that are being reinforced, a description of the structure of the products database schema, a description of the DB Schema (particularly the basket/order tables)*
 - *Mini Cart: Mini Cart exists on the product landing page. Mini basket holds a current view of all the existing items the user has in their cart. A view component is used to implement the mini cart across the site.*
 - *Cart: A dedicated cart page that consists of all the user's current products. Items in the cart can be modified in quantity or removed. Home page consists of a link to the cart for easability (present in the Nav Bar on all pages). Cart page contains a "Checkout" button that redirects to the Checkout page. The user must be logged in to access the cart page.*
