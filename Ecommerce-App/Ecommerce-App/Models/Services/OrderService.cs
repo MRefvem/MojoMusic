@@ -31,21 +31,6 @@ namespace Ecommerce_App.Models.Services
         /// <returns>The completed order, user's products are enroute!</returns>
         public async Task<Order> Create(Order order)
         {
-            // get all of the user's cart items and turn them into order items
-
-            //List<CartItems> cartItems = await _cartItems.GetAllCartItems(cart.Id);
-            //Cart cart = await _cart.GetCartForUserByEmail()
-
-            //Order newOrder = new Order()
-            //{
-            //    FirstName = order.FirstName,
-            //    LastName = order.LastName,
-            //    Address = order.Address,
-            //    City = order.City,
-            //    State = order.State,
-            //    Zip = order.Zip,
-            //};
-
             _context.Entry(order).State = EntityState.Added;
             await _context.SaveChangesAsync();
             
@@ -64,6 +49,35 @@ namespace Ecommerce_App.Models.Services
                                                .ThenInclude(x => x.CartItems)
                                                .ThenInclude(x => x.Product)
                                                .FirstOrDefaultAsync();
+
+            return order;
+        }
+
+        /// <summary>
+        /// GetAllOrders - Method that gets all the user's order 
+        /// </summary>
+        /// <param name="userEmail">The email (username) of the logged in user.</param>
+        /// <returns> A list of all of the user's orders</returns>
+        public async Task<List<Order>> GetAllOrders(string userEmail)
+        {
+            var order = await _context.Order.Where(x => x.UserEmail == userEmail)
+                                               .Include(x => x.Cart)
+                                               .ThenInclude(x => x.CartItems)
+                                               .ThenInclude(x => x.Product)
+                                               .OrderByDescending(x => x.Id)
+                                               .ToListAsync();
+            return order;
+        }
+
+       public async Task<Order> GetTotal(Order order)
+        {
+         
+            order.Total = 0;
+            foreach (var item in order.Cart.CartItems)
+            {
+                    order.Total += item.Product.Price * item.Quantity;
+                
+            }
 
             return order;
         }

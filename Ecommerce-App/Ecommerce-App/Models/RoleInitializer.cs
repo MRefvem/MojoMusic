@@ -1,5 +1,6 @@
 ﻿using Ecommerce_App.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,7 +34,7 @@ namespace Ecommerce_App.Models
             {
                 dbContext.Database.EnsureCreated();
                 AddRoles(dbContext);
-                await SeedUsers(users, _config);
+                SeedUsers(users, _config);
             }
         }
 
@@ -43,7 +44,7 @@ namespace Ecommerce_App.Models
         /// <param name="userManager">The user manager, manages all of the user's in the program.</param>
         /// <param name="_config">IConfiguration, controls all of the configuration settings established in the Startup.cs file.</param>
         /// <returns>The completed task, a seeded administrator created in the root of the program, can access special areas of the site and perform high-level CRUD operations.</returns>
-        private async static Task SeedUsers(UserManager<Customer> userManager, IConfiguration _config)
+        private static void SeedUsers(UserManager<Customer> userManager, IConfiguration _config)
         {
             if (userManager.FindByEmailAsync(_config["AdminEmail"]).Result == null)
             {
@@ -61,7 +62,7 @@ namespace Ecommerce_App.Models
                     Claim emailClaim = new Claim("Email", user.Email);
                     var result1 = userManager.AddClaimAsync(user, claim).Result;
                     var result2 = userManager.AddClaimAsync(user, emailClaim).Result;
-                    await userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
+                    userManager.AddToRoleAsync(user, ApplicationRoles.Admin).Wait();
                 }
             }
         }

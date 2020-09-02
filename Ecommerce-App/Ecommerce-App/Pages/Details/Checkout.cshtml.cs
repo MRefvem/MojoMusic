@@ -116,10 +116,8 @@ namespace Ecommerce_App.Pages.Details
             {
                 totalPrice += item.Product.Price * item.Quantity;
             }
-
+            cart.Total = totalPrice;
             Total = totalPrice;
-
-
 
             var user = await _signInManager.UserManager.GetUserAsync(User);
 
@@ -148,7 +146,6 @@ namespace Ecommerce_App.Pages.Details
 
             if (paymentResult.Successful)
             {
-                // on checkout, look at your cartitems and "transfer' them to a new order and make new orderitems for each product in your cart
                 // GET CART ITEMS HERE
                 List<CartItems> cartItems = await _cartItems.GetAllCartItems(CurrentCartId);
 
@@ -161,11 +158,13 @@ namespace Ecommerce_App.Pages.Details
                     Address = address,
                     City = city,
                     State = state,
-                    Zip = zip
+                    Zip = zip,
+                    Total = cart.Total
+                  
                 };
 
                 Order order =  await _order.Create(newOrder);
-
+                order.Date = DateTime.UtcNow;
                 StringBuilder sb = new StringBuilder();
 
                 foreach (var item in cart.CartItems)

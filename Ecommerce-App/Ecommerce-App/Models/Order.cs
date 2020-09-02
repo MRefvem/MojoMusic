@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,17 +17,11 @@ namespace Ecommerce_App.Models
         public string City { get; set; }
         public string State { get; set; }
         public int Zip { get; set; }
-
+        [Column(TypeName = "decimal(12,2)")]
+        public decimal Total { get; set; }
+        public DateTime Date { get; set; }
+       // dateTime.now
         // Nav properties
         public Cart Cart { get; set; }
-
-        // combine order address with this table
-
-        // order Table -> id (pk), first name, lastname, address infor, city, state......
-        // orderitems table -> orderId, productId
-
-        // on checkout, look at your cartitems and "transfer' them to a new order and make new orderitems for each product in your cart
-
-        // receipt can just look at your orderitems table and pull all the products from there 
     }
 }

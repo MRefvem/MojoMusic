@@ -43,7 +43,7 @@ namespace Ecommerce_App.Pages.Details
                                               .OrderByDescending(x => x.Id)
                                               .FirstOrDefaultAsync();
 
-              var order =  await _context.Order.Where(x => x.Cart.Id == cart.Id)
+                var order =  await _context.Order.Where(x => x.Cart.Id == cart.Id)
                                                 .FirstOrDefaultAsync();
 
                 CurrentUserCart = cart;
@@ -55,7 +55,7 @@ namespace Ecommerce_App.Pages.Details
                 {
                     totalPrice += item.Product.Price * item.Quantity;
                 }
-
+            order.Total = totalPrice;
                 Total = totalPrice;
 
                 return Page();

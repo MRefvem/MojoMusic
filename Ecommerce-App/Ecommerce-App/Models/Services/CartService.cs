@@ -65,7 +65,7 @@ namespace Ecommerce_App.Models.Services
             _context.Entry(cartToUpdate).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return await _context.Carts.FindAsync(cart.Id);
+            return cartToUpdate;
 
         }
 

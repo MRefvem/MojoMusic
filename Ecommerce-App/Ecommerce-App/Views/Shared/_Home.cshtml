@@ -35,6 +35,9 @@
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <li class="navbar-item">
+                            <a asp-page="/Account/UserProfile" class="nav-link">Profile</a>
+                        </li>
+                        <li class="navbar-item">
                             <a asp-page="/Details/Cart" class="nav-link">Your Cart</a>
                         </li>
                         <li class="navbar-item">
