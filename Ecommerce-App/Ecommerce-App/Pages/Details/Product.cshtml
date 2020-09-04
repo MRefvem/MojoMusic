@@ -22,7 +22,7 @@
 
         <form method="post">
             <div id=@Model.Product.Name class="container bg-light border rounded bg-gradient-primary" style="margin-top:30px">
-            
+
                 <div class="row" style="margin-top:10px; margin-bottom:10px;">
                     <div class="col-3">
                         <img src=@Model.Product.Image style="height:200px; width:200px;" />
@@ -39,10 +39,12 @@
             </div>
         </form>
 
-        <div class="container" style="margin-top:30px;">
-            @await Component.InvokeAsync("ShoppingCart", Model.CurrentCartId);
-        </div>
-
+        @if (Model.User.Claims.Any())
+        {
+            <div class="container" style="margin-top:30px;">
+                @await Component.InvokeAsync("ShoppingCart", Model.CurrentCartId);
+            </div>
+        }
     </main>
 
 </body>

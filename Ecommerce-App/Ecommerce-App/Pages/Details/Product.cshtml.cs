@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Ecommerce_App.Models;
 using Ecommerce_App.Models.Interfaces;
 using Ecommerce_App.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -15,17 +16,19 @@ namespace Ecommerce_App.Pages.Details
         private readonly IProduct _product;
         private readonly ICartItems _cartItems;
         private readonly ICart _cart;
+        private readonly SignInManager<Customer> _signInManager;
 
         [BindProperty]
         public Product Product { get; set; }
         [BindProperty]
         public int CurrentCartId { get; set; }
 
-        public ProductModel(IProduct product, ICartItems cartItems, ICart cart)
+        public ProductModel(IProduct product, ICartItems cartItems, ICart cart, SignInManager<Customer> signInManager)
         {
             _product = product;
             _cartItems = cartItems;
             _cart = cart;
+            _signInManager = signInManager;
             CurrentCartId = 0;
         }
 
@@ -36,19 +39,24 @@ namespace Ecommerce_App.Pages.Details
         /// <returns>The completed task, the user's shopping cart contents displayed along with products info.</returns>
         public async Task<IActionResult> OnGet(int Id)
         {
-            var prod = await _product.GetProduct(Id);
-            Cart cart = await _cart.GetCartForUserByEmail(GetUserEmail());
+            Product = await _product.GetProduct(Id);
+            var user = await _signInManager.UserManager.GetUserAsync(User);
 
-            // logic here
-            if (cart == null)
+            // TODO: Handle exception for if there is no user logged in
+            if (user != null)
             {
-                cart = await _cart.Create(GetUserEmail());
-            }
+                Cart cart = await _cart.GetCartForUserByEmail(GetUserEmail());
 
-            var items = await _cartItems.GetAllCartItems(cart.Id);
-            
-            Product = prod;
-            CurrentCartId = cart.Id;
+                // logic here
+                if (cart == null)
+                {
+                    cart = await _cart.Create(GetUserEmail());
+                }
+
+                var items = await _cartItems.GetAllCartItems(cart.Id);
+
+                CurrentCartId = cart.Id;
+            }
 
             return Page();
         }
@@ -61,6 +69,14 @@ namespace Ecommerce_App.Pages.Details
         public async Task<IActionResult> OnPost(int Id)
         {
             var prod = await _product.GetProduct(Id);
+            var user = await _signInManager.UserManager.GetUserAsync(User);
+
+            // TODO: Handle exception for if there is no user logged in
+            if (user == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
+
             Cart cart = await _cart.GetCartForUserByEmail(GetUserEmail());
             
             if (cart == null)

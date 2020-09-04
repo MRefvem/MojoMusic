@@ -30,6 +30,17 @@ namespace Ecommerce_App.Models.Interfaces
         /// <returns> A list of all of the user's orders</returns>
         Task<List<Order>> GetAllOrders(string userEmail);
 
-        Task<Order> GetTotal(Order order);
+        /// <summary>
+        /// GetCompleteCompanyOrderHistory - Method that gets all of the orders ever completed on the site
+        /// </summary>
+        /// <returns>A list of every order ever placed</returns>
+        Task<List<Order>> GetCompleteCompanyOrderHistory();
+
+        /// <summary>
+        /// GetTotal - Tallies up the total cost of an order
+        /// </summary>
+        /// <param name="order">The order object to tally up total price for</param>
+        /// <returns>The task complete</returns>
+        Order GetTotal(Order order);
     }
 }
