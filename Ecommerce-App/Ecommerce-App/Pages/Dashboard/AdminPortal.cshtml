@@ -66,6 +66,10 @@
         <div class="row">
             <div id=Name class="container bg-light border rounded bg-gradient-primary" style="margin-top:30px">
                 <div class="row" style="margin-top:10px; margin-bottom:10px;">
+                    <div class="col-10" style="margin-top:10px; margin-bottom:20px;">
+                        <h3>All Products</h3>
+                        <hr>
+                    </div>
                     @foreach (var item in Model.Product)
                     {
                         <form enctype="multipart/form-data" method="post">
@@ -86,6 +90,50 @@
             </div>
         </div>
 
-    </main>
+        <div class="row">
+            <div id=Name class="container bg-light border rounded bg-gradient-primary" style="margin-top:30px">
+                <div class="row" style="margin-top:10px; margin-bottom:10px;">
+                    <div class="col-10" style="margin-top:10px; margin-bottom:20px;">
+                        <h3>Complete Company Order History</h3>
+                        <hr>
+                    </div>
+                    @if (Model.Orders != null)
+                    {
+                        <div class="col-10" style="margin-top:10px; margin-bottom:10px;">
+                            @foreach (var item in Model.Orders)
+                            {
+                                <h4>Order @item.Id placed on @item.Date</h4>
+                                <h6>Billing/Shipping info</h6>
+                                <p>Customer Name: @item.FirstName @item.LastName</p>
+                                <p>Date of purchase: @item.Date</p>
+                                <p>Address: @item.Address</p>
+                                <p>City: @item.City</p>
+                                <p>State: @item.State</p>
+                                <p>Zip: @item.Zip</p>
+                                <div class="col-2"></div>
+
+                                <h6>Order summary:</h6>
+
+                                @foreach (var s in item.Cart.CartItems)
+                                {
+                                    <p>Product Name: @s.Product.Name</p>
+                                    <p>Price: $@(s.Product.Price * s.Quantity) (Unit Price: $@s.Product.Price)</p>
+                                    <p>SKU: @s.Product.SKU</p>
+                                    <p>Quantity: @s.Quantity </p>
+                                }
+
+                                <div class="col-2"></div>
+                                <div class="col-10" style="margin-bottom:20px;">
+                                    <h2>Total purchase: $@item.Cart.Total</h2>
+                                </div>
+                                <hr />
+                            }
+                        </div>
+                    }
+                    </div>
+            </div>
+        </div>
+
+</main>
     </body>
 </html>

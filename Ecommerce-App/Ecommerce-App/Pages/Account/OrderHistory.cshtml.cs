@@ -18,8 +18,8 @@ namespace Ecommerce_App.Pages.Account
 
         public List<Order> Order { get; set; }
         public Cart Cart { get; set; }
-
         public decimal Total { get; set; }
+
         public OrderHistoryModel(IOrder order , ICart cart, ICartItems cartItems)
         {
             _order = order;

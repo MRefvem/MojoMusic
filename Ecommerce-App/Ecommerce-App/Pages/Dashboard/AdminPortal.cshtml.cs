@@ -15,6 +15,9 @@ namespace Ecommerce_App.Pages.Dashboard
     public class AdminPortalModel : PageModel
     {
         private readonly IProduct _product;
+        private readonly IOrder _order;
+        private readonly ICart _cart;
+        private readonly ICartItems _cartItems;
 
         public List<Product> Product { get; set; }
         [BindProperty]
@@ -26,19 +29,43 @@ namespace Ecommerce_App.Pages.Dashboard
         public decimal Price { get; set; }
         [BindProperty]
         public string Description { get; set; }
+        public List<Order> Orders { get; set; }
+        public Cart Cart { get; set; }
+        public decimal Total { get; set; }
 
-        public AdminPortalModel(IProduct product)
+        public AdminPortalModel(IProduct product, IOrder order, ICart cart, ICartItems cartItems)
         {
             _product = product;
+            _order = order;
+            _cart = cart;
+            _cartItems = cartItems;
         }
 
         /// <summary>
-        /// OnGet - Method queries the products database and returns information about all products to display upon loading the page.
+        /// OnGet - Method queries the products database and returns information about all products to display upon loading the page, also queries the products database and returns information about all of the orders ever placed on the website and prepares that information to be viewed by the administrator.
         /// </summary>
         /// <returns>The completed task, information about all products successfully rendered to the page.</returns>
         public async Task<IActionResult> OnGet()
         {
             var prods = await _product.GetProducts();
+
+            List<Order> allOrders = await _order.GetCompleteCompanyOrderHistory();
+            Orders = allOrders;
+
+            decimal totalPrice = 0;
+
+            if (allOrders != null)
+            {
+                foreach (var order in allOrders)
+                {
+                    foreach (var cartItem in order.Cart.CartItems)
+                    {
+                        totalPrice += cartItem.Product.Price * cartItem.Quantity;
+                    }
+                    order.Cart.Total = totalPrice;
+                    Total = totalPrice;
+                }
+            }
 
             Product = prods;
 
