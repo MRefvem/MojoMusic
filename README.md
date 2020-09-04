@@ -31,6 +31,14 @@ Much in the way the the dbo.Carts table links to the dbo.CartItems table, so doe
 
 # Change-Log
 
+03 Sep 2020 - FINAL PROJECT SUBMISSION
+3.1 Sprint 3 - Milestone 2 Complete
+User Story 1
+- *As an administrator, I would like to view all of the orders that have been placed on my site*
+- *Added a section to Admin Panel where the administrator can grab all of the orders from the database and showcase them on the admin site. Shows the Order Number, Name of customer, total cost and more details.*
+Bug fixes and complete order history for administrator
+- *Fixed an unhandled exception in Products.cs. Anonymous users can now view this page as conditions to evaluate presence of user claims in order to render a user's shopping cart were created. Anonymous user is also now directed to the login page when attempting to place an item they want into their cart.*
+
 30 Aug 2020 - SPRINT 3 Complete
 3.0 Sprint 3 - Milestone 1 Complete
 User Story 1
