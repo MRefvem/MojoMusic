@@ -13,7 +13,7 @@ User Claims that are gathered for every user include First Name, Last Name, User
 # Getting Started
 To get started using this app:
 1.	Install the latest version of Microsoft Visual Studio
-2.	Clone the Git repository into your local machine: https://mkrefvem@dev.azure.com/mkrefvem/Ecommerce/_git/Ecommerce-App
+2.	Clone the Git repository into your local machine: https://github.com/MRefvem/MojoMusic.git
 3.	Open Ecommerce-App.sln
 4.	Run the latest build
 
@@ -30,6 +30,9 @@ The dbo.Carts and dbo.Order tables are join tables that link a specific user to 
 Much in the way the the dbo.Carts table links to the dbo.CartItems table, so does the dbo.Order table with the dbo.OrderHistory table. The dbo.Order table links an Order History to a specific Cart. The dbo.Order table contains a primary key to identify a unique order history in the database.
 
 # Change-Log
+
+4 Sep 2020 - FINAL
+- *Location of the local remote origin changed to GitHub. New Git repository address: https://github.com/MRefvem/MojoMusic.git*
 
 03 Sep 2020 - FINAL PROJECT SUBMISSION
 3.1 Sprint 3 - Milestone 2 Complete
